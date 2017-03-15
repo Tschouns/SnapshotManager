@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapshotManager", "SnapshotManager\SnapshotManager.csproj", "{6A5FF639-9D35-43ED-8E44-1155D034DA30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapshotManagerGui", "SnapshotManagerGui\SnapshotManagerGui.csproj", "{6A5FF639-9D35-43ED-8E44-1155D034DA30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
