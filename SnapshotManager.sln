@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbServerPlugin", "DbServerP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbServerPluginMsSql2014", "DbServerPluginMsSql2014\DbServerPluginMsSql2014.csproj", "{31D36FCA-ED36-4D4D-A4B4-D5D23C26FDE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base", "Base\Base.csproj", "{2C4E79C9-36AB-44B1-87FE-F54369C1A64F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{31D36FCA-ED36-4D4D-A4B4-D5D23C26FDE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31D36FCA-ED36-4D4D-A4B4-D5D23C26FDE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31D36FCA-ED36-4D4D-A4B4-D5D23C26FDE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4E79C9-36AB-44B1-87FE-F54369C1A64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4E79C9-36AB-44B1-87FE-F54369C1A64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4E79C9-36AB-44B1-87FE-F54369C1A64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4E79C9-36AB-44B1-87FE-F54369C1A64F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

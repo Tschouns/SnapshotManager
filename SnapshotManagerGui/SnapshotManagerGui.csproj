@@ -95,6 +95,24 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base\Base.csproj">
+      <Project>{2c4e79c9-36ab-44b1-87fe-f54369c1a64f}</Project>
+      <Name>Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DbServerPluginMsSql2014\DbServerPluginMsSql2014.csproj">
+      <Project>{31d36fca-ed36-4d4d-a4b4-d5d23c26fde6}</Project>
+      <Name>DbServerPluginMsSql2014</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DbServerPlugin\DbServerPlugin.csproj">
+      <Project>{cc6ecdf3-96c6-4cc1-960b-68af01d1ca52}</Project>
+      <Name>DbServerPlugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SnapshotManager\SnapshotManager.csproj">
+      <Project>{0b69e9af-f0d5-49c5-827a-e665193952f9}</Project>
+      <Name>SnapshotManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
