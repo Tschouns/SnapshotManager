@@ -40,7 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbServerInfo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbServerInfo.resx</DependentUpon>
+    </Compile>
     <Compile Include="MsSql2014CommandProvider.cs" />
+    <Compile Include="MsSql2014DbServerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +54,12 @@
       <Project>{cc6ecdf3-96c6-4cc1-960b-68af01d1ca52}</Project>
       <Name>DbServerPlugin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DbServerInfo.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DbServerInfo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

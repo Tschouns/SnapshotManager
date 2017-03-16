@@ -16,8 +16,6 @@ namespace SnapshotManager
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="password"></param>
         public ConnectionInfo(
             string userId,
             string password)

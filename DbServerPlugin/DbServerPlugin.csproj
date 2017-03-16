@@ -43,6 +43,7 @@
     <Compile Include="DbServerPluginInfo.cs" />
     <Compile Include="ICommandProvider.cs" />
     <Compile Include="DbServerPluginRegistry.cs" />
+    <Compile Include="IDbServerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

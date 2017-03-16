@@ -16,12 +16,21 @@ namespace DbServerPlugin
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        public DbServerPluginInfo(ICommandProvider commands)
+        public DbServerPluginInfo(
+            IDbServerInfo serverInfo,
+            ICommandProvider commands)
         {
+            ArgumentChecks.AssertNotNull(serverInfo, nameof(serverInfo));
             ArgumentChecks.AssertNotNull(commands, nameof(commands));
 
+            this.ServerInfo = serverInfo;
             this.Commands = commands;
         }
+
+        /// <summary>
+        /// Gets the <see cref="IDbServerInfo"/> for this plug-in.
+        /// </summary>
+        public IDbServerInfo ServerInfo { get; }
 
         /// <summary>
         /// Gets the <see cref="ICommandProvider"/> for this plug-in.

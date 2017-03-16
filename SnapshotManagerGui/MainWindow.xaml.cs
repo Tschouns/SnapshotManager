@@ -20,7 +20,9 @@ namespace SnapshotManagerGui
             InitializeComponent();
 
             // Quick hack...
-            DbServerPluginRegistry.RegisterPlugin(new MsSql2014CommandProvider());
+            DbServerPluginRegistry.RegisterPlugin(
+                new MsSql2014DbServerInfo(),
+                new MsSql2014CommandProvider());
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

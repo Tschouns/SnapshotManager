@@ -18,9 +18,13 @@ namespace DbServerPlugin
         /// <summary>
         /// Registers a DB server plug-in.
         /// </summary>
-        public static void RegisterPlugin(ICommandProvider commands)
+        public static void RegisterPlugin(
+            IDbServerInfo serverInfo,
+            ICommandProvider commands)
         {
-            var plugin = new DbServerPluginInfo(commands);
+            var plugin = new DbServerPluginInfo(
+                serverInfo,
+                commands);
 
             _dbServerPlugins.Add(plugin);
         }
