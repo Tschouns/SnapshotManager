@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <GroupBox x:Name="connectionsGroupBox" Header="Connections" Margin="10"/>
+            <GroupBox x:Name="databasesGroupBox" Header="Databases
+" Margin="10" Grid.Row="1"/>
+        </Grid>
+        <GroupBox x:Name="snapshotsGroupBox" Grid.Column="1" Header="Snapshots" Margin="10"/>
     </Grid>
 </Window>
