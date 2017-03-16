@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BiteMe.cs" company="Jonas Aklin">
+// <copyright file="BlowMeInTheShoes.cs" company="Jonas Aklin">
 //     Copyright (c) Jonas Aklin. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -17,7 +17,7 @@ namespace SnapshotManagerGui
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             // Quick hack...
             DbServerPluginRegistry.RegisterPlugin(
@@ -27,6 +27,17 @@ namespace SnapshotManagerGui
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void addConnectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            var newConnectionWindow = new NewConnectionWindow();
+            var result = newConnectionWindow.ShowDialog();
+
+            if (result.GetValueOrDefault())
+            {
+                MessageBox.Show("Connect... " + newConnectionWindow.DbServer.Description);
+            }
         }
     }
 }

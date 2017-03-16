@@ -32,7 +32,7 @@
             </ListView>
             <Label x:Name="connectionLabel" Content="Connections" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
             <Label x:Name="databasesLabel" Content="Databases" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-            <Button x:Name="addConnectionButton" Content="Add..." HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="addConnectionButton" Content="Add..." HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" Click="addConnectionButton_Click"/>
         </Grid>
         <ListView x:Name="snapshotsListView" Grid.Column="1" Margin="10,60,10,10">
             <ListView.View>

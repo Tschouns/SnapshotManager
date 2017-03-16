@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="BiteMe.cs" company="Jonas Aklin">
+// <copyright file="BlowMeInTheShoes.cs" company="Jonas Aklin">
 //     Copyright (c) Jonas Aklin. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
