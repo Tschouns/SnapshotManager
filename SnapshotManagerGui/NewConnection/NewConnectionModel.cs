@@ -9,6 +9,7 @@ namespace SnapshotManagerGui.NewConnection
     using Base;
     using DbServerPlugin;
     using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
     public class NewConnectionModel : INotifyPropertyChanged
     {
@@ -18,34 +19,57 @@ namespace SnapshotManagerGui.NewConnection
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Gets or sets the DB server.
+        /// </summary>
         public IDbServerInfo DbServer
         {
             get { return this._dbServer; }
             set
             {
-                this._dbServer = value;
-                this.PropertyChanged(this, new PropertyChangedEventArgs(PropertyUtils.GetPropertyName<NewConnectionModel, IDbServerInfo>(m => m.DbServer)));
+                if (this._dbServer != value)
+                {
+                    this._dbServer = value;
+                    this.OnPropertyChanged();
+                }
             }
         }
 
+        /// <summary>
+        /// Gets or sets the host.
+        /// </summary>
         public string Host
         {
             get { return this._host; }
             set
             {
-                this._host = value;
-                this.PropertyChanged(this, new PropertyChangedEventArgs(PropertyUtils.GetPropertyName<NewConnectionModel, string>(m => m.Host)));
+                if (this._host != value)
+                {
+                    this._host = value;
+                    this.OnPropertyChanged();
+                }
             }
         }
 
+        /// <summary>
+        /// Gets or sets the port number.
+        /// </summary>
         public int PortNumber
         {
             get { return this._portNumber; }
             set
             {
-                this._portNumber = value;
-                this.PropertyChanged(this, new PropertyChangedEventArgs(PropertyUtils.GetPropertyName<NewConnectionModel, int>(m => m.PortNumber)));
+                if (this._portNumber != value)
+                {
+                    this._portNumber = value;
+                    this.OnPropertyChanged();
+                }
             }
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

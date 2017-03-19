@@ -23,15 +23,13 @@ namespace SnapshotManagerGui.NewConnection
             var dbServerPluginInfos = DbServerPluginRegistry.GetAllPlugins();
             var dbServers = dbServerPluginInfos.Select(p => p.ServerInfo).ToList();
 
-            this.dbServerComboBox.DisplayMemberPath = PropertyUtils.GetPropertyName<IDbServerInfo, string>(s => s.Description);
             this.dbServerComboBox.ItemsSource = dbServers;
+
+            this.Model = new NewConnectionModel();
+            this.DataContext = this.Model;
         }
 
-        public NewConnectionModel Model { get; set; }
-
-        public IDbServerInfo DbServer => (IDbServerInfo)this.dbServerComboBox.SelectedItem;
-        public string Host => this.hostTextBox.Text;
-        public string Port => this.portTextBox.Text;
+        public NewConnectionModel Model { get; }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {

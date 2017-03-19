@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapshotManagerGui"
         mc:Ignorable="d"
-        Title="New Connection" Height="170" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="New Connection" Height="170" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="28"/>
@@ -20,10 +20,10 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="dbServerLabel" Content="DB Server" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
         <Label x:Name="hostLabel" Content="Host" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-0.342,-1" Margin="10,0,0,0"/>
-        <ComboBox x:Name="dbServerComboBox" Grid.Column="1" VerticalAlignment="Top" Margin="10,3,10,0"/>
-        <TextBox x:Name="hostTextBox" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="1" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="dbServerComboBox" SelectedItem="{Binding Path=DbServer, Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Top" Margin="10,3,10,0"/>
+        <TextBox x:Name="hostTextBox" Text="{Binding Path=Host, Mode=TwoWay}" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="1" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Label x:Name="portLabel" Content="Port" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-0.342,-1" Margin="10,0,0,0"/>
-        <TextBox x:Name="portTextBox" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="portTextBox" Text="{Binding Path=PortNumber, Mode=TwoWay}" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button x:Name="cancelButton" Content="Cancel" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="4" VerticalAlignment="Bottom" Width="75" Click="cancelButton_Click"/>
         <Button x:Name="connectButton" Content="Connect" Grid.Column="1" Margin="0,0,95,10" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="connectButton_Click"/>
 

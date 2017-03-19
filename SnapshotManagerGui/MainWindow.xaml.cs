@@ -38,7 +38,7 @@ namespace SnapshotManagerGui
 
             if (result.GetValueOrDefault())
             {
-                MessageBox.Show("Connect... " + newConnectionWindow.DbServer.Description);
+                MessageBox.Show("Connect... " + newConnectionWindow.Model.DbServer.Description);
             }
         }
     }
