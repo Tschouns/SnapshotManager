@@ -8,6 +8,7 @@ namespace SnapshotManagerGui.Windows
 {
     using Base;
     using DbServerPlugin;
+    using Models;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows;

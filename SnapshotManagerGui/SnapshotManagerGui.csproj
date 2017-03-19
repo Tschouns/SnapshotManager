@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="NewConnectionDialog.cs" />
     <Compile Include="Windows\NewConnectionWindow.xaml.cs">
       <DependentUpon>NewConnectionWindow.xaml</DependentUpon>

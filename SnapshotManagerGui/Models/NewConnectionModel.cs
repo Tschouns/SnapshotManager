@@ -4,21 +4,17 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace SnapshotManagerGui
+namespace SnapshotManagerGui.Models
 {
     using DbServerPlugin;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
 
-    public class NewConnectionModel : INotifyPropertyChanged
+    public class NewConnectionModel : BaseViewModel
     {
         private DbServerPluginInfo _dbServerPlugin;
         private string _host;
         private int _portNumber;
         private string _userId;
         private string _password;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets or sets the DB server plugin.
@@ -31,7 +27,7 @@ namespace SnapshotManagerGui
                 if (this._dbServerPlugin != value)
                 {
                     this._dbServerPlugin = value;
-                    this.OnPropertyChanged();
+                    this.InvokePropertyChanged();
                 }
             }
         }
@@ -47,7 +43,7 @@ namespace SnapshotManagerGui
                 if (this._host != value)
                 {
                     this._host = value;
-                    this.OnPropertyChanged();
+                    this.InvokePropertyChanged();
                 }
             }
         }
@@ -63,7 +59,7 @@ namespace SnapshotManagerGui
                 if (this._portNumber != value)
                 {
                     this._portNumber = value;
-                    this.OnPropertyChanged();
+                    this.InvokePropertyChanged();
                 }
             }
         }
@@ -79,7 +75,7 @@ namespace SnapshotManagerGui
                 if (this._userId != value)
                 {
                     this._userId = value;
-                    this.OnPropertyChanged();
+                    this.InvokePropertyChanged();
                 }
             }
         }
@@ -95,14 +91,9 @@ namespace SnapshotManagerGui
                 if (this._password != value)
                 {
                     this._password = value;
-                    this.OnPropertyChanged();
+                    this.InvokePropertyChanged();
                 }
             }
-        }
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
