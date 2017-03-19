@@ -8,6 +8,7 @@ namespace SnapshotManagerGui
 {
     using DbServerPlugin;
     using DbServerPluginMsSql2014;
+    using NewConnection;
     using System.Windows;
 
     /// <summary>
@@ -21,8 +22,9 @@ namespace SnapshotManagerGui
 
             // Quick hack...
             DbServerPluginRegistry.RegisterPlugin(
+                MsSql2014.Identifier,
                 new MsSql2014DbServerInfo(),
-                new MsSql2014CommandProvider());
+                null);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

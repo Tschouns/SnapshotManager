@@ -1,11 +1,11 @@
-﻿<Window x:Class="SnapshotManagerGui.NewConnectionWindow"
+﻿<Window x:Class="SnapshotManagerGui.NewConnection.NewConnectionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapshotManagerGui"
         mc:Ignorable="d"
-        Title="New Connection" Height="170" Width="400" ResizeMode="NoResize">
+        Title="New Connection" Height="170" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="28"/>

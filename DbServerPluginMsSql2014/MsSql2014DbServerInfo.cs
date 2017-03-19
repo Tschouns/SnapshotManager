@@ -16,6 +16,6 @@ namespace DbServerPluginMsSql2014
         /// <summary>
         /// See <see cref="IDbServerInfo.Description"/>.
         /// </summary>
-        string IDbServerInfo.Description => DbServerInfo.Description;
+        string IDbServerInfo.Description => MsSql2014.Description;
     }
 }

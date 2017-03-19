@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbServerInfo.Designer.cs">
+    <Compile Include="MsSql2014.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbServerInfo.resx</DependentUpon>
+      <DependentUpon>MsSql2014.resx</DependentUpon>
     </Compile>
     <Compile Include="MsSql2014DbServerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,9 +55,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DbServerInfo.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>DbServerInfo.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="MsSql2014.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MsSql2014.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

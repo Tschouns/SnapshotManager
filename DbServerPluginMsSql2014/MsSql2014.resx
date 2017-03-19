@@ -120,4 +120,7 @@
   <data name="Description" xml:space="preserve">
     <value>MS SQL Server 2014</value>
   </data>
+  <data name="Identifier" xml:space="preserve">
+    <value>mssql2014</value>
+  </data>
 </root>

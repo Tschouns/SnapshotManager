@@ -6,6 +6,7 @@
 
 namespace DbServerPlugin
 {
+    using Base;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -26,8 +27,7 @@ namespace DbServerPlugin
         {
             var plugin = new DbServerPluginInfo(
                 pluginIdentifier,
-                serverInfo,
-                services);
+                serverInfo);
 
             _dbServerPlugins.Add(plugin);
         }
@@ -35,9 +35,29 @@ namespace DbServerPlugin
         /// <summary>
         /// Gets all registered DB server plug-ins.
         /// </summary>
-        public static IEnumerable<string> GetAllPlugins()
+        public static IEnumerable<DbServerPluginInfo> GetAllPlugins()
+        {
+            return _dbServerPlugins.ToList();
+        }
+
+        /// <summary>
+        /// Gets all registered DB server plug-in identifiers.
+        /// </summary>
+        public static IEnumerable<string> GetAllPluginIdentifiers()
         {
             return _dbServerPlugins.Select(p => p.PluginIdentifier).ToList();
+        }
+
+        /// <summary>
+        /// Gets the registered DB server plug-in by the specified identifier.
+        /// </summary>
+        public static NullableResult<DbServerPluginInfo> GetPluginByIdentifier(string pluginIdentifier)
+        {
+            ArgumentChecks.AssertNotNull(pluginIdentifier, nameof(pluginIdentifier));
+
+            var plugin = _dbServerPlugins.Where(p => p.PluginIdentifier == pluginIdentifier).FirstOrDefault();
+
+            return new NullableResult<DbServerPluginInfo>(plugin);
         }
     }
 }

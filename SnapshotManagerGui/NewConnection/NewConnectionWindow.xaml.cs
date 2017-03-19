@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace SnapshotManagerGui
+namespace SnapshotManagerGui.NewConnection
 {
     using Base;
     using DbServerPlugin;
@@ -26,6 +26,8 @@ namespace SnapshotManagerGui
             this.dbServerComboBox.DisplayMemberPath = PropertyUtils.GetPropertyName<IDbServerInfo, string>(s => s.Description);
             this.dbServerComboBox.ItemsSource = dbServers;
         }
+
+        public NewConnectionModel Model { get; set; }
 
         public IDbServerInfo DbServer => (IDbServerInfo)this.dbServerComboBox.SelectedItem;
         public string Host => this.hostTextBox.Text;

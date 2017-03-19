@@ -18,16 +18,13 @@ namespace DbServerPlugin
         /// </summary>
         public DbServerPluginInfo(
             string pluginIdentifier,
-            IDbServerInfo serverInfo,
-            IDbServerPluginServiceFacade services)
+            IDbServerInfo serverInfo)
         {
             ArgumentChecks.AssertNotNull(pluginIdentifier, nameof(pluginIdentifier));
             ArgumentChecks.AssertNotNull(serverInfo, nameof(serverInfo));
-            ArgumentChecks.AssertNotNull(services, nameof(services));
 
             this.PluginIdentifier = PluginIdentifier;
             this.ServerInfo = serverInfo;
-            this.Services = services;
         }
 
         /// <summary>
