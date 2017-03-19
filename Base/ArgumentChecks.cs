@@ -4,10 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
-
 namespace Base
 {
+    using System;
+
     /// <summary>
     /// Provides runtime checks for arguments, throws exceptions.
     /// </summary>
