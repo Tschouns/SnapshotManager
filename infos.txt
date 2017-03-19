@@ -1,0 +1,2 @@
+===SQL Server 2014 ports===
+http://stackoverflow.com/questions/27762257/connecting-to-a-2014-sqlexpress-database-on-an-externally-hosted-computer-throug

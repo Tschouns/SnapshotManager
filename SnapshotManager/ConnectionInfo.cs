@@ -29,7 +29,7 @@ namespace SnapshotManager
             ArgumentChecks.AssertNotNull(userId, nameof(userId));
             ArgumentChecks.AssertNotNull(password, nameof(password));
 
-            this.dbServer = dbServer;
+            this.DbServer = dbServer;
             this.Host = host;
             this.PortNumber = portNumber;
             this.UserId = userId;
@@ -39,7 +39,7 @@ namespace SnapshotManager
         /// <summary>
         /// Gets the <see cref="DbServerPluginInfo"/>.
         /// </summary>
-        DbServerPluginInfo dbServer { get; }
+        public DbServerPluginInfo DbServer { get; }
 
         /// <summary>
         /// Gets the host for the connection.
@@ -60,5 +60,10 @@ namespace SnapshotManager
         /// Gets the password used for the connection.
         /// </summary>
         public string Password { get; }
+
+        public override string ToString()
+        {
+            return $"{this.Host}:{this.PortNumber} (user: {this.UserId})";
+        }
     }
 }

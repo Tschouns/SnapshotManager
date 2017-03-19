@@ -117,10 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Description" xml:space="preserve">
-    <value>MS SQL Server 2014 - Enterprise Edition</value>
-  </data>
-  <data name="Identifier" xml:space="preserve">
-    <value>mssql2014</value>
+  <data name="GetAllDatabasesForConnectionFailed" xml:space="preserve">
+    <value>The databases for the connection [{0}] could not be retrieved.</value>
+    <comment>{0}: the connection info</comment>
   </data>
 </root>
