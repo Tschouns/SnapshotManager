@@ -46,5 +46,13 @@ namespace DbServerPlugin
         /// Gets the <see cref="DbServerPluginServiceFacade"/> for this plug-in.
         /// </summary>
         public DbServerPluginServiceFacade Services { get; }
+
+        /// <summary>
+        /// See <see cref="object.ToString"/>.
+        /// </summary>
+        public override string ToString()
+        {
+            return this.ServerInfo.Description;
+        }
     }
 }

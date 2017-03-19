@@ -61,6 +61,9 @@ namespace SnapshotManager
         /// </summary>
         public string Password { get; }
 
+        /// <summary>
+        /// See <see cref="object.ToString"/>.
+        /// </summary>
         public override string ToString()
         {
             return $"{this.Host}:{this.PortNumber} (user: {this.UserId})";

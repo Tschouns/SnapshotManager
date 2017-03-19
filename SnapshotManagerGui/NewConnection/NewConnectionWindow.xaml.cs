@@ -8,6 +8,7 @@ namespace SnapshotManagerGui.NewConnection
 {
     using Base;
     using DbServerPlugin;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
 
@@ -16,20 +17,32 @@ namespace SnapshotManagerGui.NewConnection
     /// </summary>
     public partial class NewConnectionWindow : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NewConnectionWindow"/> class.
+        /// </summary>
         public NewConnectionWindow()
         {
             this.InitializeComponent();
-
-            var dbServerPluginInfos = DbServerPluginRegistry.GetAllPlugins();
-            var dbServers = dbServerPluginInfos.Select(p => p.ServerInfo).ToList();
-
-            this.dbServerComboBox.ItemsSource = dbServers;
 
             this.Model = new NewConnectionModel();
             this.DataContext = this.Model;
         }
 
+        /// <summary>
+        /// Gets the view model.
+        /// </summary>
         public NewConnectionModel Model { get; }
+
+        /// <summary>
+        /// Sets the available plugins.
+        /// </summary>
+        public void SetAvailableDbServerPlugins(IEnumerable<DbServerPluginInfo> availblePlugins)
+        {
+            ArgumentChecks.AssertNotNull(availblePlugins, nameof(availblePlugins));
+
+            var pluginsOrdered = availblePlugins.OrderBy(p => p.ToString()).ToList();
+            this.dbServerComboBox.ItemsSource = pluginsOrdered;
+        }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {

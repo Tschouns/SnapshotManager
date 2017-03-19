@@ -33,6 +33,6 @@ namespace Base
         /// <summary>
         /// Gets a value indicating whether the result contains an actual value.
         /// </summary>
-        public bool HaseValue => this.Value != null;
+        public bool HasValue => this.Value != null;
     }
 }

@@ -35,12 +35,11 @@ namespace SnapshotManagerGui
 
         private void addConnectionButton_Click(object sender, RoutedEventArgs e)
         {
-            var newConnectionWindow = new NewConnectionWindow();
-            var result = newConnectionWindow.ShowDialog();
-
-            if (result.GetValueOrDefault())
+            var newConnectionDialog = new NewConnectionDialog();
+            var result = newConnectionDialog.Prompt(DbServerPluginRegistry.GetAllPlugins());
+            if (result.HasValue)
             {
-                MessageBox.Show("Connect... " + newConnectionWindow.Model.DbServer.Description);
+                MessageBox.Show(result.Value.ToString());
             }
         }
     }
