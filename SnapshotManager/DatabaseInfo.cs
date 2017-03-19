@@ -4,24 +4,32 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace DbServerPlugin.Services
+namespace SnapshotManager
 {
     using Base;
 
     /// <summary>
-    /// Represents a database snapshot.
+    /// Represents a database.
     /// </summary>
-    public class Snapshot
+    public class DatabaseInfo
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Snapshot"/> class.
+        /// Initializes a new instance of the <see cref="DatabaseInfo"/> class.
         /// </summary>
-        public Snapshot(string name)
+        public DatabaseInfo(
+            ConnectionInfo connection,
+            string name)
         {
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
             ArgumentChecks.AssertNotNull(name, nameof(name));
 
             this.Name = name;
         }
+
+        /// <summary>
+        /// Gets the connection associated with this database.
+        /// </summary>
+        ConnectionInfo Connection { get; }
 
         /// <summary>
         /// Gets the database name.
