@@ -7,6 +7,7 @@
 namespace DbServerPlugin
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Allows to register and retrieve DB server plug-ins.
@@ -19,12 +20,14 @@ namespace DbServerPlugin
         /// Registers a DB server plug-in.
         /// </summary>
         public static void RegisterPlugin(
+            string pluginIdentifier,
             IDbServerInfo serverInfo,
-            ICommandProvider commands)
+            IDbServerPluginSerciveFacade services)
         {
             var plugin = new DbServerPluginInfo(
+                pluginIdentifier,
                 serverInfo,
-                commands);
+                services);
 
             _dbServerPlugins.Add(plugin);
         }
@@ -32,9 +35,9 @@ namespace DbServerPlugin
         /// <summary>
         /// Gets all registered DB server plug-ins.
         /// </summary>
-        public static IEnumerable<DbServerPluginInfo> GetAllPlugins()
+        public static IEnumerable<string> GetAllPlugins()
         {
-            return _dbServerPlugins;
+            return _dbServerPlugins.Select(p => p.PluginIdentifier).ToList();
         }
     }
 }

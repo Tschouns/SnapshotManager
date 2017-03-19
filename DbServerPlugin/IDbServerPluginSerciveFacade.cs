@@ -9,7 +9,7 @@ namespace DbServerPlugin
     /// <summary>
     /// Provides SQL commands specific to a certain SQL database system.
     /// </summary>
-    public interface ICommandProvider
+    public interface IDbServerPluginSerciveFacade
     {
     }
 }

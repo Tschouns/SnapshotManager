@@ -45,7 +45,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbServerInfo.resx</DependentUpon>
     </Compile>
-    <Compile Include="MsSql2014CommandProvider.cs" />
     <Compile Include="MsSql2014DbServerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

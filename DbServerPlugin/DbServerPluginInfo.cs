@@ -17,15 +17,24 @@ namespace DbServerPlugin
         /// Initializes a new instance.
         /// </summary>
         public DbServerPluginInfo(
+            string pluginIdentifier,
             IDbServerInfo serverInfo,
-            ICommandProvider commands)
+            IDbServerPluginSerciveFacade services)
         {
+            ArgumentChecks.AssertNotNull(pluginIdentifier, nameof(pluginIdentifier));
             ArgumentChecks.AssertNotNull(serverInfo, nameof(serverInfo));
-            ArgumentChecks.AssertNotNull(commands, nameof(commands));
+            ArgumentChecks.AssertNotNull(services, nameof(services));
 
+            this.PluginIdentifier = PluginIdentifier;
             this.ServerInfo = serverInfo;
-            this.Commands = commands;
+            this.Services = services;
         }
+
+        /// <summary>
+        /// Gets an identifier for this plug-in, which can be used as key of for identifying the
+        /// plug-in in a database or XML file.
+        /// </summary>
+        public string PluginIdentifier { get; }
 
         /// <summary>
         /// Gets the <see cref="IDbServerInfo"/> for this plug-in.
@@ -33,8 +42,8 @@ namespace DbServerPlugin
         public IDbServerInfo ServerInfo { get; }
 
         /// <summary>
-        /// Gets the <see cref="ICommandProvider"/> for this plug-in.
+        /// Gets the <see cref="IDbServerPluginSerciveFacade"/> for this plug-in.
         /// </summary>
-        public ICommandProvider Commands { get; }
+        public IDbServerPluginSerciveFacade Services { get; }
     }
 }

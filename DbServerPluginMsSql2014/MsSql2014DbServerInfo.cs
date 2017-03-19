@@ -6,7 +6,6 @@
 
 namespace DbServerPluginMsSql2014
 {
-    using System;
     using DbServerPlugin;
 
     /// <summary>
