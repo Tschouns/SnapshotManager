@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//-----------------------------------------------------------------------
+// <copyright file="BlowMeInTheShoes.cs" company="Jonas Aklin">
+//     Copyright (c) Jonas Aklin. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace DbServerPlugin
 {
-    interface IDbServerPluginServiceFacade
+    /// <summary>
+    /// Provides services specific to a DB server plug-in.
+    /// </summary>
+    public interface IDbServerPluginServiceFacade
     {
     }
 }

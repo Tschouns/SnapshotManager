@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbServerPluginInfo.cs" />
-    <Compile Include="IDbServerPluginSerciveFacade.cs" />
+    <Compile Include="IDbServerPluginServiceFacade.cs" />
     <Compile Include="DbServerPluginRegistry.cs" />
     <Compile Include="IDbServerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

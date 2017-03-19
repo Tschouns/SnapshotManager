@@ -22,7 +22,7 @@ namespace DbServerPlugin
         public static void RegisterPlugin(
             string pluginIdentifier,
             IDbServerInfo serverInfo,
-            IDbServerPluginSerciveFacade services)
+            IDbServerPluginServiceFacade services)
         {
             var plugin = new DbServerPluginInfo(
                 pluginIdentifier,

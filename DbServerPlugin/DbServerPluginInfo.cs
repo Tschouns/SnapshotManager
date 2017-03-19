@@ -19,7 +19,7 @@ namespace DbServerPlugin
         public DbServerPluginInfo(
             string pluginIdentifier,
             IDbServerInfo serverInfo,
-            IDbServerPluginSerciveFacade services)
+            IDbServerPluginServiceFacade services)
         {
             ArgumentChecks.AssertNotNull(pluginIdentifier, nameof(pluginIdentifier));
             ArgumentChecks.AssertNotNull(serverInfo, nameof(serverInfo));
@@ -42,8 +42,8 @@ namespace DbServerPlugin
         public IDbServerInfo ServerInfo { get; }
 
         /// <summary>
-        /// Gets the <see cref="IDbServerPluginSerciveFacade"/> for this plug-in.
+        /// Gets the <see cref="IDbServerPluginServiceFacade"/> for this plug-in.
         /// </summary>
-        public IDbServerPluginSerciveFacade Services { get; }
+        public IDbServerPluginServiceFacade Services { get; }
     }
 }
