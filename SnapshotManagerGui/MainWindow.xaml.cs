@@ -6,10 +6,11 @@
 
 namespace SnapshotManagerGui
 {
+    using System.Windows;
     using DbServerPlugin;
     using DbServerPluginMsSql2014;
     using NewConnection;
-    using System.Windows;
+    using DbServerPluginMsSql2014.Services;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,7 +25,8 @@ namespace SnapshotManagerGui
             DbServerPluginRegistry.RegisterPlugin(
                 MsSql2014.Identifier,
                 new MsSql2014DbServerInfo(),
-                null);
+                new MsSql2014DatabaseServices(),
+                new MsSql2014SnapshotServices());
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

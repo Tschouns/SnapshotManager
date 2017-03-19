@@ -7,6 +7,8 @@
 namespace DbServerPlugin
 {
     using Base;
+    using DbServerPluginMsSql2014.Services;
+    using Services;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -23,11 +25,15 @@ namespace DbServerPlugin
         public static void RegisterPlugin(
             string pluginIdentifier,
             IDbServerInfo serverInfo,
-            IDbServerPluginServiceFacade services)
+            IDatabaseServices databases,
+            ISnapshotServices snapshots)
         {
             var plugin = new DbServerPluginInfo(
                 pluginIdentifier,
-                serverInfo);
+                serverInfo,
+                new DbServerPluginServiceFacade(
+                    databases,
+                    snapshots));
 
             _dbServerPlugins.Add(plugin);
         }

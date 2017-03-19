@@ -47,8 +47,14 @@
     </Compile>
     <Compile Include="MsSql2014DbServerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MsSql2014DatabaseServices.cs" />
+    <Compile Include="Services\MsSql2014SnapshotServices.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Base\Base.csproj">
+      <Project>{2C4E79C9-36AB-44B1-87FE-F54369C1A64F}</Project>
+      <Name>Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DbServerPlugin\DbServerPlugin.csproj">
       <Project>{cc6ecdf3-96c6-4cc1-960b-68af01d1ca52}</Project>
       <Name>DbServerPlugin</Name>
@@ -60,6 +66,7 @@
       <LastGenOutput>MsSql2014.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

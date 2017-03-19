@@ -7,6 +7,7 @@
 namespace DbServerPlugin
 {
     using Base;
+    using DbServerPluginMsSql2014.Services;
 
     /// <summary>
     /// Provides all the plug-in specific information and interfaces.
@@ -18,13 +19,16 @@ namespace DbServerPlugin
         /// </summary>
         public DbServerPluginInfo(
             string pluginIdentifier,
-            IDbServerInfo serverInfo)
+            IDbServerInfo serverInfo,
+            DbServerPluginServiceFacade services)
         {
             ArgumentChecks.AssertNotNull(pluginIdentifier, nameof(pluginIdentifier));
             ArgumentChecks.AssertNotNull(serverInfo, nameof(serverInfo));
+            ArgumentChecks.AssertNotNull(services, nameof(services));
 
             this.PluginIdentifier = PluginIdentifier;
             this.ServerInfo = serverInfo;
+            this.Services = services;
         }
 
         /// <summary>
@@ -39,8 +43,8 @@ namespace DbServerPlugin
         public IDbServerInfo ServerInfo { get; }
 
         /// <summary>
-        /// Gets the <see cref="IDbServerPluginServiceFacade"/> for this plug-in.
+        /// Gets the <see cref="DbServerPluginServiceFacade"/> for this plug-in.
         /// </summary>
-        public IDbServerPluginServiceFacade Services { get; }
+        public DbServerPluginServiceFacade Services { get; }
     }
 }

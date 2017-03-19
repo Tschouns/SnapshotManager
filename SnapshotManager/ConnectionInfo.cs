@@ -14,7 +14,7 @@ namespace SnapshotManager
     public class ConnectionInfo
     {
         /// <summary>
-        /// Initializes a new instance.
+        /// Initializes a new instance of the <see cref="ConnectionInfo"/> class.
         /// </summary>
         public ConnectionInfo(
             string userId,
