@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace SnapshotManagerGui.NewConnection
+namespace SnapshotManagerGui
 {
     using DbServerPlugin;
     using System.ComponentModel;

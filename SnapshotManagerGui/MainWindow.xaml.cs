@@ -9,7 +9,6 @@ namespace SnapshotManagerGui
     using System.Windows;
     using DbServerPlugin;
     using DbServerPluginMsSql2014;
-    using NewConnection;
     using DbServerPluginMsSql2014.Services;
 
     /// <summary>

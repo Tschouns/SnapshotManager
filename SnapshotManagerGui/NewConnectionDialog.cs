@@ -4,12 +4,13 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace SnapshotManagerGui.NewConnection
+namespace SnapshotManagerGui
 {
     using Base;
     using DbServerPlugin;
     using SnapshotManager;
     using System.Collections.Generic;
+    using Windows;
 
     /// <summary>
     /// GUI helper class which prompts the "New Connection" dialog.
