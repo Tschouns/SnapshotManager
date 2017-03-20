@@ -47,6 +47,11 @@
     </Compile>
     <Compile Include="MsSql2014DbServerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DatabaseServicesCommands.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseServicesCommands.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\MsSql2014DatabaseServices.cs" />
     <Compile Include="Services\MsSql2014SnapshotServices.cs" />
   </ItemGroup>
@@ -64,6 +69,10 @@
     <EmbeddedResource Include="MsSql2014.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MsSql2014.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services\DatabaseServicesCommands.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DatabaseServicesCommands.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

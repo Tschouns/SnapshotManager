@@ -44,7 +44,9 @@
     <Compile Include="DatabaseInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ConnectionRepository.cs" />
+    <Compile Include="Repositories\DatabaseRepository.cs" />
     <Compile Include="Repositories\IConnectionRepository.cs" />
+    <Compile Include="Repositories\IDatabaseRepository.cs" />
     <Compile Include="Services\IDatabaseServices.cs" />
     <Compile Include="Services\DatabaseServices.cs" />
     <Compile Include="Services\Messages.Designer.cs">

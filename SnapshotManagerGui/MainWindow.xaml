@@ -17,7 +17,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <ListView x:Name="connectionsListView" Margin="10,60,10,10">
+            <ListView x:Name="connectionsListView" Margin="10,60,10,10" SelectionChanged="connectionsListView_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="DB Server" DisplayMemberBinding="{Binding DbServer}"/>
@@ -29,7 +29,7 @@
             <ListView x:Name="databasesListView" Margin="10,30,10,10" Grid.Row="1">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
