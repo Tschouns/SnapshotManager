@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="ArgumentChecks.cs" />
     <Compile Include="NullableResult.cs" />
-    <Compile Include="PropertyUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

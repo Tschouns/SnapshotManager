@@ -8,13 +8,16 @@ namespace SnapshotManagerGui.Models
 {
     using DbServerPlugin;
 
+    /// <summary>
+    /// Represents the view model of the "New Connection" dialog.
+    /// </summary>
     public class NewConnectionModel : BaseViewModel
     {
         private DbServerPluginInfo _dbServerPlugin;
-        private string _host;
-        private int _portNumber;
-        private string _userId;
-        private string _password;
+        private string _host = string.Empty;
+        private int _portNumber = 0;
+        private string _userId = string.Empty;
+        private string _password = string.Empty;
 
         /// <summary>
         /// Gets or sets the DB server plugin.

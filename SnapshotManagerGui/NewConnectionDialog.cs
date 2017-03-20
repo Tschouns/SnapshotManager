@@ -37,6 +37,8 @@ namespace SnapshotManagerGui
                     model.PortNumber,
                     model.UserId,
                     model.Password);
+
+                return new NullableResult<ConnectionInfo>(newConnection);
             }
 
             return new NullableResult<ConnectionInfo>(null);
