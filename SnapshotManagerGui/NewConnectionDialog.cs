@@ -34,7 +34,7 @@ namespace SnapshotManagerGui
                 var newConnection = new ConnectionInfo(
                     model.DbServerPlugin,
                     model.Host,
-                    model.PortNumber,
+                    model.IntegratedSecurity,
                     model.UserId,
                     model.Password);
 

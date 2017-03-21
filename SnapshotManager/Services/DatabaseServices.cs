@@ -26,11 +26,16 @@ namespace SnapshotManager.Services
 
             try
             {
-                var databaseNames = connection.DbServer.Services.Databases.GetAllDatabases(
-                    connection.Host,
-                    connection.PortNumber,
-                    connection.UserId,
-                    connection.Password);
+                IEnumerable<string> databaseNames = new string[0];
+
+                if (connection.UsesIntegratedSecurity)
+                {
+                    databaseNames = connection.DbServer.Services.Databases.GetAllDatabasesUsingIntegratedSecurity(connection.Host);
+                }
+                else
+                {
+                    databaseNames = connection.DbServer.Services.Databases.GetAllDatabases(connection.Host, connection.UserId, connection.Password);
+                }
 
                 var databaseInfos = databaseNames.Select(name => new DatabaseInfo(connection, name)).ToList();
 

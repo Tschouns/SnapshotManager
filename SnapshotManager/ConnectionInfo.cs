@@ -20,7 +20,7 @@ namespace SnapshotManager
         public ConnectionInfo(
             DbServerPluginInfo dbServer,
             string host,
-            int portNumber,
+            bool usesIntegratedSecurity,
             string userId,
             string password)
         {
@@ -31,7 +31,7 @@ namespace SnapshotManager
 
             this.DbServer = dbServer;
             this.Host = host;
-            this.PortNumber = portNumber;
+            this.UsesIntegratedSecurity = usesIntegratedSecurity;
             this.UserId = userId;
             this.Password = password;
         }
@@ -47,9 +47,10 @@ namespace SnapshotManager
         public string Host { get; }
 
         /// <summary>
-        /// Gets the port number for the connection.
+        /// Gets a value indicating whether the connection uses integrated security (in which case
+        /// <see cref="UserId"/> and <see cref="Password"/> are not relevant).
         /// </summary>
-        public int PortNumber { get; }
+        public bool UsesIntegratedSecurity { get; }
 
         /// <summary>
         /// Gets the user ID used for the connection.
@@ -66,7 +67,7 @@ namespace SnapshotManager
         /// </summary>
         public override string ToString()
         {
-            return $"{this.Host}:{this.PortNumber} (user: {this.UserId})";
+            return $"{this.Host} (user: {this.UserId})";
         }
     }
 }

@@ -16,6 +16,11 @@ namespace DbServerPlugin.Services
         /// <summary>
         /// Gets all databases for the specified connection.
         /// </summary>
-        IEnumerable<string> GetAllDatabases(string host, int portNumber, string userId, string password);
+        IEnumerable<string> GetAllDatabasesUsingIntegratedSecurity(string host);
+
+        /// <summary>
+        /// Gets all databases for the specified connection.
+        /// </summary>
+        IEnumerable<string> GetAllDatabases(string host, string userId, string password);
     }
 }

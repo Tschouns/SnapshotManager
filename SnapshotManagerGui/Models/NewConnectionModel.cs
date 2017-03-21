@@ -15,7 +15,7 @@ namespace SnapshotManagerGui.Models
     {
         private DbServerPluginInfo _dbServerPlugin;
         private string _host = string.Empty;
-        private int _portNumber = 0;
+        private bool _integratedSecurity = false;
         private string _userId = string.Empty;
         private string _password = string.Empty;
 
@@ -52,16 +52,16 @@ namespace SnapshotManagerGui.Models
         }
 
         /// <summary>
-        /// Gets or sets the port number.
+        /// Gets or sets a value indicating whether integrated security is to be used.
         /// </summary>
-        public int PortNumber
+        public bool IntegratedSecurity
         {
-            get { return this._portNumber; }
+            get { return this._integratedSecurity; }
             set
             {
-                if (this._portNumber != value)
+                if (this._integratedSecurity != value)
                 {
-                    this._portNumber = value;
+                    this._integratedSecurity = value;
                     this.InvokePropertyChanged();
                 }
             }

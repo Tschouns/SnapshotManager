@@ -18,21 +18,20 @@ namespace DbServerPluginMsSql2014.Services
     /// </summary>
     public class MsSql2014DatabaseServices : IDatabaseServices
     {
-        /// <summary>
-        /// See <see cref="IDatabaseServices.GetAllDatabases(string, int, string, string)"/>.
-        /// </summary>
-        public IEnumerable<string> GetAllDatabases(string host, int portNumber, string userId, string password)
+        public IEnumerable<string> GetAllDatabasesUsingIntegratedSecurity(string host)
         {
             ArgumentChecks.AssertNotNull(host, nameof(host));
-            ArgumentChecks.AssertNotNull(userId, nameof(userId));
-            ArgumentChecks.AssertNotNull(password, nameof(password));
 
-            var connectionString = new SqlConnectionStringBuilder();
-            connectionString.DataSource = host;
-            connectionString.UserID = userId;
-            connectionString.Password = password;
+            // TODO: create own connection string builder....
+            var connectionStringBuilder = new SqlConnectionStringBuilder();
+            connectionStringBuilder.DataSource = host;
+            ////connectionStringBuilder.UserID = userId;
+            ////connectionStringBuilder.Password = password;
+            connectionStringBuilder.IntegratedSecurity = true;
 
-            using (var sqlConnection = new SqlConnection(connectionString.ToString()))
+            var connectionString = "Server=WR-SQL14\\SQL2014_02;Integrated Security=SSPI";
+
+            using (var sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
 
@@ -55,6 +54,11 @@ namespace DbServerPluginMsSql2014.Services
 
                 return databaseNames;
             }
+        }
+
+        public IEnumerable<string> GetAllDatabases(string host, string userId, string password)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
