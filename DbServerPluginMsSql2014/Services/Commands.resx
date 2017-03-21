@@ -123,4 +123,7 @@
   <data name="SelectDatabases" xml:space="preserve">
     <value>SELECT name FROM sys.databases</value>
   </data>
+  <data name="SelectSnapshots" xml:space="preserve">
+    <value>SELECT name FROM sys.databases WHERE source_database_id IS NOT NULL</value>
+  </data>
 </root>

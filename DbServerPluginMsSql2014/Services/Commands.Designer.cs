@@ -22,14 +22,14 @@ namespace DbServerPluginMsSql2014.Services {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class DatabaseServicesCommands {
+    internal class Commands {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DatabaseServicesCommands() {
+        internal Commands() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DbServerPluginMsSql2014.Services {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DbServerPluginMsSql2014.Services.DatabaseServicesCommands", typeof(DatabaseServicesCommands).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DbServerPluginMsSql2014.Services.Commands", typeof(Commands).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -75,6 +75,15 @@ namespace DbServerPluginMsSql2014.Services {
         internal static string SelectDatabases {
             get {
                 return ResourceManager.GetString("SelectDatabases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT name FROM sys.databases WHERE source_database_id IS NOT NULL.
+        /// </summary>
+        internal static string SelectSnapshots {
+            get {
+                return ResourceManager.GetString("SelectSnapshots", resourceCulture);
             }
         }
     }

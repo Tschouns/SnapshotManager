@@ -23,6 +23,7 @@ namespace SnapshotManager
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
             ArgumentChecks.AssertNotNull(name, nameof(name));
 
+            this.Connection = connection;
             this.Name = name;
         }
 

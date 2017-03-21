@@ -49,6 +49,7 @@ namespace DbServerPluginMsSql2014.Services
 
             var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
 
+            // TODO: Refactor this... same code as in MsSql2014SnapshotServices!
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
@@ -57,7 +58,7 @@ namespace DbServerPluginMsSql2014.Services
                 var sqlCommand = new SqlCommand();
                 sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = DatabaseServicesCommands.SelectDatabases;
+                sqlCommand.CommandText = Commands.SelectDatabases;
 
                 // Execute query.
                 var adapter = new SqlDataAdapter(sqlCommand);
@@ -67,7 +68,7 @@ namespace DbServerPluginMsSql2014.Services
 
                 var databaseNames = dataTable.Rows
                     .Cast<DataRow>()
-                    .Select(r => r[DatabaseServicesCommands.NameColumn].ToString())
+                    .Select(r => r[Commands.NameColumn].ToString())
                     .ToList();
 
                 return databaseNames;
