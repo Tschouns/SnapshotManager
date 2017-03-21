@@ -20,7 +20,7 @@
             <Label x:Name="connectionLabel" Content="Connections" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
             <Button x:Name="addConnectionButton" Content="Add..." HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" Click="AddConnectionButton_Click" TabIndex="1"/>
             <Button x:Name="removeConnectionButton" Content="Remove" HorizontalAlignment="Left" Margin="90,35,0,0" VerticalAlignment="Top" Width="75" Click="RemoveConnectionButton_OnClickConnectionButton_Click" TabIndex="2"/>
-            <ListView x:Name="connectionsListView" Margin="10,60,10,10" SelectionChanged="connectionsListView_SelectionChanged" TabIndex="0">
+            <ListView x:Name="connectionsListView" Margin="10,60,10,10" SelectionChanged="ConnectionsListView_SelectionChanged" TabIndex="0">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Host" DisplayMemberBinding="{Binding Host}"/>
@@ -29,7 +29,7 @@
             </ListView>
 
             <Label x:Name="databasesLabel" Content="Databases" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-            <ListView x:Name="databasesListView" Margin="10,30,10,10" Grid.Row="1" TabIndex="10">
+            <ListView x:Name="databasesListView" Margin="10,30,10,10" Grid.Row="1" TabIndex="10" SelectionChanged="DatabasesListView_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>

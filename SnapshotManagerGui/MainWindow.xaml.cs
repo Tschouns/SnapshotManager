@@ -21,6 +21,7 @@ namespace SnapshotManagerGui
     {
         private readonly IConnectionRepository _connectionRepository;
         private readonly IDatabaseRepository _databaseRepository;
+        private readonly ISnapshotRepository _snapshotRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -38,6 +39,7 @@ namespace SnapshotManagerGui
 
             this._connectionRepository = new ConnectionRepository();
             this._databaseRepository = new DatabaseRepository();
+            this._snapshotRepository = new SnapshotRepository();
         }
 
         private void UpdateConnectionsListView()
@@ -66,9 +68,39 @@ namespace SnapshotManagerGui
             }
         }
 
-        private void connectionsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void UpdateSnapshotListView()
+        {
+            this.snapshotsListView.Items.Clear();
+
+            var selectedDatabase = (DatabaseInfo)this.databasesListView.SelectedItem;
+            if (selectedDatabase == null)
+            {
+                return;
+            }
+
+            var loadResult = this._snapshotRepository.TryLoadSnapshots(selectedDatabase);
+            if (!loadResult.Successful)
+            {
+                MessageBox.Show(loadResult.ErrorMessage);
+            }
+
+            var snapshots = this._snapshotRepository.GetLoadedSnapshots(selectedDatabase);
+            foreach (var snapshot in snapshots)
+            {
+                this.snapshotsListView.Items.Add(snapshot);
+            }
+        }
+
+        #region event handlers
+
+        private void ConnectionsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             this.UpdateDatabaseListView();
+        }
+
+        private void DatabasesListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            this.UpdateSnapshotListView();
         }
 
         private void AddConnectionButton_Click(object sender, RoutedEventArgs e)
@@ -103,5 +135,7 @@ namespace SnapshotManagerGui
             this.UpdateConnectionsListView();
             this.UpdateDatabaseListView();
         }
+
+        #endregion
     }
 }
