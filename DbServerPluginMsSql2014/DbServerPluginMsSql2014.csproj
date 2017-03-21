@@ -40,6 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ConnectionStringHelper.cs" />
+    <Compile Include="Helpers\ConnectionStringTemplates.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConnectionStringTemplates.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\IConnectionStringHelper.cs" />
     <Compile Include="MsSql2014.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,6 +73,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Helpers\ConnectionStringTemplates.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConnectionStringTemplates.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="MsSql2014.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MsSql2014.Designer.cs</LastGenOutput>
