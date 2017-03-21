@@ -33,5 +33,18 @@ namespace SnapshotManager.Repositories
 
             this._connections.Add(connection);
         }
+
+        /// <summary>
+        /// See <see cref="IConnectionRepository.RemoveConnection(ConnectionInfo)"/>.
+        /// </summary>
+        public void RemoveConnection(ConnectionInfo connection)
+        {
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            if (this._connections.Contains(connection))
+            {
+                this._connections.Remove(connection);
+            }
+        }
     }
 }

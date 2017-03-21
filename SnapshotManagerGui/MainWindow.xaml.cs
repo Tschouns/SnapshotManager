@@ -78,7 +78,7 @@ namespace SnapshotManagerGui
             this.UpdateDatabaseListView();
         }
 
-        private void addConnectionButton_Click(object sender, RoutedEventArgs e)
+        private void AddConnectionButton_Click(object sender, RoutedEventArgs e)
         {
             var newConnectionDialog = new NewConnectionDialog();
             var result = newConnectionDialog.Prompt(DbServerPluginRegistry.GetAllPlugins());
@@ -86,7 +86,20 @@ namespace SnapshotManagerGui
             {
                 this._connectionRepository.AddConnection(result.Value);
                 this.UpdateConnectionsListView();
+                this.UpdateDatabaseListView();
             }
+        }
+
+        private void RemoveConnectionButton_OnClickConnectionButton_Click(object aSender, RoutedEventArgs aE)
+        {
+            var selectedConnections = this.connectionsListView.SelectedItems.Cast<ConnectionInfo>().ToList();
+            foreach (var connection in selectedConnections)
+            {
+                this._connectionRepository.RemoveConnection(connection);
+            }
+
+            this.UpdateConnectionsListView();
+            this.UpdateDatabaseListView();
         }
     }
 }

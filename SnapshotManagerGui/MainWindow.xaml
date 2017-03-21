@@ -18,8 +18,8 @@
             </Grid.RowDefinitions>
 
             <Label x:Name="connectionLabel" Content="Connections" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="addConnectionButton" Content="Add..." HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" Click="addConnectionButton_Click" TabIndex="1"/>
-            <Button x:Name="removeConnectionButton" Content="Remove" HorizontalAlignment="Left" Margin="90,35,0,0" VerticalAlignment="Top" Width="75" Click="addConnectionButton_Click" TabIndex="2"/>
+            <Button x:Name="addConnectionButton" Content="Add..." HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" Click="AddConnectionButton_Click" TabIndex="1"/>
+            <Button x:Name="removeConnectionButton" Content="Remove" HorizontalAlignment="Left" Margin="90,35,0,0" VerticalAlignment="Top" Width="75" Click="RemoveConnectionButton_OnClickConnectionButton_Click" TabIndex="2"/>
             <ListView x:Name="connectionsListView" Margin="10,60,10,10" SelectionChanged="connectionsListView_SelectionChanged" TabIndex="0">
                 <ListView.View>
                     <GridView>

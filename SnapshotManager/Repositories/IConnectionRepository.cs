@@ -22,5 +22,10 @@ namespace SnapshotManager.Repositories
         /// Adds a connection to the repository.
         /// </summary>
         void AddConnection(ConnectionInfo connection);
+
+        /// <summary>
+        /// Removes a connection from the repository.
+        /// </summary>
+        void RemoveConnection(ConnectionInfo connection);
     }
 }
