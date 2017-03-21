@@ -43,7 +43,7 @@ namespace DbServerPluginMsSql2014.Services
         /// <summary>
         /// See <see cref="IDatabaseServices.GetAllDatabasesUsingIntegratedSecurity"/>.
         /// </summary>
-        public IEnumerable<string> GetAllDatabases(DbServerConnectionInfo connection)
+        public IEnumerable<string> GetAllDatabases(DbServerConnectionData connection)
         {
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 

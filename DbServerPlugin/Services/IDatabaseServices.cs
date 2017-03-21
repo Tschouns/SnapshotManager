@@ -16,6 +16,6 @@ namespace DbServerPlugin.Services
         /// <summary>
         /// Gets all databases for the specified connection.
         /// </summary>
-        IEnumerable<string> GetAllDatabases(DbServerConnectionInfo connection);
+        IEnumerable<string> GetAllDatabases(DbServerConnectionData connection);
     }
 }

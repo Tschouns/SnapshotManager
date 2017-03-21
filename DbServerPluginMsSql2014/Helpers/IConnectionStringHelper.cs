@@ -25,8 +25,8 @@ namespace DbServerPluginMsSql2014.Helpers
         string CreateConnectionString(string host, string userId, string password);
 
         /// <summary>
-        /// Creates an SQL connection string based on the specified <see cref="DbServerConnectionInfo"/>.
+        /// Creates an SQL connection string based on the specified <see cref="DbServerConnectionData"/>.
         /// </summary>
-        string CreateConnectionString(DbServerConnectionInfo connectionInfo);
+        string CreateConnectionString(DbServerConnectionData connectionData);
     }
 }

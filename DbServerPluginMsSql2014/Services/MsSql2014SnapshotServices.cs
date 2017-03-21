@@ -17,33 +17,33 @@ namespace DbServerPluginMsSql2014.Services
     public class MsSql2014SnapshotServices : ISnapshotServices
     {
         /// <summary>
-        /// See <see cref="ISnapshotServices.GetAllSnapshots(string, DbServerConnectionInfo)"/>.
+        /// See <see cref="ISnapshotServices.GetAllSnapshots(string, DbServerConnectionData)"/>.
         /// </summary>
-        public IEnumerable<string> GetAllSnapshots(string database, DbServerConnectionInfo connection)
+        public IEnumerable<string> GetAllSnapshots(string database, DbServerConnectionData connection)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// See <see cref="ISnapshotServices.CreateSnapshot(string, string, DbServerConnectionInfo)"/>.
+        /// See <see cref="ISnapshotServices.CreateSnapshot(string, string, DbServerConnectionData)"/>.
         /// </summary>
-        public void CreateSnapshot(string snapshotName, string database, DbServerConnectionInfo connection)
+        public void CreateSnapshot(string snapshotName, string database, DbServerConnectionData connection)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// See <see cref="ISnapshotServices.RestoreSnapshot(string, string, DbServerConnectionInfo)"/>.
+        /// See <see cref="ISnapshotServices.RestoreSnapshot(string, string, DbServerConnectionData)"/>.
         /// </summary>
-        public void RestoreSnapshot(string snapshotName, string host, DbServerConnectionInfo connection)
+        public void RestoreSnapshot(string snapshotName, string host, DbServerConnectionData connection)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// See <see cref="ISnapshotServices.DeleteSnapshot(string, string, DbServerConnectionInfo)"/>.
+        /// See <see cref="ISnapshotServices.DeleteSnapshot(string, string, DbServerConnectionData)"/>.
         /// </summary>
-        public void DeleteSnapshot(string snapshotName, string host, DbServerConnectionInfo connection)
+        public void DeleteSnapshot(string snapshotName, string host, DbServerConnectionData connection)
         {
             throw new NotImplementedException();
         }

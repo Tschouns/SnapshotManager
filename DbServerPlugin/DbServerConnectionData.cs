@@ -11,12 +11,12 @@ namespace DbServerPlugin
     /// <summary>
     /// Represents a database server connection.
     /// </summary>
-    public class DbServerConnectionInfo
+    public class DbServerConnectionData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DbServerConnectionInfo"/> class.
+        /// Initializes a new instance of the <see cref="DbServerConnectionData"/> class.
         /// </summary>
-        public DbServerConnectionInfo(
+        public DbServerConnectionData(
             string host,
             bool usesIntegratedSecurity,
             string userId,

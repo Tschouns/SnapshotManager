@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbServerConnectionInfo.cs" />
+    <Compile Include="DbServerConnectionData.cs" />
     <Compile Include="DbServerPluginInfo.cs" />
     <Compile Include="DbServerPluginRegistry.cs" />
     <Compile Include="IDbServerInfo.cs" />

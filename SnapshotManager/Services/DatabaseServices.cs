@@ -27,7 +27,7 @@ namespace SnapshotManager.Services
 
             try
             {
-                var databaseNames = connection.DbServer.Services.Databases.GetAllDatabases(new DbServerConnectionInfo(
+                var databaseNames = connection.DbServer.Services.Databases.GetAllDatabases(new DbServerConnectionData(
                     connection.Host,
                     connection.UsesIntegratedSecurity,
                     connection.UserId,
@@ -56,7 +56,7 @@ namespace SnapshotManager.Services
             {
                 var snapshotNames = database.Connection.DbServer.Services.Snapshots.GetAllSnapshots(
                     database.Name,
-                    new DbServerConnectionInfo(
+                    new DbServerConnectionData(
                         database.Connection.Host,
                         database.Connection.UsesIntegratedSecurity,
                         database.Connection.UserId,

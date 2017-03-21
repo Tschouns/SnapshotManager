@@ -6,7 +6,6 @@
 
 namespace DbServerPluginMsSql2014.Helpers
 {
-    using System;
     using System.Globalization;
     using Base;
     using DbServerPlugin;
@@ -51,18 +50,18 @@ namespace DbServerPluginMsSql2014.Helpers
         }
 
         /// <summary>
-        /// See <see cref="IConnectionStringHelper.CreateConnectionString(DbServerConnectionInfo)"/>.
+        /// See <see cref="IConnectionStringHelper.CreateConnectionString(DbServerConnectionData)"/>.
         /// </summary>
-        public string CreateConnectionString(DbServerConnectionInfo connectionInfo)
+        public string CreateConnectionString(DbServerConnectionData connectionData)
         {
-            ArgumentChecks.AssertNotNull(connectionInfo, nameof(connectionInfo));
+            ArgumentChecks.AssertNotNull(connectionData, nameof(connectionData));
 
-            if (connectionInfo.UsesIntegratedSecurity)
+            if (connectionData.UsesIntegratedSecurity)
             {
-                return this.CreateConnectionStringIntegratedSecurity(connectionInfo.Host);
+                return this.CreateConnectionStringIntegratedSecurity(connectionData.Host);
             }
 
-            return this.CreateConnectionString(connectionInfo.Host, connectionInfo.UserId, connectionInfo.Password);
+            return this.CreateConnectionString(connectionData.Host, connectionData.UserId, connectionData.Password);
         }
     }
 }
