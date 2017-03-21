@@ -44,6 +44,8 @@ namespace SnapshotManager.Repositories
         {
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
+            this.ClearDatabases(connection);
+
             try
             {
                 var databases = this._databaseServices.GetAllDatabasesForConnection(connection);
@@ -70,6 +72,19 @@ namespace SnapshotManager.Repositories
             }
 
             return this._databasesPerConnectionDict[connection];
+        }
+
+        /// <summary>
+        /// See <see cref="IDatabaseRepository.ClearDatabases(ConnectionInfo)"/>.
+        /// </summary>
+        public void ClearDatabases(ConnectionInfo connection)
+        {
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            if (this._databasesPerConnectionDict.ContainsKey(connection))
+            {
+                this._databasesPerConnectionDict.Remove(connection);
+            }
         }
     }
 }

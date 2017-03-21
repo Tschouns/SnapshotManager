@@ -21,6 +21,11 @@ namespace SnapshotManager.Repositories
         /// <summary>
         /// Gets the snapshots for the specified database.
         /// </summary>
-        IEnumerable<DatabaseInfo> GetLoadedSnapshots(DatabaseInfo database);
+        IEnumerable<SnapshotInfo> GetLoadedSnapshots(DatabaseInfo database);
+
+        /// <summary>
+        /// Clears the snapshots for the specified database.
+        /// </summary>
+        void ClearSnapshots(DatabaseInfo database);
     }
 }

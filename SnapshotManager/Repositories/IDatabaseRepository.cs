@@ -22,5 +22,10 @@ namespace SnapshotManager.Repositories
         /// Gets the databases for the specified connection.
         /// </summary>
         IEnumerable<DatabaseInfo> GetLoadedDatabases(ConnectionInfo connection);
+
+        /// <summary>
+        /// Clears the databases for the specified connection.
+        /// </summary>
+        void ClearDatabases(ConnectionInfo connection);
     }
 }
