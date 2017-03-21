@@ -7,6 +7,7 @@
 namespace SnapshotManager.Services
 {
     using Base;
+    using DbServerPlugin;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -26,16 +27,11 @@ namespace SnapshotManager.Services
 
             try
             {
-                IEnumerable<string> databaseNames = new string[0];
-
-                if (connection.UsesIntegratedSecurity)
-                {
-                    databaseNames = connection.DbServer.Services.Databases.GetAllDatabasesUsingIntegratedSecurity(connection.Host);
-                }
-                else
-                {
-                    databaseNames = connection.DbServer.Services.Databases.GetAllDatabases(connection.Host, connection.UserId, connection.Password);
-                }
+                var databaseNames = connection.DbServer.Services.Databases.GetAllDatabases(new DbServerConnectionInfo(
+                    connection.Host,
+                    connection.UsesIntegratedSecurity,
+                    connection.UserId,
+                    connection.Password));
 
                 var databaseInfos = databaseNames.Select(name => new DatabaseInfo(connection, name)).ToList();
 
@@ -44,6 +40,35 @@ namespace SnapshotManager.Services
             catch(Exception ex)
             {
                 var message = string.Format(CultureInfo.CurrentCulture, Messages.GetAllDatabasesForConnectionFailed, connection);
+
+                throw new SnapshotException(message, ex);
+            }
+        }
+
+        /// <summary>
+        /// See <see cref="IDatabaseServices.GetAllSnapshotsForDatabase(DatabaseInfo)"/>.
+        /// </summary>
+        public IEnumerable<SnapshotInfo> GetAllSnapshotsForDatabase(DatabaseInfo database)
+        {
+            ArgumentChecks.AssertNotNull(database, nameof(database));
+
+            try
+            {
+                var snapshotNames = database.Connection.DbServer.Services.Snapshots.GetAllSnapshots(
+                    database.Name,
+                    new DbServerConnectionInfo(
+                        database.Connection.Host,
+                        database.Connection.UsesIntegratedSecurity,
+                        database.Connection.UserId,
+                        database.Connection.Password));
+
+                var snapshotInfos = snapshotNames.Select(name => new SnapshotInfo(database, name)).ToList();
+
+                return snapshotInfos;
+            }
+            catch (Exception ex)
+            {
+                var message = string.Format(CultureInfo.CurrentCulture, Messages.GetAllSnapshotsForDatabaseFailed, database);
 
                 throw new SnapshotException(message, ex);
             }

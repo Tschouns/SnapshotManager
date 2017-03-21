@@ -121,4 +121,8 @@
     <value>The databases for the connection [{0}] could not be retrieved.</value>
     <comment>{0}: the connection info</comment>
   </data>
+  <data name="GetAllSnapshotsForDatabaseFailed" xml:space="preserve">
+    <value>The snapshots for the database [{0}] could not be retrieved.</value>
+    <comment>{0}: the database info</comment>
+  </data>
 </root>

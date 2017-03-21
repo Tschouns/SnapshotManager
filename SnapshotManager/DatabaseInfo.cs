@@ -29,7 +29,7 @@ namespace SnapshotManager
         /// <summary>
         /// Gets the connection associated with this database.
         /// </summary>
-        ConnectionInfo Connection { get; }
+        public ConnectionInfo Connection { get; }
 
         /// <summary>
         /// Gets the database name.

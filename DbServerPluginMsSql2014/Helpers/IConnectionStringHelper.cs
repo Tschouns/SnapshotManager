@@ -6,6 +6,8 @@
 
 namespace DbServerPluginMsSql2014.Helpers
 {
+    using DbServerPlugin;
+
     /// <summary>
     /// Creates SQL connection strings for different connections.
     /// </summary>
@@ -21,5 +23,10 @@ namespace DbServerPluginMsSql2014.Helpers
         /// and password.
         /// </summary>
         string CreateConnectionString(string host, string userId, string password);
+
+        /// <summary>
+        /// Creates an SQL connection string based on the specified <see cref="DbServerConnectionInfo"/>.
+        /// </summary>
+        string CreateConnectionString(DbServerConnectionInfo connectionInfo);
     }
 }

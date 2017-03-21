@@ -68,5 +68,14 @@ namespace SnapshotManager.Services {
                 return ResourceManager.GetString("GetAllDatabasesForConnectionFailed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The snapshots for the database [{0}] could not be retrieved..
+        /// </summary>
+        internal static string GetAllSnapshotsForDatabaseFailed {
+            get {
+                return ResourceManager.GetString("GetAllSnapshotsForDatabaseFailed", resourceCulture);
+            }
+        }
     }
 }

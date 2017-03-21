@@ -6,8 +6,10 @@
 
 namespace DbServerPluginMsSql2014.Helpers
 {
+    using System;
     using System.Globalization;
     using Base;
+    using DbServerPlugin;
 
     /// <summary>
     /// See <see cref="IConnectionStringHelper"/>.
@@ -30,7 +32,7 @@ namespace DbServerPluginMsSql2014.Helpers
         }
 
         /// <summary>
-        /// See <see cref="IConnectionStringHelper.CreateConnectionString"/>.
+        /// See <see cref="IConnectionStringHelper.CreateConnectionString(string, string, string)"/>.
         /// </summary>
         public string CreateConnectionString(string host, string userId, string password)
         {
@@ -46,6 +48,21 @@ namespace DbServerPluginMsSql2014.Helpers
                 password);
 
             return connectionString;
+        }
+
+        /// <summary>
+        /// See <see cref="IConnectionStringHelper.CreateConnectionString(DbServerConnectionInfo)"/>.
+        /// </summary>
+        public string CreateConnectionString(DbServerConnectionInfo connectionInfo)
+        {
+            ArgumentChecks.AssertNotNull(connectionInfo, nameof(connectionInfo));
+
+            if (connectionInfo.UsesIntegratedSecurity)
+            {
+                return this.CreateConnectionStringIntegratedSecurity(connectionInfo.Host);
+            }
+
+            return this.CreateConnectionString(connectionInfo.Host, connectionInfo.UserId, connectionInfo.Password);
         }
     }
 }

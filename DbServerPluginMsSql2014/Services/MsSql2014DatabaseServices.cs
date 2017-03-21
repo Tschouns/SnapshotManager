@@ -13,6 +13,7 @@ namespace DbServerPluginMsSql2014.Services
     using DbServerPlugin.Services;
     using Base;
     using DbServerPluginMsSql2014.Helpers;
+    using DbServerPlugin;
 
     /// <summary>
     /// See <see cref="IDatabaseServices"/>.
@@ -42,33 +43,11 @@ namespace DbServerPluginMsSql2014.Services
         /// <summary>
         /// See <see cref="IDatabaseServices.GetAllDatabasesUsingIntegratedSecurity"/>.
         /// </summary>
-        public IEnumerable<string> GetAllDatabasesUsingIntegratedSecurity(string host)
+        public IEnumerable<string> GetAllDatabases(DbServerConnectionInfo connection)
         {
-            ArgumentChecks.AssertNotNull(host, nameof(host));
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
-            var connectionString = this._connectionStringHelper.CreateConnectionStringIntegratedSecurity(host);
-
-            return this.GetAllDatabasesInternal(connectionString);
-        }
-
-        /// <summary>
-        /// See <see cref="IDatabaseServices.GetAllDatabases"/>.
-        /// </summary>
-        public IEnumerable<string> GetAllDatabases(string host, string userId, string password)
-        {
-            ArgumentChecks.AssertNotNull(host, nameof(host));
-
-            var connectionString = this._connectionStringHelper.CreateConnectionString(
-                host,
-                userId,
-                password);
-
-            return this.GetAllDatabasesInternal(connectionString);
-        }
-
-        private IEnumerable<string> GetAllDatabasesInternal(string connectionString)
-        {
-            ArgumentChecks.AssertNotNull(connectionString, nameof(connectionString));
+            var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
 
             using (var sqlConnection = new SqlConnection(connectionString))
             {

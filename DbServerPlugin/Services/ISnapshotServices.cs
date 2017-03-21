@@ -16,21 +16,21 @@ namespace DbServerPlugin.Services
         /// <summary>
         /// Gets all databases for the specified database.
         /// </summary>
-        IEnumerable<string> GetAllSnapshots(string database, string host, int portNumber, string userId, string password);
+        IEnumerable<string> GetAllSnapshots(string database, DbServerConnectionInfo connection);
 
         /// <summary>
         /// Create a new database snapshot by the specified name.
         /// </summary>
-        void CreateSnapshot(string snapshotName, string database, string host, int portNumber, string userId, string password);
+        void CreateSnapshot(string snapshotName, string database, DbServerConnectionInfo connection);
 
         /// <summary>
         /// Restores an existing database snapshot by the specified name.
         /// </summary>
-        void RestoreSnapshot(string snapshotName, string host, int portNumber, string userId, string password);
+        void RestoreSnapshot(string snapshotName, string host, DbServerConnectionInfo connection);
 
         /// <summary>
         /// Deletes an existing database snapshot by the specified name.
         /// </summary>
-        void DeleteSnapshot(string snapshotName, string host, int portNumber, string userId, string password);
+        void DeleteSnapshot(string snapshotName, string host, DbServerConnectionInfo connection);
     }
 }

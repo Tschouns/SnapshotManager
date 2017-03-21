@@ -4,23 +4,23 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace SnapshotManager.Services
+namespace SnapshotManager.Repositories
 {
     using System.Collections.Generic;
 
     /// <summary>
-    /// Provides methods to interact with databases.
+    /// Stores all the snapshots per database.
     /// </summary>
-    public interface IDatabaseServices
+    public interface ISnapshotRepository
     {
         /// <summary>
-        /// Gets all the databases for the specified connection.
+        /// Tries to load the snapshots for the specified database.
         /// </summary>
-        IEnumerable<DatabaseInfo> GetAllDatabasesForConnection(ConnectionInfo connection);
+        LoadResult TryLoadSnapshots(DatabaseInfo database);
 
         /// <summary>
-        /// Gets all the snapshots for the specified database.
+        /// Gets the snapshots for the specified database.
         /// </summary>
-        IEnumerable<SnapshotInfo> GetAllSnapshotsForDatabase(DatabaseInfo database);
+        IEnumerable<DatabaseInfo> GetLoadedSnapshots(DatabaseInfo database);
     }
 }
