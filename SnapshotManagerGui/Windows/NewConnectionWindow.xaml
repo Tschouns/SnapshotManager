@@ -27,7 +27,7 @@
         <TextBox x:Name="hostTextBox" Text="{Binding Host, Mode=TwoWay}" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="1" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="1"/>
 
         <Label x:Name="integratedSecurityLabel" Content="Integrated Security" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="-0.342,-1" Margin="10,0,0,0"/>
-        <CheckBox x:Name="integratedSecurityCheckBox" IsChecked="{Binding IntegratedSecurity, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,8,0,0" Grid.Row="3" TabIndex="2"/>
+        <CheckBox x:Name="integratedSecurityCheckBox" IsChecked="{Binding IntegratedSecurity, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,8,0,0" Grid.Row="3" TabIndex="2" Checked="IntegratedSecurityCheckBox_Checked" Unchecked="IntegratedSecurityCheckBox_Unchecked"/>
 
         <Label x:Name="userIdLabel" Content="User ID" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" RenderTransformOrigin="-0.342,-1" Margin="10,0,0,0"/>
         <TextBox x:Name="userIdTextBox" Text="{Binding UserId, Mode=TwoWay}" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="3"/>

@@ -27,6 +27,8 @@ namespace SnapshotManagerGui.Windows
 
             this.Model = new NewConnectionModel();
             this.DataContext = this.Model;
+
+            this.dbServerComboBox.Focus();
         }
 
         /// <summary>
@@ -43,6 +45,20 @@ namespace SnapshotManagerGui.Windows
 
             var pluginsOrdered = availblePlugins.OrderBy(p => p.ToString()).ToList();
             this.dbServerComboBox.ItemsSource = pluginsOrdered;
+
+            // Preselect the first entry (if any).
+            if (pluginsOrdered.Any())
+            {
+                this.Model.DbServerPlugin = pluginsOrdered.First();
+            }
+        }
+
+        private void SetLoginInfoIsEnabled(bool isEnabled)
+        {
+            this.userIdLabel.IsEnabled = isEnabled;
+            this.userIdTextBox.IsEnabled = isEnabled;
+            this.passwordLabel.IsEnabled = isEnabled;
+            this.passwordTextBox.IsEnabled = isEnabled;
         }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
@@ -55,6 +71,16 @@ namespace SnapshotManagerGui.Windows
         {
             this.DialogResult = false;
             this.Close();
+        }
+
+        private void IntegratedSecurityCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            this.SetLoginInfoIsEnabled(false);
+        }
+
+        private void IntegratedSecurityCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.SetLoginInfoIsEnabled(true);
         }
     }
 }

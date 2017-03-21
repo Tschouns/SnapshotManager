@@ -59,17 +59,10 @@ namespace SnapshotManagerGui
                 return;
             }
 
-            try
+            var databases = this._databaseRepository.GetLoadedDatabases(selectedConnection);
+            foreach (var database in databases)
             {
-                var databases = this._databaseRepository.GetDatabasesForConnection(selectedConnection);
-                foreach (var database in databases)
-                {
-                    this.databasesListView.Items.Add(database);
-                }
-            }
-            catch(SnapshotException ex)
-            {
-                MessageBox.Show(ex.Message + $" ({ex.InnerException.Message})");
+                this.databasesListView.Items.Add(database);
             }
         }
 
@@ -84,7 +77,16 @@ namespace SnapshotManagerGui
             var result = newConnectionDialog.Prompt(DbServerPluginRegistry.GetAllPlugins());
             if (result.HasValue)
             {
+                // Add to connection repo.
                 this._connectionRepository.AddConnection(result.Value);
+
+                // Load databases.
+                var loadResult = this._databaseRepository.TryLoadDatabases(result.Value);
+                if (!loadResult.Successful)
+                {
+                    MessageBox.Show(loadResult.ErrorMessage);
+                }
+
                 this.UpdateConnectionsListView();
                 this.UpdateDatabaseListView();
             }

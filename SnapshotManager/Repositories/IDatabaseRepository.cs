@@ -14,8 +14,13 @@ namespace SnapshotManager.Repositories
     public interface IDatabaseRepository
     {
         /// <summary>
-        /// Gets the connections.
+        /// Tries to load the databases for the specified connection.
         /// </summary>
-        IEnumerable<DatabaseInfo> GetDatabasesForConnection(ConnectionInfo connection);
+        LoadResult TryLoadDatabases(ConnectionInfo connection);
+
+        /// <summary>
+        /// Gets the databases for the specified connection.
+        /// </summary>
+        IEnumerable<DatabaseInfo> GetLoadedDatabases(ConnectionInfo connection);
     }
 }

@@ -38,16 +38,35 @@ namespace SnapshotManager.Repositories
         }
 
         /// <summary>
-        /// See <see cref="IDatabaseRepository"/>.
+        /// See <see cref="IDatabaseRepository.TryLoadDatabases(ConnectionInfo)"/>.
         /// </summary>
-        public IEnumerable<DatabaseInfo> GetDatabasesForConnection(ConnectionInfo connection)
+        public LoadResult TryLoadDatabases(ConnectionInfo connection)
+        {
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            try
+            {
+                var databases = this._databaseServices.GetAllDatabasesForConnection(connection);
+                this._databasesPerConnectionDict.Add(connection, databases);
+
+                return LoadResult.CreateSuccessful();
+            }
+            catch(SnapshotException ex)
+            {
+                return LoadResult.CreateFailed($"{ex.Message} ({ex.InnerException.Message})");
+            }
+        }
+
+        /// <summary>
+        /// See <see cref="IDatabaseRepository.GetLoadedDatabases(ConnectionInfo)"/>.
+        /// </summary>
+        public IEnumerable<DatabaseInfo> GetLoadedDatabases(ConnectionInfo connection)
         {
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
             if (!this._databasesPerConnectionDict.ContainsKey(connection))
             {
-                var databases = this._databaseServices.GetAllDatabasesForConnection(connection);
-                this._databasesPerConnectionDict.Add(connection, databases);
+                return new DatabaseInfo[0];
             }
 
             return this._databasesPerConnectionDict[connection];

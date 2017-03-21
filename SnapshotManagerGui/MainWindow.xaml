@@ -23,7 +23,6 @@
             <ListView x:Name="connectionsListView" Margin="10,60,10,10" SelectionChanged="connectionsListView_SelectionChanged" TabIndex="0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="DB Server" DisplayMemberBinding="{Binding DbServer}"/>
                         <GridViewColumn Header="Host" DisplayMemberBinding="{Binding Host}"/>
                     </GridView>
                 </ListView.View>
