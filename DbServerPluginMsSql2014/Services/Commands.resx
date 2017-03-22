@@ -124,6 +124,10 @@
   <data name="NameColumn" xml:space="preserve">
     <value>name</value>
   </data>
+  <data name="RestoreSnapshot" xml:space="preserve">
+    <value>RESTORE DATABASE {0} FROM DATABASE_SNAPSHOT = '{1}'</value>
+    <comment>{0}: database name, {1}: snapshot name</comment>
+  </data>
   <data name="SelectDatabases" xml:space="preserve">
     <value>SELECT name FROM sys.databases WHERE source_database_id IS NULL</value>
   </data>

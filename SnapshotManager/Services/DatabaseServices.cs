@@ -75,6 +75,32 @@ namespace SnapshotManager.Services
         }
 
         /// <summary>
+        /// See <see cref="IDatabaseServices.RestoreSnapshot(SnapshotInfo)"/>.
+        /// </summary>
+        public void RestoreSnapshot(SnapshotInfo snapshot)
+        {
+            ArgumentChecks.AssertNotNull(snapshot, nameof(snapshot));
+
+            try
+            {
+                snapshot.Database.Connection.DbServer.Services.Snapshots.RestoreSnapshot(
+                    snapshot.Name,
+                    snapshot.Database.Name,
+                    new DbServerConnectionData(
+                        snapshot.Database.Connection.Host,
+                        snapshot.Database.Connection.UsesIntegratedSecurity,
+                        snapshot.Database.Connection.UserId,
+                        snapshot.Database.Connection.Password));
+            }
+            catch (Exception ex)
+            {
+                var message = string.Format(CultureInfo.CurrentCulture, Messages.RestoreSnapshotFailed, snapshot);
+
+                throw new SnapshotException(message, ex);
+            }
+        }
+
+        /// <summary>
         /// See <see cref="IDatabaseServices.DeleteSnapshot(SnapshotInfo)"/>.
         /// </summary>
         public void DeleteSnapshot(SnapshotInfo snapshot)
@@ -93,7 +119,7 @@ namespace SnapshotManager.Services
             }
             catch (Exception ex)
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Messages.GetAllSnapshotsForDatabaseFailed, snapshot);
+                var message = string.Format(CultureInfo.CurrentCulture, Messages.DeleteSnapshotFailed, snapshot);
 
                 throw new SnapshotException(message, ex);
             }

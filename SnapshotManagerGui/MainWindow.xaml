@@ -47,7 +47,7 @@
         </ListView>
         <Label x:Name="snapshotsLabel" Content="Snapshots" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
         <Button x:Name="createSnapshotButton" Content="Create..." Grid.Column="1" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" TabIndex="21"/>
-        <Button x:Name="restoreSnapshotButton" Content="Restore" Grid.Column="1" HorizontalAlignment="Left" Margin="90,35,0,0" VerticalAlignment="Top" Width="75" TabIndex="22"/>
+        <Button x:Name="restoreSnapshotButton" Content="Restore" Grid.Column="1" HorizontalAlignment="Left" Margin="90,35,0,0" VerticalAlignment="Top" Width="75" TabIndex="22" Click="RestoreSnapshotButton_Click"/>
         <Button x:Name="deleteSnapshotButton" Content="Delete" Grid.Column="1" HorizontalAlignment="Left" Margin="170,35,0,0" VerticalAlignment="Top" Width="75" TabIndex="23" Click="DeleteSnapshotButton_Click"/>
     </Grid>
 </Window>

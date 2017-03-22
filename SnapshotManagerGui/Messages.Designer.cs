@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DbServerPluginMsSql2014.Services {
+namespace SnapshotManagerGui {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace DbServerPluginMsSql2014.Services {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Commands {
+    internal class Messages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Commands() {
+        internal Messages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DbServerPluginMsSql2014.Services {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DbServerPluginMsSql2014.Services.Commands", typeof(Commands).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SnapshotManagerGui.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,51 +61,11 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DROP DATABASE {0}.
+        ///   Looks up a localized string similar to The snapshot has been successfully restored..
         /// </summary>
-        internal static string DropSnapshot {
+        internal static string SnapshotRestored {
             get {
-                return ResourceManager.GetString("DropSnapshot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to name.
-        /// </summary>
-        internal static string NameColumn {
-            get {
-                return ResourceManager.GetString("NameColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RESTORE DATABASE {0} FROM DATABASE_SNAPSHOT = &apos;{1}&apos;.
-        /// </summary>
-        internal static string RestoreSnapshot {
-            get {
-                return ResourceManager.GetString("RestoreSnapshot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SELECT name FROM sys.databases WHERE source_database_id IS NULL.
-        /// </summary>
-        internal static string SelectDatabases {
-            get {
-                return ResourceManager.GetString("SelectDatabases", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SELECT ss.name
-        ///FROM
-        ///	sys.databases AS db
-        ///	inner join sys.databases AS ss ON db.database_id = ss.source_database_id
-        ///WHERE db.name = &apos;{0}&apos;.
-        /// </summary>
-        internal static string SelectSnapshots {
-            get {
-                return ResourceManager.GetString("SelectSnapshots", resourceCulture);
+                return ResourceManager.GetString("SnapshotRestored", resourceCulture);
             }
         }
     }

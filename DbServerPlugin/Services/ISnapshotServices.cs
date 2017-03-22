@@ -24,12 +24,12 @@ namespace DbServerPlugin.Services
         void CreateSnapshot(string snapshotName, string databaseName, DbServerConnectionData connection);
 
         /// <summary>
-        /// Restores an existing database snapshot by the specified name.
+        /// Restores an database from an existing database snapshot.
         /// </summary>
-        void RestoreSnapshot(string snapshotName, DbServerConnectionData connection);
+        void RestoreSnapshot(string snapshotName, string databaseName, DbServerConnectionData connection);
 
         /// <summary>
-        /// Deletes an existing database snapshot by the specified name.
+        /// Deletes an existing database snapshot.
         /// </summary>
         void DeleteSnapshot(string snapshotName, DbServerConnectionData connection);
     }

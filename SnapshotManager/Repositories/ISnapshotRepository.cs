@@ -24,9 +24,15 @@ namespace SnapshotManager.Repositories
         IEnumerable<SnapshotInfo> GetLoadedSnapshots(DatabaseInfo database);
 
         /// <summary>
-        /// Clears the snapshots for the specified database.
+        /// Clears the snapshots for the specified database from the repository (does not remove
+        /// them on the database server).
         /// </summary>
         void ClearSnapshots(DatabaseInfo database);
+
+        /// <summary>
+        /// Tries to restore the database from a snapshot on the database server.
+        /// </summary>
+        SuccessResult TryRestoreSnapshot(SnapshotInfo snapshot);
 
         /// <summary>
         /// Tries to delete a snapshot on the database server.

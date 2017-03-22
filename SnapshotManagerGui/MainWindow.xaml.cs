@@ -136,6 +136,27 @@ namespace SnapshotManagerGui
             this.UpdateDatabaseListView();
         }
 
+        private void RestoreSnapshotButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedSnapshot = (SnapshotInfo)this.snapshotsListView.SelectedItem;
+            if (selectedSnapshot == null)
+            {
+                return;
+            }
+
+            var restoreResult = this._snapshotRepository.TryRestoreSnapshot(selectedSnapshot);
+            if (restoreResult.Successful)
+            {
+                MessageBox.Show(Messages.SnapshotRestored);
+            }
+            else
+            {
+                MessageBox.Show(restoreResult.ErrorMessage);
+            }
+
+            this.UpdateSnapshotListView();
+        }
+
         private void DeleteSnapshotButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedSnapshots = this.snapshotsListView.SelectedItems.Cast<SnapshotInfo>().ToList();

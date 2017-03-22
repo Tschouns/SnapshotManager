@@ -86,5 +86,14 @@ namespace SnapshotManager.Services {
                 return ResourceManager.GetString("GetAllSnapshotsForDatabaseFailed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The snapshot [{0}] could not be restored..
+        /// </summary>
+        internal static string RestoreSnapshotFailed {
+            get {
+                return ResourceManager.GetString("RestoreSnapshotFailed", resourceCulture);
+            }
+        }
     }
 }

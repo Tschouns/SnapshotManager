@@ -75,11 +75,17 @@ namespace DbServerPluginMsSql2014.Services
         }
 
         /// <summary>
-        /// See <see cref="ISnapshotServices.RestoreSnapshot(string, DbServerConnectionData)"/>.
+        /// See <see cref="ISnapshotServices.RestoreSnapshot(string, string, DbServerConnectionData)"/>.
         /// </summary>
-        public void RestoreSnapshot(string snapshotName, DbServerConnectionData connection)
+        public void RestoreSnapshot(string snapshotName, string databaseName, DbServerConnectionData connection)
         {
-            throw new NotImplementedException();
+            ArgumentChecks.AssertNotNull(snapshotName, nameof(snapshotName));
+            ArgumentChecks.AssertNotNull(databaseName, nameof(databaseName));
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
+            var dropSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.RestoreSnapshot, databaseName, snapshotName);
+            this._sqlHelper.ExecuteNonQuery(connectionString, dropSnapshotsQuery);
         }
 
         /// <summary>
