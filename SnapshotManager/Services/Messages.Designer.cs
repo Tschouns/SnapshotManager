@@ -61,6 +61,15 @@ namespace SnapshotManager.Services {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The snapshot [{0}] could not be deleted..
+        /// </summary>
+        internal static string DeleteSnapshotFailed {
+            get {
+                return ResourceManager.GetString("DeleteSnapshotFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The databases for the connection [{0}] could not be retrieved..
         /// </summary>
         internal static string GetAllDatabasesForConnectionFailed {

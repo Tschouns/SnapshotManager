@@ -30,7 +30,7 @@ namespace SnapshotManager
         /// <summary>
         /// Gets the database which this snapshot belongs to.
         /// </summary>
-        DatabaseInfo Database { get; }
+        public DatabaseInfo Database { get; }
 
         /// <summary>
         /// Gets the snapshot name.

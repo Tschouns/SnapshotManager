@@ -16,7 +16,7 @@ namespace SnapshotManager.Repositories
         /// <summary>
         /// Tries to load the databases for the specified connection.
         /// </summary>
-        LoadResult TryLoadDatabases(ConnectionInfo connection);
+        SuccessResult TryLoadDatabases(ConnectionInfo connection);
 
         /// <summary>
         /// Gets the databases for the specified connection.

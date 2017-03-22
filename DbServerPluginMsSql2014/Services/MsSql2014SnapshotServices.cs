@@ -50,12 +50,13 @@ namespace DbServerPluginMsSql2014.Services
         /// <summary>
         /// See <see cref="ISnapshotServices.GetAllSnapshots(string, DbServerConnectionData)"/>.
         /// </summary>
-        public IEnumerable<string> GetAllSnapshots(string database, DbServerConnectionData connection)
+        public IEnumerable<string> GetAllSnapshots(string databaseName, DbServerConnectionData connection)
         {
+            ArgumentChecks.AssertNotNull(databaseName, nameof(databaseName));
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
             var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
-            var selectSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.SelectSnapshots, database);
+            var selectSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.SelectSnapshots, databaseName);
             var dataTable = this._sqlHelper.ExecuteQuery(connectionString, selectSnapshotsQuery);
             var snapshotNames = dataTable.Rows
                 .Cast<DataRow>()
@@ -68,25 +69,30 @@ namespace DbServerPluginMsSql2014.Services
         /// <summary>
         /// See <see cref="ISnapshotServices.CreateSnapshot(string, string, DbServerConnectionData)"/>.
         /// </summary>
-        public void CreateSnapshot(string snapshotName, string database, DbServerConnectionData connection)
+        public void CreateSnapshot(string snapshotName, string databaseName, DbServerConnectionData connection)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// See <see cref="ISnapshotServices.RestoreSnapshot(string, string, DbServerConnectionData)"/>.
+        /// See <see cref="ISnapshotServices.RestoreSnapshot(string, DbServerConnectionData)"/>.
         /// </summary>
-        public void RestoreSnapshot(string snapshotName, string host, DbServerConnectionData connection)
+        public void RestoreSnapshot(string snapshotName, DbServerConnectionData connection)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// See <see cref="ISnapshotServices.DeleteSnapshot(string, string, DbServerConnectionData)"/>.
+        /// See <see cref="ISnapshotServices.DeleteSnapshot(string, DbServerConnectionData)"/>.
         /// </summary>
-        public void DeleteSnapshot(string snapshotName, string host, DbServerConnectionData connection)
+        public void DeleteSnapshot(string snapshotName, DbServerConnectionData connection)
         {
-            throw new NotImplementedException();
+            ArgumentChecks.AssertNotNull(snapshotName, nameof(snapshotName));
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
+            var dropSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.DropSnapshot, snapshotName);
+            this._sqlHelper.ExecuteNonQuery(connectionString, dropSnapshotsQuery);
         }
     }
 }

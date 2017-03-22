@@ -41,7 +41,7 @@ namespace SnapshotManager.Repositories
         /// <summary>
         /// See <see cref="ISnapshotRepository.TryLoadSnapshots(DatabaseInfo)"/>.
         /// </summary>
-        public LoadResult TryLoadSnapshots(DatabaseInfo database)
+        public SuccessResult TryLoadSnapshots(DatabaseInfo database)
         {
             ArgumentChecks.AssertNotNull(database, nameof(database));
 
@@ -52,11 +52,11 @@ namespace SnapshotManager.Repositories
                 var snapshots = this._databaseServices.GetAllSnapshotsForDatabase(database);
                 this._snapshotsPerDatabaseDict.Add(database, snapshots);
 
-                return LoadResult.CreateSuccessful();
+                return SuccessResult.CreateSuccessful();
             }
             catch(SnapshotException ex)
             {
-                return LoadResult.CreateFailed($"{ex} ({ex.InnerException.Message})");
+                return SuccessResult.CreateFailed($"{ex} ({ex.InnerException.Message})");
             }
         }
 
@@ -85,6 +85,32 @@ namespace SnapshotManager.Repositories
             if (this._snapshotsPerDatabaseDict.ContainsKey(database))
             {
                 this._snapshotsPerDatabaseDict.Remove(database);
+            }
+        }
+
+        /// <summary>
+        /// See <see cref="ISnapshotRepository.TryDeleteSnapshot(SnapshotInfo)"/>.
+        /// </summary>
+        public SuccessResult TryDeleteSnapshot(SnapshotInfo snapshot)
+        {
+            ArgumentChecks.AssertNotNull(snapshot, nameof(snapshot));
+
+            try
+            {
+                this._databaseServices.DeleteSnapshot(snapshot);
+
+                // If this snapshot and his friends from the same database were already loaded...
+                if (this._snapshotsPerDatabaseDict.ContainsKey(snapshot.Database))
+                {
+                    // ...we try to reload them.
+                    return this.TryLoadSnapshots(snapshot.Database);
+                }
+
+                return SuccessResult.CreateSuccessful();
+            }
+            catch (SnapshotException ex)
+            {
+                return SuccessResult.CreateFailed($"{ex} ({ex.InnerException.Message})");
             }
         }
     }

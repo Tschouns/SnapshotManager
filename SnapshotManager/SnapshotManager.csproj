@@ -48,7 +48,7 @@
     <Compile Include="Repositories\IConnectionRepository.cs" />
     <Compile Include="Repositories\IDatabaseRepository.cs" />
     <Compile Include="Repositories\ISnapshotRepository.cs" />
-    <Compile Include="Repositories\LoadResult.cs" />
+    <Compile Include="Repositories\SuccessResult.cs" />
     <Compile Include="Repositories\SnapshotRepository.cs" />
     <Compile Include="Services\IDatabaseServices.cs" />
     <Compile Include="Services\DatabaseServices.cs" />

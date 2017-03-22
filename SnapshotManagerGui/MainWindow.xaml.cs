@@ -136,6 +136,22 @@ namespace SnapshotManagerGui
             this.UpdateDatabaseListView();
         }
 
+        private void DeleteSnapshotButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedSnapshots = this.snapshotsListView.SelectedItems.Cast<SnapshotInfo>().ToList();
+            foreach (var snapshot in selectedSnapshots)
+            {
+                var deleteResult = this._snapshotRepository.TryDeleteSnapshot(snapshot);
+                if (!deleteResult.Successful)
+                {
+                    MessageBox.Show(deleteResult.ErrorMessage);
+
+                    // We won't atempt to delete anymore snapshots...
+                    return;
+                }
+            }
+        }
+
         #endregion
     }
 }

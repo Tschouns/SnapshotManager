@@ -16,7 +16,7 @@ namespace SnapshotManager.Repositories
         /// <summary>
         /// Tries to load the snapshots for the specified database.
         /// </summary>
-        LoadResult TryLoadSnapshots(DatabaseInfo database);
+        SuccessResult TryLoadSnapshots(DatabaseInfo database);
 
         /// <summary>
         /// Gets the snapshots for the specified database.
@@ -27,5 +27,10 @@ namespace SnapshotManager.Repositories
         /// Clears the snapshots for the specified database.
         /// </summary>
         void ClearSnapshots(DatabaseInfo database);
+
+        /// <summary>
+        /// Tries to delete a snapshot on the database server.
+        /// </summary>
+        SuccessResult TryDeleteSnapshot(SnapshotInfo snapshot);
     }
 }

@@ -22,5 +22,10 @@ namespace SnapshotManager.Services
         /// Gets all the snapshots for the specified database.
         /// </summary>
         IEnumerable<SnapshotInfo> GetAllSnapshotsForDatabase(DatabaseInfo database);
+
+        /// <summary>
+        /// Deletes the specified snapshot.
+        /// </summary>
+        void DeleteSnapshot(SnapshotInfo snapshot);
     }
 }

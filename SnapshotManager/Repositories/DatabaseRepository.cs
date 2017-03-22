@@ -40,7 +40,7 @@ namespace SnapshotManager.Repositories
         /// <summary>
         /// See <see cref="IDatabaseRepository.TryLoadDatabases(ConnectionInfo)"/>.
         /// </summary>
-        public LoadResult TryLoadDatabases(ConnectionInfo connection)
+        public SuccessResult TryLoadDatabases(ConnectionInfo connection)
         {
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
@@ -51,11 +51,11 @@ namespace SnapshotManager.Repositories
                 var databases = this._databaseServices.GetAllDatabasesForConnection(connection);
                 this._databasesPerConnectionDict.Add(connection, databases);
 
-                return LoadResult.CreateSuccessful();
+                return SuccessResult.CreateSuccessful();
             }
             catch(SnapshotException ex)
             {
-                return LoadResult.CreateFailed($"{ex.Message} ({ex.InnerException.Message})");
+                return SuccessResult.CreateFailed($"{ex.Message} ({ex.InnerException.Message})");
             }
         }
 
