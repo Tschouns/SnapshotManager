@@ -36,5 +36,13 @@ namespace SnapshotManager
         /// Gets the snapshot name.
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// See <see cref="object.ToString"/>.
+        /// </summary>
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

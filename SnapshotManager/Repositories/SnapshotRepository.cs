@@ -89,6 +89,26 @@ namespace SnapshotManager.Repositories
         }
 
         /// <summary>
+        /// See <see cref="ISnapshotRepository.TryCreateSnapshot(string, DatabaseInfo)"/>.
+        /// </summary>
+        public SuccessResult TryCreateSnapshot(string snapshotName, DatabaseInfo database)
+        {
+            ArgumentChecks.AssertNotNull(snapshotName, nameof(snapshotName));
+            ArgumentChecks.AssertNotNull(database, nameof(database));
+
+            try
+            {
+                this._databaseServices.CreateSnapshotForDatabase(snapshotName, database);
+
+                return this.TryLoadSnapshots(database);
+            }
+            catch (SnapshotException ex)
+            {
+                return SuccessResult.CreateFailed($"{ex.Message} ({ex.InnerException.Message})");
+            }
+        }
+
+        /// <summary>
         /// See <see cref="ISnapshotRepository.TryRestoreSnapshot(SnapshotInfo)"/>.
         /// </summary>
         public SuccessResult TryRestoreSnapshot(SnapshotInfo snapshot)

@@ -131,6 +131,15 @@
   <data name="SelectDatabases" xml:space="preserve">
     <value>SELECT name FROM sys.databases WHERE source_database_id IS NULL</value>
   </data>
+  <data name="SelectPhysicalFiles" xml:space="preserve">
+    <value>SELECT mf.physical_name
+FROM
+	sys.databases db
+	inner join sys.master_files mf on db.database_id = mf.database_id
+WHERE
+	db.name = '{0}'</value>
+    <comment>{0}: database name</comment>
+  </data>
   <data name="SelectSnapshots" xml:space="preserve">
     <value>SELECT ss.name
 FROM

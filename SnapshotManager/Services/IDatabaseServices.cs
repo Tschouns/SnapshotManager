@@ -30,6 +30,14 @@ namespace SnapshotManager.Services
         IEnumerable<SnapshotInfo> GetAllSnapshotsForDatabase(DatabaseInfo database);
 
         /// <summary>
+        /// Creates a snapshot for the specified database
+        /// </summary>
+        /// <exception cref="SnapshotException">
+        /// Thrown if the snapshot could not be created
+        /// </exception>
+        void CreateSnapshotForDatabase(string snapshotName, DatabaseInfo database);
+
+        /// <summary>
         /// Restores the database from the specified snapshot.
         /// </summary>
         /// <exception cref="SnapshotException">

@@ -61,6 +61,15 @@ namespace SnapshotManager.Services {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The snapshot for the database [{0}] could not be created..
+        /// </summary>
+        internal static string CreateSnapshotFailed {
+            get {
+                return ResourceManager.GetString("CreateSnapshotFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The snapshot [{0}] could not be deleted..
         /// </summary>
         internal static string DeleteSnapshotFailed {

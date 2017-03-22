@@ -97,6 +97,20 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT mf.physical_name
+        ///FROM
+        ///	sys.databases db
+        ///	inner join sys.master_files mf on db.database_id = mf.database_id
+        ///WHERE
+        ///	db.name = &apos;{0}&apos;.
+        /// </summary>
+        internal static string SelectPhysicalFiles {
+            get {
+                return ResourceManager.GetString("SelectPhysicalFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT ss.name
         ///FROM
         ///	sys.databases AS db

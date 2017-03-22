@@ -30,6 +30,11 @@ namespace SnapshotManager.Repositories
         void ClearSnapshots(DatabaseInfo database);
 
         /// <summary>
+        /// Tries to create a snapshot of a database on the database server.
+        /// </summary>
+        SuccessResult TryCreateSnapshot(string snapshotName, DatabaseInfo database);
+
+        /// <summary>
         /// Tries to restore the database from a snapshot on the database server.
         /// </summary>
         SuccessResult TryRestoreSnapshot(SnapshotInfo snapshot);

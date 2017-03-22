@@ -6,6 +6,7 @@
 
 namespace SnapshotManagerGui
 {
+    using System;
     using System.Windows;
     using DbServerPlugin;
     using DbServerPluginMsSql2014;
@@ -134,6 +135,23 @@ namespace SnapshotManagerGui
 
             this.UpdateConnectionsListView();
             this.UpdateDatabaseListView();
+        }
+
+        private void CreateSnapshotButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedDatabase = (DatabaseInfo)this.databasesListView.SelectedItem;
+            if (selectedDatabase == null)
+            {
+                return;
+            }
+
+            var createResult = this._snapshotRepository.TryCreateSnapshot(Guid.NewGuid().ToString(), selectedDatabase);
+            if (!createResult.Successful)
+            {
+                MessageBox.Show(createResult.ErrorMessage);
+            }
+
+            this.UpdateSnapshotListView();
         }
 
         private void RestoreSnapshotButton_Click(object sender, RoutedEventArgs e)

@@ -75,6 +75,33 @@ namespace SnapshotManager.Services
         }
 
         /// <summary>
+        /// See <see cref="IDatabaseServices.CreateSnapshotForDatabase"/>.
+        /// </summary>
+        public void CreateSnapshotForDatabase(string snapshotName, DatabaseInfo database)
+        {
+            ArgumentChecks.AssertNotNull(snapshotName, nameof(snapshotName));
+            ArgumentChecks.AssertNotNull(database, nameof(database));
+
+            try
+            {
+                database.Connection.DbServer.Services.Snapshots.CreateSnapshot(
+                    snapshotName,
+                    database.Name,
+                    new DbServerConnectionData(
+                        database.Connection.Host,
+                        database.Connection.UsesIntegratedSecurity,
+                        database.Connection.UserId,
+                        database.Connection.Password));
+            }
+            catch (Exception ex)
+            {
+                var message = string.Format(CultureInfo.CurrentCulture, Messages.CreateSnapshotFailed, database);
+
+                throw new SnapshotException(message, ex);
+            }
+        }
+
+        /// <summary>
         /// See <see cref="IDatabaseServices.RestoreSnapshot(SnapshotInfo)"/>.
         /// </summary>
         public void RestoreSnapshot(SnapshotInfo snapshot)
