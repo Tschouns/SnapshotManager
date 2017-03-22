@@ -147,9 +147,12 @@ namespace SnapshotManagerGui
                     MessageBox.Show(deleteResult.ErrorMessage);
 
                     // We won't atempt to delete anymore snapshots...
+                    this.UpdateSnapshotListView();
                     return;
                 }
             }
+
+            this.UpdateSnapshotListView();
         }
 
         #endregion

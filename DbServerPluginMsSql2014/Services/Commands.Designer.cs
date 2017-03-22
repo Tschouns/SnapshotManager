@@ -61,7 +61,7 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DROP DATABASE &apos;{0}&apos;.
+        ///   Looks up a localized string similar to DROP DATABASE {0}.
         /// </summary>
         internal static string DropSnapshot {
             get {
