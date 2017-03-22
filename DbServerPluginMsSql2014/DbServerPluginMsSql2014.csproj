@@ -47,6 +47,8 @@
       <DependentUpon>ConnectionStringTemplates.resx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\IConnectionStringHelper.cs" />
+    <Compile Include="Helpers\ISqlHelper.cs" />
+    <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="MsSql2014.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

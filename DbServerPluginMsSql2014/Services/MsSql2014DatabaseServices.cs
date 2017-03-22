@@ -7,7 +7,6 @@
 namespace DbServerPluginMsSql2014.Services
 {
     using System.Collections.Generic;
-    using System.Data.SqlClient;
     using System.Data;
     using System.Linq;
     using DbServerPlugin.Services;
@@ -21,23 +20,30 @@ namespace DbServerPluginMsSql2014.Services
     public class MsSql2014DatabaseServices : IDatabaseServices
     {
         private readonly IConnectionStringHelper _connectionStringHelper;
+        private readonly ISqlHelper _sqlHelper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MsSql2014DatabaseServices"/> class.
         /// </summary>
         public MsSql2014DatabaseServices()
-            : this(new ConnectionStringHelper())
+            : this(
+                  new ConnectionStringHelper(),
+                  new SqlHelper())
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MsSql2014DatabaseServices"/> class.
         /// </summary>
-        public MsSql2014DatabaseServices(IConnectionStringHelper connectionStringHelper)
+        public MsSql2014DatabaseServices(
+            IConnectionStringHelper connectionStringHelper,
+            ISqlHelper sqlHelper)
         {
             ArgumentChecks.AssertNotNull(connectionStringHelper, nameof(connectionStringHelper));
+            ArgumentChecks.AssertNotNull(sqlHelper, nameof(sqlHelper));
 
             this._connectionStringHelper = connectionStringHelper;
+            this._sqlHelper = sqlHelper;
         }
 
         /// <summary>
@@ -48,31 +54,13 @@ namespace DbServerPluginMsSql2014.Services
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
             var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
+            var dataTable = this._sqlHelper.ExecuteQuery(connectionString, Commands.SelectDatabases);
+            var databaseNames = dataTable.Rows
+                .Cast<DataRow>()
+                .Select(r => r[Commands.NameColumn].ToString())
+                .ToList();
 
-            // TODO: Refactor this... same code as in MsSql2014SnapshotServices!
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                sqlConnection.Open();
-
-                // Build SQL SELECT query.
-                var sqlCommand = new SqlCommand();
-                sqlCommand.Connection = sqlConnection;
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = Commands.SelectDatabases;
-
-                // Execute query.
-                var adapter = new SqlDataAdapter(sqlCommand);
-                var dataSet = new DataSet();
-                adapter.Fill(dataSet);
-                DataTable dataTable = dataSet.Tables[0];
-
-                var databaseNames = dataTable.Rows
-                    .Cast<DataRow>()
-                    .Select(r => r[Commands.NameColumn].ToString())
-                    .ToList();
-
-                return databaseNames;
-            }
+            return databaseNames;
         }
     }
 }
