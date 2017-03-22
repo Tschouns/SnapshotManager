@@ -145,7 +145,7 @@ namespace SnapshotManagerGui
                 return;
             }
 
-            var createResult = this._snapshotRepository.TryCreateSnapshot(Guid.NewGuid().ToString(), selectedDatabase);
+            var createResult = this._snapshotRepository.TryCreateSnapshot("MySnapshot_" + DateTime.Now.ToFileTime(), selectedDatabase);
             if (!createResult.Successful)
             {
                 MessageBox.Show(createResult.ErrorMessage);

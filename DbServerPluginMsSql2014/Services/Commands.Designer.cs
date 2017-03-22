@@ -61,11 +61,29 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CREATE DATABASE {0} ON {1} AS SNAPSHOT OF {2}.
+        /// </summary>
+        internal static string CreateSnapshot {
+            get {
+                return ResourceManager.GetString("CreateSnapshot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DROP DATABASE {0}.
         /// </summary>
         internal static string DropSnapshot {
             get {
                 return ResourceManager.GetString("DropSnapshot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (NAME={0}, FILENAME=&apos;{1}&apos;).
+        /// </summary>
+        internal static string FileClause {
+            get {
+                return ResourceManager.GetString("FileClause", resourceCulture);
             }
         }
         
@@ -79,6 +97,15 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to physical_name.
+        /// </summary>
+        internal static string PhysicalNameColumn {
+            get {
+                return ResourceManager.GetString("PhysicalNameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RESTORE DATABASE {0} FROM DATABASE_SNAPSHOT = &apos;{1}&apos;.
         /// </summary>
         internal static string RestoreSnapshot {
@@ -88,25 +115,25 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT mf.name, mf.physical_name
+        ///FROM
+        ///	sys.databases db
+        ///	inner join sys.master_files mf on db.database_id = mf.database_id
+        ///WHERE
+        ///	db.name = &apos;{0}&apos; AND type_desc &lt;&gt; &apos;LOG&apos;.
+        /// </summary>
+        internal static string SelectDatabaseFiles {
+            get {
+                return ResourceManager.GetString("SelectDatabaseFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT name FROM sys.databases WHERE source_database_id IS NULL.
         /// </summary>
         internal static string SelectDatabases {
             get {
                 return ResourceManager.GetString("SelectDatabases", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SELECT mf.physical_name
-        ///FROM
-        ///	sys.databases db
-        ///	inner join sys.master_files mf on db.database_id = mf.database_id
-        ///WHERE
-        ///	db.name = &apos;{0}&apos;.
-        /// </summary>
-        internal static string SelectPhysicalFiles {
-            get {
-                return ResourceManager.GetString("SelectPhysicalFiles", resourceCulture);
             }
         }
         

@@ -15,6 +15,8 @@ namespace DbServerPluginMsSql2014.Services
     using System.Data;
     using System.Linq;
     using System.Globalization;
+    using System.IO;
+    using System.Text;
 
     /// <summary>
     /// See <see cref="ISnapshotServices"/>.
@@ -71,7 +73,58 @@ namespace DbServerPluginMsSql2014.Services
         /// </summary>
         public void CreateSnapshot(string snapshotName, string databaseName, DbServerConnectionData connection)
         {
-            throw new NotImplementedException();
+            ArgumentChecks.AssertNotNull(databaseName, nameof(databaseName));
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            // Retrieve the files for the database.
+            var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
+            var selectDatabaseFilesQuery = string.Format(CultureInfo.InvariantCulture, Commands.SelectDatabaseFiles, databaseName);
+            var dataTable = this._sqlHelper.ExecuteQuery(connectionString, selectDatabaseFilesQuery);
+
+            var logicalFileNames = dataTable.Rows
+                .Cast<DataRow>()
+                .Select(r => r[Commands.NameColumn].ToString())
+                .ToList();
+
+            // Determine an adequate file location for our snapshot files.
+            var physicalFilePaths = dataTable.Rows
+                .Cast<DataRow>()
+                .Select(r => r[Commands.PhysicalNameColumn].ToString())
+                .ToList();
+
+            if (!physicalFilePaths.Any())
+            {
+                throw new ApplicationException($"No physical files found for {databaseName}!");
+            }
+            
+            var fileLocation = Path.GetDirectoryName(physicalFilePaths.First());
+
+            // Iterate through all files, and assemble file clause...
+            var fileClauseBuilder = new StringBuilder();
+            var fileNumber = 0;
+            foreach (var logicalFileName in logicalFileNames)
+            {
+                var physicalSnapshotFileName = Path.Combine(fileLocation, snapshotName + "_" + fileNumber + ".ss");
+                var clause = string.Format(
+                    CultureInfo.InvariantCulture,
+                    Commands.FileClause,
+                    logicalFileName,
+                    physicalSnapshotFileName);
+
+                if (fileClauseBuilder.Length > 0)
+                {
+                    fileClauseBuilder.Append(", ");
+                }
+
+                fileClauseBuilder.Append(clause);
+
+                fileNumber++;
+            }
+
+            // Asseble and execute 'create snapshot' query.
+            var createSnapshotQuery = string.Format(CultureInfo.InvariantCulture, Commands.CreateSnapshot, snapshotName, fileClauseBuilder, databaseName);
+            ////throw new ApplicationException(createSnapshotQuery);
+            this._sqlHelper.ExecuteNonQuery(connectionString, createSnapshotQuery);
         }
 
         /// <summary>

@@ -117,28 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CreateSnapshot" xml:space="preserve">
+    <value>CREATE DATABASE {0} ON {1} AS SNAPSHOT OF {2}</value>
+    <comment>{0}: snapshot name, {1}: file clause, {2}: database name</comment>
+  </data>
   <data name="DropSnapshot" xml:space="preserve">
     <value>DROP DATABASE {0}</value>
     <comment>{0}: snapshot name</comment>
   </data>
+  <data name="FileClause" xml:space="preserve">
+    <value>(NAME={0}, FILENAME='{1}')</value>
+    <comment>{0}: logical file name, {1}: physical file name</comment>
+  </data>
   <data name="NameColumn" xml:space="preserve">
     <value>name</value>
+  </data>
+  <data name="PhysicalNameColumn" xml:space="preserve">
+    <value>physical_name</value>
   </data>
   <data name="RestoreSnapshot" xml:space="preserve">
     <value>RESTORE DATABASE {0} FROM DATABASE_SNAPSHOT = '{1}'</value>
     <comment>{0}: database name, {1}: snapshot name</comment>
   </data>
-  <data name="SelectDatabases" xml:space="preserve">
-    <value>SELECT name FROM sys.databases WHERE source_database_id IS NULL</value>
-  </data>
-  <data name="SelectPhysicalFiles" xml:space="preserve">
-    <value>SELECT mf.physical_name
+  <data name="SelectDatabaseFiles" xml:space="preserve">
+    <value>SELECT mf.name, mf.physical_name
 FROM
 	sys.databases db
 	inner join sys.master_files mf on db.database_id = mf.database_id
 WHERE
-	db.name = '{0}'</value>
+	db.name = '{0}' AND type_desc &lt;&gt; 'LOG'</value>
     <comment>{0}: database name</comment>
+  </data>
+  <data name="SelectDatabases" xml:space="preserve">
+    <value>SELECT name FROM sys.databases WHERE source_database_id IS NULL</value>
   </data>
   <data name="SelectSnapshots" xml:space="preserve">
     <value>SELECT ss.name
