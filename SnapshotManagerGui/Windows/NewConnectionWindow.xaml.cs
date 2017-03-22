@@ -51,6 +51,8 @@ namespace SnapshotManagerGui.Windows
             {
                 this.Model.DbServerPlugin = pluginsOrdered.First();
             }
+
+            this.dbServerComboBox.IsEnabled = pluginsOrdered.Count > 1;
         }
 
         private void SetLoginInfoIsEnabled(bool isEnabled)
@@ -63,6 +65,8 @@ namespace SnapshotManagerGui.Windows
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
+            this.Model.Password = this.passwordTextBox.Password;
+
             this.DialogResult = true;
             this.Close();
         }
