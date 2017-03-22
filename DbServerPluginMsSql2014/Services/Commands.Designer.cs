@@ -70,7 +70,7 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT name FROM sys.databases.
+        ///   Looks up a localized string similar to SELECT name FROM sys.databases WHERE source_database_id IS NULL.
         /// </summary>
         internal static string SelectDatabases {
             get {
@@ -79,7 +79,11 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT name FROM sys.databases WHERE source_database_id IS NOT NULL.
+        ///   Looks up a localized string similar to SELECT ss.name
+        ///FROM
+        ///	sys.databases AS db
+        ///	inner join sys.databases AS ss ON db.database_id = ss.source_database_id
+        ///WHERE db.name = &apos;{0}&apos;.
         /// </summary>
         internal static string SelectSnapshots {
             get {

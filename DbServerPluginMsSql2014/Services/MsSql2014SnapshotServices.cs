@@ -15,6 +15,7 @@ namespace DbServerPluginMsSql2014.Services
     using System.Data.SqlClient;
     using System.Data;
     using System.Linq;
+    using System.Globalization;
 
     /// <summary>
     /// See <see cref="ISnapshotServices"/>.
@@ -58,7 +59,7 @@ namespace DbServerPluginMsSql2014.Services
                 var sqlCommand = new SqlCommand();
                 sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.CommandText = Commands.SelectSnapshots;
+                sqlCommand.CommandText = string.Format(CultureInfo.InvariantCulture, Commands.SelectSnapshots, database);
 
                 // Execute query.
                 var adapter = new SqlDataAdapter(sqlCommand);

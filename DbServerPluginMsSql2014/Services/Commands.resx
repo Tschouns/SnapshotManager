@@ -121,9 +121,14 @@
     <value>name</value>
   </data>
   <data name="SelectDatabases" xml:space="preserve">
-    <value>SELECT name FROM sys.databases</value>
+    <value>SELECT name FROM sys.databases WHERE source_database_id IS NULL</value>
   </data>
   <data name="SelectSnapshots" xml:space="preserve">
-    <value>SELECT name FROM sys.databases WHERE source_database_id IS NOT NULL</value>
+    <value>SELECT ss.name
+FROM
+	sys.databases AS db
+	inner join sys.databases AS ss ON db.database_id = ss.source_database_id
+WHERE db.name = '{0}'</value>
+    <comment>{0}: database name</comment>
   </data>
 </root>
