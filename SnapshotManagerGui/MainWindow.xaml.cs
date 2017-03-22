@@ -7,12 +7,13 @@
 namespace SnapshotManagerGui
 {
     using System;
+    using System.Linq;
     using System.Windows;
+    using Base;
     using DbServerPlugin;
     using DbServerPluginMsSql2014;
     using DbServerPluginMsSql2014.Services;
     using SnapshotManager.Repositories;
-    using System.Linq;
     using SnapshotManager;
 
     /// <summary>
@@ -41,6 +42,32 @@ namespace SnapshotManagerGui
             this._connectionRepository = new ConnectionRepository();
             this._databaseRepository = new DatabaseRepository();
             this._snapshotRepository = new SnapshotRepository();
+
+            this.UpdateButtonStatus();
+        }
+
+        private static void HandleResult(SuccessResult result)
+        {
+            ArgumentChecks.AssertNotNull(result, nameof(result));
+
+            if (!result.Successful)
+            {
+                MessageBox.Show(result.ErrorMessage);
+            }
+        }
+
+        private void UpdateButtonStatus()
+        {
+            var isConnectionSelected = this.connectionsListView.SelectedItem != null;
+            var isDatabaseSelected = this.databasesListView.SelectedItem != null;
+            var isSnapshotSelected = this.snapshotsListView.SelectedItem != null;
+
+            this.removeConnectionButton.IsEnabled = isConnectionSelected;
+            this.refreshDatabasesButton.IsEnabled = isConnectionSelected;
+            this.refreshSnapshotsButton.IsEnabled = isDatabaseSelected;
+            this.createSnapshotButton.IsEnabled = isDatabaseSelected;
+            this.restoreSnapshotButton.IsEnabled = isSnapshotSelected;
+            this.deleteSnapshotButton.IsEnabled = isSnapshotSelected;
         }
 
         private void UpdateConnectionsListView()
@@ -79,12 +106,7 @@ namespace SnapshotManagerGui
                 return;
             }
 
-            var loadResult = this._snapshotRepository.TryLoadSnapshots(selectedDatabase);
-            if (!loadResult.Successful)
-            {
-                MessageBox.Show(loadResult.ErrorMessage);
-            }
-
+            HandleResult(this._snapshotRepository.TryLoadSnapshots(selectedDatabase));
             var snapshots = this._snapshotRepository.GetLoadedSnapshots(selectedDatabase);
             foreach (var snapshot in snapshots)
             {
@@ -96,12 +118,19 @@ namespace SnapshotManagerGui
 
         private void ConnectionsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            this.UpdateButtonStatus();
             this.UpdateDatabaseListView();
         }
 
         private void DatabasesListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            this.UpdateButtonStatus();
             this.UpdateSnapshotListView();
+        }
+
+        private void SnapshotsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            this.UpdateButtonStatus();
         }
 
         private void AddConnectionButton_Click(object sender, RoutedEventArgs e)
@@ -114,25 +143,23 @@ namespace SnapshotManagerGui
                 this._connectionRepository.AddConnection(result.Value);
 
                 // Load databases.
-                var loadResult = this._databaseRepository.TryLoadDatabases(result.Value);
-                if (!loadResult.Successful)
-                {
-                    MessageBox.Show(loadResult.ErrorMessage);
-                }
-
+                HandleResult(this._databaseRepository.TryLoadDatabases(result.Value));
                 this.UpdateConnectionsListView();
                 this.UpdateDatabaseListView();
             }
         }
 
-        private void RemoveConnectionButton_OnClickConnectionButton_Click(object aSender, RoutedEventArgs aE)
+        private void RemoveConnectionButton_OnClickConnectionButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedConnections = this.connectionsListView.SelectedItems.Cast<ConnectionInfo>().ToList();
             foreach (var connection in selectedConnections)
             {
                 this._connectionRepository.RemoveConnection(connection);
+                this._databaseRepository.ClearDatabases(connection);
+                this._snapshotRepository.ClearSnapshots(connection);
             }
 
+            this.UpdateButtonStatus();
             this.UpdateConnectionsListView();
             this.UpdateDatabaseListView();
         }
@@ -145,12 +172,9 @@ namespace SnapshotManagerGui
                 return;
             }
 
-            var createResult = this._snapshotRepository.TryCreateSnapshot("MySnapshot_" + DateTime.Now.ToFileTime(), selectedDatabase);
-            if (!createResult.Successful)
-            {
-                MessageBox.Show(createResult.ErrorMessage);
-            }
+            HandleResult(this._snapshotRepository.TryCreateSnapshot("MySnapshot_" + DateTime.Now.ToFileTime(), selectedDatabase));
 
+            this.UpdateButtonStatus();
             this.UpdateSnapshotListView();
         }
 
@@ -163,15 +187,13 @@ namespace SnapshotManagerGui
             }
 
             var restoreResult = this._snapshotRepository.TryRestoreSnapshot(selectedSnapshot);
+            HandleResult(restoreResult);
             if (restoreResult.Successful)
             {
                 MessageBox.Show(Messages.SnapshotRestored);
             }
-            else
-            {
-                MessageBox.Show(restoreResult.ErrorMessage);
-            }
 
+            this.UpdateButtonStatus();
             this.UpdateSnapshotListView();
         }
 
@@ -180,17 +202,35 @@ namespace SnapshotManagerGui
             var selectedSnapshots = this.snapshotsListView.SelectedItems.Cast<SnapshotInfo>().ToList();
             foreach (var snapshot in selectedSnapshots)
             {
-                var deleteResult = this._snapshotRepository.TryDeleteSnapshot(snapshot);
-                if (!deleteResult.Successful)
-                {
-                    MessageBox.Show(deleteResult.ErrorMessage);
-
-                    // We won't atempt to delete anymore snapshots...
-                    this.UpdateSnapshotListView();
-                    return;
-                }
+                HandleResult(this._snapshotRepository.TryDeleteSnapshot(snapshot));
             }
 
+            this.UpdateButtonStatus();
+            this.UpdateSnapshotListView();
+        }
+
+        private void RefreshDatabasesButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedConnection = (ConnectionInfo)this.connectionsListView.SelectedItem;
+            if (selectedConnection != null)
+            {
+                HandleResult(this._databaseRepository.TryLoadDatabases(selectedConnection));
+            }
+
+            this.UpdateButtonStatus();
+            this.UpdateDatabaseListView();
+            this.UpdateSnapshotListView();
+        }
+
+        private void RefreshSnapshotsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedDatabase = (DatabaseInfo)this.databasesListView.SelectedItem;
+            if (selectedDatabase != null)
+            {
+                HandleResult(this._snapshotRepository.TryLoadSnapshots(selectedDatabase));
+            }
+
+            this.UpdateButtonStatus();
             this.UpdateSnapshotListView();
         }
 

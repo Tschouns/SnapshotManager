@@ -9,7 +9,7 @@ namespace SnapshotManager.Repositories
     using Base;
     using Services;
     using System.Collections.Generic;
-    using System;
+    using System.Linq;
 
     /// <summary>
     /// See <see cref="ISnapshotRepository"/>.
@@ -85,6 +85,23 @@ namespace SnapshotManager.Repositories
             if (this._snapshotsPerDatabaseDict.ContainsKey(database))
             {
                 this._snapshotsPerDatabaseDict.Remove(database);
+            }
+        }
+
+        /// <summary>
+        /// See <see cref="ISnapshotRepository.ClearSnapshots(ConnectionInfo)"/>.
+        /// </summary>
+        public void ClearSnapshots(ConnectionInfo connection)
+        {
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            var databases = this._snapshotsPerDatabaseDict.Keys
+                .Where(d => d.Connection == connection)
+                .ToList();
+
+            foreach (var database in databases)
+            {
+                this.ClearSnapshots(database);
             }
         }
 

@@ -30,6 +30,12 @@ namespace SnapshotManager.Repositories
         void ClearSnapshots(DatabaseInfo database);
 
         /// <summary>
+        /// Clears the snapshots for the specified connection from the repository (does not remove
+        /// them on the database server).
+        /// </summary>
+        void ClearSnapshots(ConnectionInfo connection);
+
+        /// <summary>
         /// Tries to create a snapshot of a database on the database server.
         /// </summary>
         SuccessResult TryCreateSnapshot(string snapshotName, DatabaseInfo database);
