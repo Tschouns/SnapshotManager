@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapshotManagerGui"
         mc:Ignorable="d"
-        Title="Snapshot Manager" Height="462.73" Width="662.423">
+        Title="Snapshot Manager - Secret Beta" Height="462.73" Width="662.423">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

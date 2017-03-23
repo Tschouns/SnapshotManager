@@ -1,0 +1,13 @@
+=== Planned Features ===
+- Connections in config file
+- Create snapshot: Prompt to override snapshot name, perhaps physical file location
+- Restore snapshot: Automatically delete other snapshots first (after user confirmation!)
+- Refresh: using F5, context sensitive
+- About box
+
+=== TODOs ===
+- Add IOC container
+- Split SnapshotManager project into separate interface/implementation projects
+- Enable proper plugin mechanism, dynamically load plugins
+- Add app icon
+- Add "Refresh" icon
