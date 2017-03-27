@@ -11,3 +11,4 @@
 - Enable proper plugin mechanism, dynamically load plugins
 - Add app icon
 - Add "Refresh" icon
+- Main window MinSize
