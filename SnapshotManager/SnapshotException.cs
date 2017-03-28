@@ -15,10 +15,18 @@ namespace SnapshotManager
     public class SnapshotException : Exception
     {
         /// <summary>
-        /// Initializes a new instance.
+        /// Initializes a new instance of the <see cref="SnapshotException"/> class.
         /// </summary>
         public SnapshotException(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SnapshotException"/> class.
+        /// </summary>
+        public SnapshotException(string message)
+            : base(message)
         {
         }
     }

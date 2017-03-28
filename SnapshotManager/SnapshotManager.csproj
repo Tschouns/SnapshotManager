@@ -43,8 +43,14 @@
   <ItemGroup>
     <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="Config\ConnectionConfigurationElement.cs" />
+    <Compile Include="Config\ConnectionConfigurationElementCollection.cs" />
     <Compile Include="Config\ConnectionDataConfigurationSection.cs" />
     <Compile Include="Config\IConfigHelper.cs" />
+    <Compile Include="Config\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="ConnectionInfo.cs" />
     <Compile Include="DatabaseInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +82,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Config\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Services\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>

@@ -16,15 +16,15 @@ namespace SnapshotManager.Config
         private const string ConnectionDataConnections = "Connections";
 
         /// <summary>
-        /// Gets or sets a <see cref="ConfigurationElementCollection"/> containing connections.
+        /// Gets or sets a <see cref="ConnectionConfigurationElementCollection"/> containing connections.
         /// </summary>
-        [ConfigurationProperty("urls", IsDefaultCollection = false)]
-        [ConfigurationCollection(typeof(ConfigurationElementCollection),lalalalaaaaaalaladidaaaaa)]
-        public ConfigurationElementCollection ConnectionCollection
+        [ConfigurationProperty(ConnectionDataConnections, IsDefaultCollection = false)]
+        [ConfigurationCollection(typeof(ConnectionConfigurationElementCollection))]
+        public ConnectionConfigurationElementCollection ConnectionCollection
         {
             get
             {
-                return (ConfigurationElementCollection)this[ConnectionDataConnections];
+                return (ConnectionConfigurationElementCollection)this[ConnectionDataConnections];
             }
             set
             {
