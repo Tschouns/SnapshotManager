@@ -15,6 +15,9 @@ namespace SnapshotManager.Config
     /// </summary>
     public class ConnectionConfigurationElementCollection : ConfigurationElementCollection
     {
+        /// <summary>
+        /// Determines whether the collection contains an element with the same key as the one specified.
+        /// </summary>
         public bool Contains(ConnectionConfigurationElement element)
         {
             ArgumentChecks.AssertNotNull(element, nameof(element));
@@ -26,6 +29,9 @@ namespace SnapshotManager.Config
             return contains;
         }
 
+        /// <summary>
+        /// Adds the specified element.
+        /// </summary>
         public void Add(ConnectionConfigurationElement element)
         {
             ArgumentChecks.AssertNotNull(element, nameof(element));
@@ -33,11 +39,22 @@ namespace SnapshotManager.Config
             this.BaseAdd(element);
         }
 
+        /// <summary>
+        /// Removes the specified element.
+        /// </summary>
         public void Remove(ConnectionConfigurationElement element)
         {
             ArgumentChecks.AssertNotNull(element, nameof(element));
 
             this.BaseRemove(this.GetElementKey(element));
+        }
+
+        /// <summary>
+        /// Clears all the elements in the collection
+        /// </summary>
+        public void Clear()
+        {
+            this.BaseClear();
         }
 
         protected override ConfigurationElement CreateNewElement()

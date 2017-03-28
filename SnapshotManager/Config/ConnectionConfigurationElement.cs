@@ -58,16 +58,15 @@ namespace SnapshotManager.Config
         /// <summary>
         /// Gets or sets the integrated security attribute.
         /// </summary>
-        [ConfigurationProperty(ConnectionUsesIntegratedSecurity, DefaultValue = BooleanTrue)]
         public bool UsesIntegratedSecurity
         {
             get
             {
-                return (string)this[ConnectionUsesIntegratedSecurity] == BooleanTrue;
+                return this.IntegratedSecurity == BooleanTrue;
             }
             set
             {
-                this[ConnectionUsesIntegratedSecurity] = value ? BooleanTrue : BooleanFalse;
+                this.IntegratedSecurity = value ? BooleanTrue : BooleanFalse;
             }
         }
 
@@ -100,6 +99,23 @@ namespace SnapshotManager.Config
             set
             {
                 this[ConnectionPassword] = value;
+            }
+        }
+
+        /// <summary>
+        /// This property is used merely to parse the value from the XML - the value is only exposed
+        /// via the <see cref="UsesIntegratedSecurity"/> property, typed as <see cref="bool"/>.
+        /// </summary>
+        [ConfigurationProperty(ConnectionUsesIntegratedSecurity, DefaultValue = BooleanTrue)]
+        private string IntegratedSecurity
+        {
+            get
+            {
+                return (string)this[ConnectionUsesIntegratedSecurity];
+            }
+            set
+            {
+                this[ConnectionUsesIntegratedSecurity] = value;
             }
         }
     }

@@ -7,6 +7,8 @@
 namespace SnapshotManagerGui
 {
     using System;
+    using System.Configuration;
+    using System.Globalization;
     using System.Linq;
     using System.Windows;
     using Base;
@@ -15,6 +17,7 @@ namespace SnapshotManagerGui
     using DbServerPluginMsSql2014.Services;
     using SnapshotManager.Repositories;
     using SnapshotManager;
+    using SnapshotManager.Config;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -115,6 +118,25 @@ namespace SnapshotManagerGui
         }
 
         #region event handlers
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            HandleResult(this._connectionRepository.TryLoadConnectionsFromConfig());
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var saveResult = this._connectionRepository.TrySaveConnectionsToConfig();
+            if (!saveResult.Successful)
+            {
+                var message = string.Format(CultureInfo.CurrentCulture, Messages.SaveConnectionsFailedYesNoQuestion, saveResult.ErrorMessage);
+                var messageBoxResult = MessageBox.Show(message, Messages.SaveConnectionsFailedCaption, MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
 
         private void ConnectionsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {

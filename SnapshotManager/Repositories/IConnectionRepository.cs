@@ -14,6 +14,16 @@ namespace SnapshotManager.Repositories
     public interface IConnectionRepository
     {
         /// <summary>
+        /// Tries to load the connections from the config file.
+        /// </summary>
+        SuccessResult TryLoadConnectionsFromConfig();
+
+        /// <summary>
+        /// Tries to save the connections to the config file.
+        /// </summary>
+        SuccessResult TrySaveConnectionsToConfig();
+
+        /// <summary>
         /// Gets the connections.
         /// </summary>
         IEnumerable<ConnectionInfo> GetConnections();

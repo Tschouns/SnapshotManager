@@ -26,8 +26,8 @@ namespace SnapshotManager.Config
         void AddConnectionToConfiguration(Configuration config, ConnectionInfo connection);
 
         /// <summary>
-        /// Removes the specified connection from the specified <see cref="Configuration"/>.
+        /// Clears all the connections from the specified <see cref="Configuration"/>.
         /// </summary>
-        void RemoveConnectionFromConfiguration(Configuration config, ConnectionInfo connection);
+        void ClearConnectionsFromConfiguration(Configuration config);
     }
 }

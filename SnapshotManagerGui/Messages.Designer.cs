@@ -61,6 +61,26 @@ namespace SnapshotManagerGui {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sure?.
+        /// </summary>
+        internal static string SaveConnectionsFailedCaption {
+            get {
+                return ResourceManager.GetString("SaveConnectionsFailedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The connections could not be saved ({0}).
+        ///
+        ///Would you like to close the application anyway?.
+        /// </summary>
+        internal static string SaveConnectionsFailedYesNoQuestion {
+            get {
+                return ResourceManager.GetString("SaveConnectionsFailedYesNoQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The snapshot has been successfully restored..
         /// </summary>
         internal static string SnapshotRestored {

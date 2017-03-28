@@ -23,6 +23,9 @@ namespace SnapshotManager.Config
         /// <summary>
         /// See <see cref="IConfigHelper.GetConnectionsFromConfiguration"/> .
         /// </summary>
+        /// <exception cref="SnapshotException">
+        /// Thrown if a configured connection does not match any plugin identifier
+        /// </exception>
         public IEnumerable<ConnectionInfo> GetConnectionsFromConfiguration(Configuration config)
         {
             ArgumentChecks.AssertNotNull(config, nameof(config));
@@ -56,19 +59,14 @@ namespace SnapshotManager.Config
         }
 
         /// <summary>
-        /// See <see cref="IConfigHelper.RemoveConnectionFromConfiguration"/> .
+        /// See <see cref="IConfigHelper.ClearConnectionsFromConfiguration"/> .
         /// </summary>
-        public void RemoveConnectionFromConfiguration(Configuration config, ConnectionInfo connection)
+        public void ClearConnectionsFromConfiguration(Configuration config)
         {
             ArgumentChecks.AssertNotNull(config, nameof(config));
-            ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
-            var element = ConvertToConfigElement(connection);
             var section = GetOrCreateConnectionDataSection(config);
-            if (section.ConnectionCollection.Contains(element))
-            {
-                section.ConnectionCollection.Remove(element);
-            }
+            section.ConnectionCollection.Clear();
         }
 
         private static ConnectionDataConfigurationSection GetOrCreateConnectionDataSection(Configuration config)
