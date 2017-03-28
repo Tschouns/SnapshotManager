@@ -121,7 +121,17 @@ namespace SnapshotManagerGui
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // Load connections.
             HandleResult(this._connectionRepository.TryLoadConnectionsFromConfig());
+
+            // Load databases foreach connection.
+            var connections = this._connectionRepository.GetConnections();
+            foreach (var connection in connections)
+            {
+                HandleResult(this._databaseRepository.TryLoadDatabases(connection));
+            }
+
+            this.UpdateConnectionsListView();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
