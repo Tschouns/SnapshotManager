@@ -26,7 +26,7 @@ namespace DbServerPlugin
             ArgumentChecks.AssertNotNull(serverInfo, nameof(serverInfo));
             ArgumentChecks.AssertNotNull(services, nameof(services));
 
-            this.PluginIdentifier = PluginIdentifier;
+            this.PluginIdentifier = pluginIdentifier;
             this.ServerInfo = serverInfo;
             this.Services = services;
         }
