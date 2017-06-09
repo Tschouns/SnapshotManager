@@ -6,6 +6,7 @@
 
 namespace DbServerPluginMsSql2014.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Globalization;
@@ -65,6 +66,10 @@ namespace DbServerPluginMsSql2014.Services
             foreach (var databaseName in databaseNames)
             {
                 var physicalFilePaths = this.GetPhysicalFilePaths(connection, databaseName);
+                if (!physicalFilePaths.Any())
+                {
+                    throw new ApplicationException($"No physical files found for {databaseName}!");
+                }
 
                 databaseDatas.Add(new DatabaseData(databaseName, physicalFilePaths));
             }

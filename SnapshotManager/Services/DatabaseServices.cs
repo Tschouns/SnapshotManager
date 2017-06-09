@@ -11,6 +11,7 @@ namespace SnapshotManager.Services
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
 
     /// <summary>
@@ -57,9 +58,7 @@ namespace SnapshotManager.Services
             try
             {
                 var snapshotNames = database.Connection.DbServer.Services.Snapshots.GetAllSnapshots(
-                    new DatabaseData(
-                        database.Name,
-                        database.PhysicalFilePaths), 
+                    database.Name, 
                     new DbServerConnectionData(
                         database.Connection.Host,
                         database.Connection.UsesIntegratedSecurity,
@@ -88,11 +87,13 @@ namespace SnapshotManager.Services
 
             try
             {
+                // TODO: pass this in as argument.
+                var snapshotPhysicalFileLocation = Path.GetDirectoryName(database.PhysicalFilePaths.First());
+
                 database.Connection.DbServer.Services.Snapshots.CreateSnapshot(
                     snapshotName,
-                    new DatabaseData(
-                        database.Name,
-                        database.PhysicalFilePaths), 
+                    snapshotPhysicalFileLocation,
+                    database.Name,
                     new DbServerConnectionData(
                         database.Connection.Host,
                         database.Connection.UsesIntegratedSecurity,
@@ -118,9 +119,7 @@ namespace SnapshotManager.Services
             {
                 snapshot.Database.Connection.DbServer.Services.Snapshots.RestoreSnapshot(
                     snapshot.Name,
-                    new DatabaseData(
-                        snapshot.Database.Name,
-                        snapshot.Database.PhysicalFilePaths),
+                    snapshot.Database.Name,
                     new DbServerConnectionData(
                         snapshot.Database.Connection.Host,
                         snapshot.Database.Connection.UsesIntegratedSecurity,
