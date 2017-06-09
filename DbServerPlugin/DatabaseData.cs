@@ -4,37 +4,29 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace SnapshotManager
+namespace DbServerPlugin
 {
     using System.Collections.Generic;
     using Base;
 
     /// <summary>
-    /// Represents a database.
+    /// Represents a specific database.
     /// </summary>
-    public class DatabaseInfo
+    public class DatabaseData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DatabaseInfo"/> class.
+        /// Initializes a new instance of the <see cref="DatabaseData"/> class.
         /// </summary>
-        public DatabaseInfo(
-            ConnectionInfo connection,
+        public DatabaseData(
             string name,
             IEnumerable<string> physicalFilePaths)
         {
-            ArgumentChecks.AssertNotNull(connection, nameof(connection));
             ArgumentChecks.AssertNotNullOrEmpty(name, nameof(name));
             ArgumentChecks.AssertNotNull(physicalFilePaths, nameof(physicalFilePaths));
 
-            this.Connection = connection;
             this.Name = name;
             this.PhysicalFilePaths = physicalFilePaths;
         }
-
-        /// <summary>
-        /// Gets the connection associated with this database.
-        /// </summary>
-        public ConnectionInfo Connection { get; }
 
         /// <summary>
         /// Gets the database name.
@@ -45,13 +37,5 @@ namespace SnapshotManager
         /// Gets physical file paths (including location and file name).
         /// </summary>
         public IEnumerable<string> PhysicalFilePaths { get; }
-
-        /// <summary>
-        /// See <see cref="object.ToString"/>.
-        /// </summary>
-        public override string ToString()
-        {
-            return this.Name;
-        }
     }
 }

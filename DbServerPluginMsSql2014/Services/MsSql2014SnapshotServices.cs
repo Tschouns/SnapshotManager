@@ -52,13 +52,13 @@ namespace DbServerPluginMsSql2014.Services
         /// <summary>
         /// See <see cref="ISnapshotServices.GetAllSnapshots(string, DbServerConnectionData)"/>.
         /// </summary>
-        public IEnumerable<string> GetAllSnapshots(string databaseName, DbServerConnectionData connection)
+        public IEnumerable<string> GetAllSnapshots(DatabaseData database, DbServerConnectionData connection)
         {
-            ArgumentChecks.AssertNotNull(databaseName, nameof(databaseName));
+            ArgumentChecks.AssertNotNull(database, nameof(database));
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
             var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
-            var selectSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.SelectSnapshots, databaseName);
+            var selectSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.SelectSnapshots, database.Name);
             var dataTable = this._sqlHelper.ExecuteQuery(connectionString, selectSnapshotsQuery);
             var snapshotNames = dataTable.Rows
                 .Cast<DataRow>()
@@ -69,16 +69,16 @@ namespace DbServerPluginMsSql2014.Services
         }
 
         /// <summary>
-        /// See <see cref="ISnapshotServices.CreateSnapshot(string, string, DbServerConnectionData)"/>.
+        /// See <see cref="ISnapshotServices.CreateSnapshot(string, DatabaseData, DbServerConnectionData)"/>.
         /// </summary>
-        public void CreateSnapshot(string snapshotName, string databaseName, DbServerConnectionData connection)
+        public void CreateSnapshot(string snapshotName, DatabaseData database, DbServerConnectionData connection)
         {
-            ArgumentChecks.AssertNotNull(databaseName, nameof(databaseName));
+            ArgumentChecks.AssertNotNull(database, nameof(database));
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
             // Retrieve the files for the database.
             var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
-            var selectDatabaseFilesQuery = string.Format(CultureInfo.InvariantCulture, Commands.SelectDatabaseFiles, databaseName);
+            var selectDatabaseFilesQuery = string.Format(CultureInfo.InvariantCulture, Commands.SelectDatabaseFiles, database.Name);
             var dataTable = this._sqlHelper.ExecuteQuery(connectionString, selectDatabaseFilesQuery);
 
             var logicalFileNames = dataTable.Rows
@@ -94,7 +94,7 @@ namespace DbServerPluginMsSql2014.Services
 
             if (!physicalFilePaths.Any())
             {
-                throw new ApplicationException($"No physical files found for {databaseName}!");
+                throw new ApplicationException($"No physical files found for {database.Name}!");
             }
             
             var fileLocation = Path.GetDirectoryName(physicalFilePaths.First());
@@ -122,22 +122,22 @@ namespace DbServerPluginMsSql2014.Services
             }
 
             // Asseble and execute 'create snapshot' query.
-            var createSnapshotQuery = string.Format(CultureInfo.InvariantCulture, Commands.CreateSnapshot, snapshotName, fileClauseBuilder, databaseName);
+            var createSnapshotQuery = string.Format(CultureInfo.InvariantCulture, Commands.CreateSnapshot, snapshotName, fileClauseBuilder, database.Name);
             ////throw new ApplicationException(createSnapshotQuery);
             this._sqlHelper.ExecuteNonQuery(connectionString, createSnapshotQuery);
         }
 
         /// <summary>
-        /// See <see cref="ISnapshotServices.RestoreSnapshot(string, string, DbServerConnectionData)"/>.
+        /// See <see cref="ISnapshotServices.RestoreSnapshot(string, DatabaseData, DbServerConnectionData)"/>.
         /// </summary>
-        public void RestoreSnapshot(string snapshotName, string databaseName, DbServerConnectionData connection)
+        public void RestoreSnapshot(string snapshotName, DatabaseData database, DbServerConnectionData connection)
         {
             ArgumentChecks.AssertNotNull(snapshotName, nameof(snapshotName));
-            ArgumentChecks.AssertNotNull(databaseName, nameof(databaseName));
+            ArgumentChecks.AssertNotNull(database, nameof(database));
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
             var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
-            var dropSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.RestoreSnapshot, databaseName, snapshotName);
+            var dropSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.RestoreSnapshot, database.Name, snapshotName);
             this._sqlHelper.ExecuteNonQuery(connectionString, dropSnapshotsQuery);
         }
 

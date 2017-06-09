@@ -27,13 +27,15 @@ namespace SnapshotManager.Services
 
             try
             {
-                var databaseNames = connection.DbServer.Services.Databases.GetAllDatabases(new DbServerConnectionData(
+                var databases = connection.DbServer.Services.Databases.GetAllDatabases(new DbServerConnectionData(
                     connection.Host,
                     connection.UsesIntegratedSecurity,
                     connection.UserId,
                     connection.Password));
 
-                var databaseInfos = databaseNames.Select(name => new DatabaseInfo(connection, name)).ToList();
+                var databaseInfos = databases
+                    .Select(database => new DatabaseInfo(connection, database.Name, database.PhysicalFilePaths))
+                    .ToList();
 
                 return databaseInfos;
             }
@@ -55,7 +57,9 @@ namespace SnapshotManager.Services
             try
             {
                 var snapshotNames = database.Connection.DbServer.Services.Snapshots.GetAllSnapshots(
-                    database.Name,
+                    new DatabaseData(
+                        database.Name,
+                        database.PhysicalFilePaths), 
                     new DbServerConnectionData(
                         database.Connection.Host,
                         database.Connection.UsesIntegratedSecurity,
@@ -86,7 +90,9 @@ namespace SnapshotManager.Services
             {
                 database.Connection.DbServer.Services.Snapshots.CreateSnapshot(
                     snapshotName,
-                    database.Name,
+                    new DatabaseData(
+                        database.Name,
+                        database.PhysicalFilePaths), 
                     new DbServerConnectionData(
                         database.Connection.Host,
                         database.Connection.UsesIntegratedSecurity,
@@ -112,7 +118,9 @@ namespace SnapshotManager.Services
             {
                 snapshot.Database.Connection.DbServer.Services.Snapshots.RestoreSnapshot(
                     snapshot.Name,
-                    snapshot.Database.Name,
+                    new DatabaseData(
+                        snapshot.Database.Name,
+                        snapshot.Database.PhysicalFilePaths),
                     new DbServerConnectionData(
                         snapshot.Database.Connection.Host,
                         snapshot.Database.Connection.UsesIntegratedSecurity,

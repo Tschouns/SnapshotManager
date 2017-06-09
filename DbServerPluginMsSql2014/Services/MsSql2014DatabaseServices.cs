@@ -8,6 +8,7 @@ namespace DbServerPluginMsSql2014.Services
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Globalization;
     using System.Linq;
     using DbServerPlugin.Services;
     using Base;
@@ -49,7 +50,7 @@ namespace DbServerPluginMsSql2014.Services
         /// <summary>
         /// See <see cref="IDatabaseServices.GetAllDatabasesUsingIntegratedSecurity"/>.
         /// </summary>
-        public IEnumerable<string> GetAllDatabases(DbServerConnectionData connection)
+        public IEnumerable<DatabaseData> GetAllDatabases(DbServerConnectionData connection)
         {
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
@@ -60,7 +61,32 @@ namespace DbServerPluginMsSql2014.Services
                 .Select(r => r[Commands.NameColumn].ToString())
                 .ToList();
 
-            return databaseNames;
+            IList<DatabaseData> databaseDatas = new List<DatabaseData>();
+            foreach (var databaseName in databaseNames)
+            {
+                var physicalFilePaths = this.GetPhysicalFilePaths(connection, databaseName);
+
+                databaseDatas.Add(new DatabaseData(databaseName, physicalFilePaths));
+            }
+
+            return databaseDatas;
+        }
+
+        private IEnumerable<string> GetPhysicalFilePaths(DbServerConnectionData connection, string databaseName)
+        {
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+            ArgumentChecks.AssertNotNullOrEmpty(databaseName, nameof(databaseName));
+
+            var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
+            var selectDatabaseFilesQuery = string.Format(CultureInfo.InvariantCulture, Commands.SelectDatabaseFiles, databaseName);
+            var dataTable = this._sqlHelper.ExecuteQuery(connectionString, selectDatabaseFilesQuery);
+
+            var physicalFilePaths = dataTable.Rows
+                .Cast<DataRow>()
+                .Select(r => r[Commands.PhysicalNameColumn].ToString())
+                .ToList();
+
+            return physicalFilePaths;
         }
     }
 }

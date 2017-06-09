@@ -23,5 +23,16 @@ namespace Base
                 throw new ArgumentNullException(argumentName);
             }
         }
+
+        /// <summary>
+        /// Asserts that a specified string argument is not <c>null</c> or empty.
+        /// </summary>
+        public static void AssertNotNullOrEmpty(string argument, string argumentName)
+        {
+            if (string.IsNullOrEmpty(argument))
+            {
+                throw new ArgumentNullException(argumentName);
+            }
+        }
     }
 }
