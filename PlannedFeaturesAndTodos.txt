@@ -6,6 +6,7 @@
 - About box
 
 === TODOs ===
+- Escape properly for SQL
 - Add IOC container
 - Split SnapshotManager project into separate interface/implementation projects
 - Enable proper plugin mechanism, dynamically load plugins
