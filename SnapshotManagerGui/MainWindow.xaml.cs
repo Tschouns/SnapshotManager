@@ -202,8 +202,8 @@ namespace SnapshotManagerGui
                 return;
             }
 
-            var newSnapshotDialo = new NewSnapshotDialog();
-            var result = newSnapshotDialo.Prompt("MySnapshot_" + DateTime.Now.ToFileTime());
+            var newSnapshotDialog = new NewSnapshotDialog();
+            var result = newSnapshotDialog.Prompt(selectedDatabase.Name + "_Snapshot_" + DateTime.Now.ToShortTimeString());
             if (result.HasValue)
             {
                 HandleResult(this._snapshotRepository.TryCreateSnapshot(result.Value, selectedDatabase));
