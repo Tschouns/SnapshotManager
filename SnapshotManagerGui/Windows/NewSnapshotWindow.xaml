@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapshotManagerGui.Windows"
         mc:Ignorable="d"
-        Title="New Snapshot" Height="130" Width="440">
+        Title="New Snapshot" Height="130" Width="440" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="28"/>
