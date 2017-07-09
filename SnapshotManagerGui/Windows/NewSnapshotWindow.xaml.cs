@@ -40,6 +40,7 @@ namespace SnapshotManagerGui.Windows
             {
                 this.snapShotNameTextBox.Text = value;
                 this.snapShotNameTextBox.SelectAll();
+                this.snapShotNameTextBox.Focus();
             }
         }
 
