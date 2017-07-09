@@ -22,6 +22,7 @@ namespace SnapshotManagerGui
             ArgumentChecks.AssertNotNullOrEmpty(suggestedName, nameof(suggestedName));
 
             var newSnapshotWindow = new NewSnapshotWindow();
+            newSnapshotWindow.SnapshotName = suggestedName;
 
             if (newSnapshotWindow.ShowDialog() == true &&
                 !string.IsNullOrWhiteSpace(newSnapshotWindow.SnapshotName))
