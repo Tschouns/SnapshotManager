@@ -7,7 +7,6 @@
 namespace SnapshotManagerGui
 {
     using System;
-    using System.Configuration;
     using System.Globalization;
     using System.Linq;
     using System.Windows;
@@ -17,7 +16,6 @@ namespace SnapshotManagerGui
     using DbServerPluginMsSql2014.Services;
     using SnapshotManager.Repositories;
     using SnapshotManager;
-    using SnapshotManager.Config;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -204,10 +202,15 @@ namespace SnapshotManagerGui
                 return;
             }
 
-            HandleResult(this._snapshotRepository.TryCreateSnapshot("MySnapshot_" + DateTime.Now.ToFileTime(), selectedDatabase));
+            var newSnapshotDialo = new NewSnapshotDialog();
+            var result = newSnapshotDialo.Prompt("MySnapshot_" + DateTime.Now.ToFileTime());
+            if (result.HasValue)
+            {
+                HandleResult(this._snapshotRepository.TryCreateSnapshot(result.Value, selectedDatabase));
 
-            this.UpdateButtonStatus();
-            this.UpdateSnapshotListView();
+                this.UpdateButtonStatus();
+                this.UpdateSnapshotListView();
+            }
         }
 
         private void RestoreSnapshotButton_Click(object sender, RoutedEventArgs e)
