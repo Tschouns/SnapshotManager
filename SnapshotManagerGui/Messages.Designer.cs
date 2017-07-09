@@ -61,6 +61,15 @@ namespace SnapshotManagerGui {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a name for the new snapshot..
+        /// </summary>
+        internal static string EnterSnapshotName {
+            get {
+                return ResourceManager.GetString("EnterSnapshotName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sure?.
         /// </summary>
         internal static string SaveConnectionsFailedCaption {
