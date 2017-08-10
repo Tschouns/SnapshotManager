@@ -18,8 +18,8 @@
             <RowDefinition Height="28"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="dbServerLabel" Content="DB Server" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
         <ComboBox x:Name="dbServerComboBox" SelectedItem="{Binding DbServerPlugin, Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Top" Margin="10,3,10,0" TabIndex="0"/>
