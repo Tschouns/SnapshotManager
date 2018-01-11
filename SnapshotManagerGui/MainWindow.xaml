@@ -5,55 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapshotManagerGui"
         mc:Ignorable="d"
-        Title="Snapshot Manager - Secret Beta" Height="462.73" Width="662.423" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Snapshot Manager - Secret Beta" Height="581.773" Width="1024.351" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" >
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="MinWidth" Value="75" />
+        </Style>
+        <Style TargetType="{x:Type ListView}" >
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style TargetType="{x:Type Label}" >
+            <Setter Property="Margin" Value="0" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Grid>
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
             </Grid.RowDefinitions>
-
-            <Label x:Name="connectionLabel" Content="Connections" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="addConnectionButton" Content="Add..." HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" Click="AddConnectionButton_Click" TabIndex="10"/>
-            <Button x:Name="removeConnectionButton" Content="Remove" HorizontalAlignment="Left" Margin="90,35,0,0" VerticalAlignment="Top" Width="75" Click="RemoveConnectionButton_OnClickConnectionButton_Click" TabIndex="11"/>
-            
-            <ListView x:Name="connectionsListView" Margin="10,60,10,10" SelectionChanged="ConnectionsListView_SelectionChanged" TabIndex="12">
+            <Label x:Name="connectionLabel" Content="Connections" Grid.Row="0"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Button x:Name="addConnectionButton" Content="Add..." HorizontalAlignment="Left" Click="AddConnectionButton_Click" TabIndex="10"/>
+                <Button x:Name="removeConnectionButton" Content="Remove" HorizontalAlignment="Left" Click="RemoveConnectionButton_OnClickConnectionButton_Click" TabIndex="11"/>
+            </StackPanel>
+            <ListView x:Name="connectionsListView" Grid.Row="2" SelectionChanged="ConnectionsListView_SelectionChanged" TabIndex="12">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Host" DisplayMemberBinding="{Binding Host}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
+        </Grid>
 
-            <Label x:Name="databasesLabel" Content="Databases" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-            <Button x:Name="refreshDatabasesButton" Content="R" HorizontalAlignment="Right" Margin="0,5,10,0" Grid.Row="1" VerticalAlignment="Top" Width="22" Click="RefreshDatabasesButton_Click" TabIndex="21"/>
-            
-            <ListView x:Name="databasesListView" Margin="10,30,10,10" Grid.Row="1" TabIndex="22" SelectionChanged="DatabasesListView_SelectionChanged">
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label x:Name="databasesLabel" Content="Databases"  Grid.Row="0" />
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Button x:Name="refreshDatabasesButton" Content="Refresh" Click="RefreshDatabasesButton_Click" TabIndex="21"/>
+            </StackPanel>
+            <ListView x:Name="databasesListView" Grid.Row="2" TabIndex="22" SelectionChanged="DatabasesListView_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
-
         </Grid>
 
-        <Label x:Name="snapshotsLabel" Content="Snapshots" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="createSnapshotButton" Content="Create..." Grid.Column="1" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" TabIndex="32" Click="CreateSnapshotButton_Click"/>
-        <Button x:Name="restoreSnapshotButton" Content="Restore" Grid.Column="1" HorizontalAlignment="Left" Margin="90,35,0,0" VerticalAlignment="Top" Width="75" TabIndex="33" Click="RestoreSnapshotButton_Click"/>
-        <Button x:Name="deleteSnapshotButton" Content="Delete" Grid.Column="1" HorizontalAlignment="Left" Margin="170,35,0,0" VerticalAlignment="Top" Width="75" TabIndex="34" Click="DeleteSnapshotButton_Click"/>
-        <Button x:Name="refreshSnapshotsButton" Content="R" Grid.Column="1" HorizontalAlignment="Right" Margin="0,35,10,0" VerticalAlignment="Top" Width="22" Click="RefreshSnapshotsButton_Click" TabIndex="35"/>
-        <ListView x:Name="snapshotsListView" Grid.Column="1" Margin="10,60,10,10" TabIndex="36" SelectionChanged="SnapshotsListView_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label x:Name="snapshotsLabel" Content="Snapshots" Grid.Row="0"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Button x:Name="refreshSnapshotsButton" Content="Refresh" Grid.Column="2" Click="RefreshSnapshotsButton_Click" TabIndex="35"/>
+                <Button x:Name="createSnapshotButton" Content="Create..." Grid.Column="2" TabIndex="32" Click="CreateSnapshotButton_Click"/>
+                <Button x:Name="restoreSnapshotButton" Content="Restore" Grid.Column="2" TabIndex="33" Click="RestoreSnapshotButton_Click"/>
+                <Button x:Name="deleteSnapshotButton" Content="Delete" Grid.Column="2" TabIndex="34" Click="DeleteSnapshotButton_Click"/>
+            </StackPanel>
+            <ListView x:Name="snapshotsListView" Grid.Row="2" TabIndex="36" SelectionChanged="SnapshotsListView_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+
 
     </Grid>
 </Window>
