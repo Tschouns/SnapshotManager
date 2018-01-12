@@ -86,5 +86,29 @@ namespace SnapshotManager.Repositories
                 this._databasesPerConnectionDict.Remove(connection);
             }
         }
+
+        /// <summary>
+        /// See <see cref="IDatabaseRepository.DeleteDatabase(ConnectionInfo)"/>.
+        /// </summary>
+        public SuccessResult DeleteDatabase(DatabaseInfo database)
+        {
+            ArgumentChecks.AssertNotNull(database, nameof(database));
+
+            try
+            {
+                this._databaseServices.DeleteDatabase(database);
+                // If this snapshot and his friends from the same database were already loaded...
+                if (this._databasesPerConnectionDict.ContainsKey(database.Connection))
+                {
+                    // ...we try to reload them.
+                    return this.TryLoadDatabases(database.Connection);
+                }
+                return SuccessResult.CreateSuccessful();
+            }
+            catch (SnapshotException ex)
+            {
+                return SuccessResult.CreateFailed($"{ex.Message} ({ex.InnerException.Message})");
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace DbServerPluginMsSql2014.Services {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Commands {
@@ -72,9 +72,9 @@ namespace DbServerPluginMsSql2014.Services {
         /// <summary>
         ///   Looks up a localized string similar to DROP DATABASE {0}.
         /// </summary>
-        internal static string DropSnapshot {
+        internal static string DropDatabaseOrSnapshot {
             get {
-                return ResourceManager.GetString("DropSnapshot", resourceCulture);
+                return ResourceManager.GetString("DropDatabaseOrSnapshot", resourceCulture);
             }
         }
         
@@ -147,6 +147,15 @@ namespace DbServerPluginMsSql2014.Services {
         internal static string SelectSnapshots {
             get {
                 return ResourceManager.GetString("SelectSnapshots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to master;model;msdb;tempdb.
+        /// </summary>
+        internal static string SystemDatabases {
+            get {
+                return ResourceManager.GetString("SystemDatabases", resourceCulture);
             }
         }
     }

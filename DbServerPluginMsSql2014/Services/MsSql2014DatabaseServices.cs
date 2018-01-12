@@ -65,16 +65,36 @@ namespace DbServerPluginMsSql2014.Services
             IList<DatabaseData> databaseDatas = new List<DatabaseData>();
             foreach (var databaseName in databaseNames)
             {
-                var physicalFilePaths = this.GetPhysicalFilePaths(connection, databaseName);
-                if (!physicalFilePaths.Any())
+                if (!Commands.SystemDatabases.Split(';').Contains(databaseName))
                 {
-                    throw new ApplicationException($"No physical files found for {databaseName}!");
-                }
+                    var physicalFilePaths = this.GetPhysicalFilePaths(connection, databaseName);
+                    if (!physicalFilePaths.Any())
+                    {
+                        throw new ApplicationException($"No physical files found for {databaseName}!");
+                    }
 
-                databaseDatas.Add(new DatabaseData(databaseName, physicalFilePaths));
+                    databaseDatas.Add(new DatabaseData(databaseName, physicalFilePaths));
+                }
             }
 
             return databaseDatas;
+        }
+
+        /// <summary>
+        /// See <see cref="IDatabaseServices.DeleteDatabase(string, DbServerConnectionData)"/>.
+        /// </summary>
+        public void DeleteDatabase(string databaseName, DbServerConnectionData connection)
+        {
+            ArgumentChecks.AssertNotNullOrEmpty(databaseName, nameof(databaseName));
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            if (!Commands.SystemDatabases.Split(';').Contains(databaseName))
+            {
+                var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
+                var dropDatabaseQuery = string.Format(CultureInfo.InvariantCulture, Commands.DropDatabaseOrSnapshot, databaseName);
+                this._sqlHelper.ExecuteNonQuery(connectionString, dropDatabaseQuery);
+            }
+   
         }
 
         private IEnumerable<string> GetPhysicalFilePaths(DbServerConnectionData connection, string databaseName)

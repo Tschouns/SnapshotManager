@@ -52,5 +52,13 @@ namespace SnapshotManager.Services
         /// Thrown if the specified snapshot could not be deleted
         /// </exception>
         void DeleteSnapshot(SnapshotInfo snapshot);
+
+        /// <summary>
+        /// Deletes the specified database.
+        /// </summary>
+        /// <exception cref="SnapshotException">
+        /// Thrown if the specified databse could not be deleted
+        /// </exception>
+        void DeleteDatabase(DatabaseInfo database);
     }
 }

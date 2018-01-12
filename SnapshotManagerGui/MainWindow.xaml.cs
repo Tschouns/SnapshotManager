@@ -67,6 +67,7 @@ namespace SnapshotManagerGui
             this.refreshDatabasesButton.IsEnabled = isConnectionSelected;
             this.refreshSnapshotsButton.IsEnabled = isDatabaseSelected;
             this.createSnapshotButton.IsEnabled = isDatabaseSelected;
+            this.deleteDatabaseButton.IsEnabled = isDatabaseSelected;
             this.restoreSnapshotButton.IsEnabled = isSnapshotSelected;
             this.deleteSnapshotButton.IsEnabled = isSnapshotSelected;
         }
@@ -269,6 +270,21 @@ namespace SnapshotManagerGui
             this.UpdateSnapshotListView();
         }
 
+
+        private void DeleteDatabaeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedDatabase = this.databasesListView.SelectedItems.Cast<DatabaseInfo>().ToList();
+            foreach (var database in selectedDatabase)
+            {
+                HandleResult(this._databaseRepository.DeleteDatabase(database));
+            }
+
+            this.UpdateButtonStatus();
+            this.UpdateDatabaseListView();
+            this.UpdateSnapshotListView();
+        }
         #endregion
+
+
     }
 }

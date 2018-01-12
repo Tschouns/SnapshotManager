@@ -158,5 +158,29 @@ namespace SnapshotManager.Services
                 throw new SnapshotException(message, ex);
             }
         }
+
+        /// <summary>
+        /// See <see cref="IDatabaseServices.DeleteSnapshot(SnapshotInfo)"/>.
+        /// </summary>
+        public void DeleteDatabase(DatabaseInfo database)
+        {
+            ArgumentChecks.AssertNotNull(database, nameof(database));
+
+            try
+            {
+                database.Connection.DbServer.Services.Databases.DeleteDatabase(
+                    database.Name,
+                    new DbServerConnectionData(
+                        database.Connection.Host,
+                        database.Connection.UsesIntegratedSecurity,
+                        database.Connection.UserId,
+                        database.Connection.Password));
+            }
+            catch (Exception ex)
+            {
+                var message = string.Format(CultureInfo.CurrentCulture, Messages.DeleteSnapshotFailed, database);
+                throw new SnapshotException(message, ex);
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="WpfStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/WpfStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -48,6 +48,7 @@
             <Label x:Name="databasesLabel" Content="Databases"  Grid.Row="0" />
             <StackPanel Orientation="Horizontal" Grid.Row="1">
                 <Button x:Name="refreshDatabasesButton" Content="Refresh" Click="RefreshDatabasesButton_Click" TabIndex="21"/>
+                <Button x:Name="deleteDatabaseButton" Content="Delete" Click="DeleteDatabaeButton_Click" TabIndex="22" />
             </StackPanel>
             <ListView x:Name="databasesListView" Grid.Row="2" TabIndex="22" SelectionChanged="DatabasesListView_SelectionChanged">
                 <ListView.View>
