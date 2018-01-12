@@ -7,16 +7,11 @@
         mc:Ignorable="d"
         Title="Snapshot Manager - Secret Beta" Height="581.773" Width="1024.351" Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.Resources>
-        <Style TargetType="{x:Type Button}" >
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="MinWidth" Value="75" />
-        </Style>
-        <Style TargetType="{x:Type ListView}" >
-            <Setter Property="Margin" Value="5" />
-        </Style>
-        <Style TargetType="{x:Type Label}" >
-            <Setter Property="Margin" Value="0" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="WpfStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

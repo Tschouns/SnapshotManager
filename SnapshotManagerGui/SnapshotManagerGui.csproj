@@ -60,6 +60,10 @@
     <Compile Include="Windows\NewSnapshotWindow.xaml.cs">
       <DependentUpon>NewSnapshotWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="WpfStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\NewConnectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
