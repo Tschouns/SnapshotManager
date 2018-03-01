@@ -139,7 +139,7 @@ namespace DbServerPluginMsSql2014.Services
             ArgumentChecks.AssertNotNull(connection, nameof(connection));
 
             var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
-            var dropSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.DropSnapshot, snapshotName);
+            var dropSnapshotsQuery = string.Format(CultureInfo.InvariantCulture, Commands.DropDatabaseOrSnapshot, snapshotName);
             this._sqlHelper.ExecuteNonQuery(connectionString, dropSnapshotsQuery);
         }
     }

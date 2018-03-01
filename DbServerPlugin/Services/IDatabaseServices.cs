@@ -17,5 +17,10 @@ namespace DbServerPlugin.Services
         /// Gets all databases for the specified connection.
         /// </summary>
         IEnumerable<DatabaseData> GetAllDatabases(DbServerConnectionData connection);
+
+        /// <summary>
+        /// Delete a Database but no systemdatabase
+        /// </summary>
+        void DeleteDatabase(string databaseName, DbServerConnectionData connection);
     }
 }

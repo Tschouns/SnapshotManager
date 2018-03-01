@@ -121,7 +121,7 @@
     <value>CREATE DATABASE {0} ON {1} AS SNAPSHOT OF {2}</value>
     <comment>{0}: snapshot name, {1}: file clause, {2}: database name</comment>
   </data>
-  <data name="DropSnapshot" xml:space="preserve">
+  <data name="DropDatabaseOrSnapshot" xml:space="preserve">
     <value>DROP DATABASE {0}</value>
     <comment>{0}: snapshot name</comment>
   </data>
@@ -158,5 +158,8 @@ FROM
 	inner join sys.databases AS ss ON db.database_id = ss.source_database_id
 WHERE db.name = '{0}'</value>
     <comment>{0}: database name</comment>
+  </data>
+  <data name="SystemDatabases" xml:space="preserve">
+    <value>master;model;msdb;tempdb</value>
   </data>
 </root>

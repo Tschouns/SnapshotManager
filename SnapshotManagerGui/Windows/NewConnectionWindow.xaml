@@ -5,36 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapshotManagerGui"
         mc:Ignorable="d"
-        Title="New Connection" Height="250" Width="440" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="New Connection" Height="258.064" Width="487.043" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WpfStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="28"/>
-            <RowDefinition Height="28"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="14"/>
-            <RowDefinition Height="28"/>
-            <RowDefinition Height="28"/>
-            <RowDefinition Height="28"/>
-            <RowDefinition/>
-            <RowDefinition Height="28"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="dbServerLabel" Content="DB Server" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
-        <ComboBox x:Name="dbServerComboBox" SelectedItem="{Binding DbServerPlugin, Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Top" Margin="10,3,10,0" TabIndex="0"/>
-        <Label x:Name="hostLabel" Content="Host" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-0.342,-1" Margin="10,0,0,0"/>
-        <TextBox x:Name="hostTextBox" Text="{Binding Host, Mode=TwoWay}" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top" TabIndex="1" MaxLines="1"/>
+        <Label x:Name="dbServerLabel" Content="DB Server" />
+        <ComboBox x:Name="dbServerComboBox" SelectedItem="{Binding DbServerPlugin, Mode=TwoWay}" Grid.Column="1" TabIndex="0"/>
+        <Label x:Name="hostLabel" Content="Host" Grid.Row="1"/>
+        <TextBox x:Name="hostTextBox" Text="{Binding Host, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" TabIndex="1" MaxLines="1"/>
 
-        <Label x:Name="integratedSecurityLabel" Content="Integrated Security" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="-0.342,-1" Margin="10,0,0,0"/>
-        <CheckBox x:Name="integratedSecurityCheckBox" IsChecked="{Binding IntegratedSecurity, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,8,0,0" Grid.Row="3" TabIndex="2" Checked="IntegratedSecurityCheckBox_Checked" Unchecked="IntegratedSecurityCheckBox_Unchecked"/>
+        <Label x:Name="integratedSecurityLabel" Content="Integrated Security" Grid.Row="3" />
+        <CheckBox x:Name="integratedSecurityCheckBox" IsChecked="{Binding IntegratedSecurity, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" TabIndex="2" Checked="IntegratedSecurityCheckBox_Checked" Unchecked="IntegratedSecurityCheckBox_Unchecked"/>
 
-        <Label x:Name="userIdLabel" Content="User ID" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" RenderTransformOrigin="-0.342,-1" Margin="10,0,0,0"/>
-        <TextBox x:Name="userIdTextBox" Text="{Binding UserId, Mode=TwoWay}" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="4" VerticalAlignment="Top" TabIndex="3" MaxLines="1"/>
-        <Label x:Name="passwordLabel" Content="Password" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" RenderTransformOrigin="-0.342,-1" Margin="10,0,0,0"/>
-        <PasswordBox x:Name="passwordTextBox" Grid.Column="1" Height="23" Margin="10,3,10,0" Grid.Row="5" VerticalAlignment="Top" TabIndex="4" />
+        <Label x:Name="userIdLabel" Content="User ID" Grid.Row="4" />
+        <TextBox x:Name="userIdTextBox" Text="{Binding UserId, Mode=TwoWay}" Grid.Column="1"  Grid.Row="4" TabIndex="3" MaxLines="1"/>
+        <Label x:Name="passwordLabel" Content="Password" Grid.Row="5" />
+        <PasswordBox x:Name="passwordTextBox" Grid.Column="1" Grid.Row="5" TabIndex="4" />
 
-        <Button x:Name="connectButton" Content="Connect" Grid.Column="1" Margin="0,0,95,3" Grid.Row="7" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="connectButton_Click" TabIndex="5"/>
-        <Button x:Name="cancelButton" Content="Cancel" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,3" Grid.Row="7" VerticalAlignment="Bottom" Width="75" Click="cancelButton_Click" TabIndex="6"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="7" Grid.Column="1">
+            <Button x:Name="connectButton" Content="Connect" Grid.Column="1" Click="connectButton_Click" TabIndex="5"/>
+            <Button x:Name="cancelButton" Content="Cancel" Grid.Column="1" Grid.Row="7" Click="cancelButton_Click" TabIndex="6"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -27,5 +27,12 @@ namespace SnapshotManager.Repositories
         /// Clears the databases for the specified connection.
         /// </summary>
         void ClearDatabases(ConnectionInfo connection);
+
+        /// <summary>
+        /// Delete the database.
+        /// </summary>
+        /// <param name="database"></param>
+        /// <returns></returns>
+        SuccessResult DeleteDatabase(DatabaseInfo database);
     }
 }

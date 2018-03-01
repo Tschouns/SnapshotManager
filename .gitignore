@@ -55,3 +55,9 @@ obj/
 
 # Style Cop cache files
 **/StyleCop.Cache
+/.vs/SnapshotManager/v15/Server/sqlite3/storage.ide-wal
+/.vs/SnapshotManager/v15/Server/sqlite3/storage.ide-shm
+/.vs/SnapshotManager/v15/Server/sqlite3/storage.ide
+/.vs/SnapshotManager/v15/Server/sqlite3/db.lock
+/.vs/SnapshotManager/v15/Server/sqlite3
+/.vs/SnapshotManager/v15/.suo
