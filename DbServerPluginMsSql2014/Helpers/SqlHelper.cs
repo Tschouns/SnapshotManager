@@ -60,6 +60,7 @@ namespace DbServerPluginMsSql2014.Helpers
                 sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandType = CommandType.Text;
                 sqlCommand.CommandText = nonQueryStatement;
+                sqlCommand.CommandTimeout = 600;
 
                 // Execute query.
                 var rowsAffected = sqlCommand.ExecuteNonQuery();
