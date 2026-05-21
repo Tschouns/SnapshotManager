@@ -7,7 +7,7 @@
 namespace SnapshotManager.Repositories
 {
     using Base;
-    using Services;
+    using SnapshotManager.Access;
     using System.Collections.Generic;
 
     /// <summary>
@@ -15,21 +15,21 @@ namespace SnapshotManager.Repositories
     /// </summary>
     public class DatabaseRepository : IDatabaseRepository
     {
-        private readonly IDatabaseServices _databaseServices;
+        private readonly IDatabaseAccess _databaseServices;
         private readonly IDictionary<ConnectionInfo, IEnumerable<DatabaseInfo>> _databasesPerConnectionDict;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseRepository"/> class.
         /// </summary>
         public DatabaseRepository()
-            : this(new DatabaseServices())
+            : this(new DatabaseAccess())
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseRepository"/> class.
         /// </summary>
-        public DatabaseRepository(IDatabaseServices databaseServices)
+        public DatabaseRepository(IDatabaseAccess databaseServices)
         {
             ArgumentChecks.AssertNotNull(databaseServices, nameof(databaseServices));
 
@@ -88,16 +88,16 @@ namespace SnapshotManager.Repositories
         }
 
         /// <summary>
-        /// See <see cref="IDatabaseRepository.DeleteDatabase(ConnectionInfo)"/>.
+        /// See <see cref="IDatabaseRepository.TryDeleteDatabase(ConnectionInfo)"/>.
         /// </summary>
-        public SuccessResult DeleteDatabase(DatabaseInfo database)
+        public SuccessResult TryDeleteDatabase(DatabaseInfo database)
         {
             ArgumentChecks.AssertNotNull(database, nameof(database));
 
             try
             {
                 this._databaseServices.DeleteDatabase(database);
-                // If this snapshot and his friends from the same database were already loaded...
+                // If this database and his friends from the same database were already loaded...
                 if (this._databasesPerConnectionDict.ContainsKey(database.Connection))
                 {
                     // ...we try to reload them.

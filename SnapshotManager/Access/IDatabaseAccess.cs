@@ -4,14 +4,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace SnapshotManager.Services
+namespace SnapshotManager.Access
 {
     using System.Collections.Generic;
 
     /// <summary>
     /// Provides methods to interact with databases.
     /// </summary>
-    public interface IDatabaseServices
+    public interface IDatabaseAccess
     {
         /// <summary>
         /// Gets all the databases for the specified connection.
