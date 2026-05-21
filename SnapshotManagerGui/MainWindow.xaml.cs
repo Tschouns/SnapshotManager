@@ -75,6 +75,11 @@ namespace SnapshotManagerGui
         private void UpdateConnectionsListView()
         {
             this.connectionsListView.Items.Clear();
+
+            var connections = _connectionRepository
+                .GetConnections()
+                .OrderBy(c => c.Host);
+
             foreach (var connection in this._connectionRepository.GetConnections())
             {
                 this.connectionsListView.Items.Add(connection);
@@ -91,7 +96,10 @@ namespace SnapshotManagerGui
                 return;
             }
 
-            var databases = this._databaseRepository.GetLoadedDatabases(selectedConnection);
+            var databases = _databaseRepository
+                .GetLoadedDatabases(selectedConnection)
+                .OrderBy(d => d.Name);
+
             foreach (var database in databases)
             {
                 this.databasesListView.Items.Add(database);
@@ -109,7 +117,11 @@ namespace SnapshotManagerGui
             }
 
             HandleResult(this._snapshotRepository.TryLoadSnapshots(selectedDatabase));
-            var snapshots = this._snapshotRepository.GetLoadedSnapshots(selectedDatabase);
+            
+            var snapshots = _snapshotRepository
+                .GetLoadedSnapshots(selectedDatabase)
+                .OrderBy(s => s.Name);
+
             foreach (var snapshot in snapshots)
             {
                 this.snapshotsListView.Items.Add(snapshot);
@@ -271,7 +283,7 @@ namespace SnapshotManagerGui
         }
 
 
-        private void DeleteDatabaeButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedDatabase = this.databasesListView.SelectedItems.Cast<DatabaseInfo>().ToList();
             foreach (var database in selectedDatabase)
