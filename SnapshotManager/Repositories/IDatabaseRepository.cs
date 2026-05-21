@@ -29,10 +29,8 @@ namespace SnapshotManager.Repositories
         void ClearDatabases(ConnectionInfo connection);
 
         /// <summary>
-        /// Delete the database.
+        /// Tries to delete a database on the database server.
         /// </summary>
-        /// <param name="database"></param>
-        /// <returns></returns>
-        SuccessResult DeleteDatabase(DatabaseInfo database);
+        SuccessResult TryDeleteDatabase(DatabaseInfo database);
     }
 }

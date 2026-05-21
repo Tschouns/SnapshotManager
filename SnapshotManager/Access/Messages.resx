@@ -121,6 +121,10 @@
     <value>The snapshot for the database [{0}] could not be created.</value>
     <comment>{0}: the database info</comment>
   </data>
+  <data name="DeleteDatabaseFailed" xml:space="preserve">
+    <value>The database [{0}] could not be deleted.</value>
+    <comment>{0}: the database info</comment>
+  </data>
   <data name="DeleteSnapshotFailed" xml:space="preserve">
     <value>The snapshot [{0}] could not be deleted.</value>
     <comment>{0}: the snapshot info</comment>

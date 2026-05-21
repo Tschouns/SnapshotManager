@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SnapshotManager.Services {
+namespace SnapshotManager.Access {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SnapshotManager.Services {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SnapshotManager.Services.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SnapshotManager.Access.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,6 +66,15 @@ namespace SnapshotManager.Services {
         internal static string CreateSnapshotFailed {
             get {
                 return ResourceManager.GetString("CreateSnapshotFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The database [{0}] could not be deleted..
+        /// </summary>
+        internal static string DeleteDatabaseFailed {
+            get {
+                return ResourceManager.GetString("DeleteDatabaseFailed", resourceCulture);
             }
         }
         

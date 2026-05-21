@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace SnapshotManager.Services
+namespace SnapshotManager.Access
 {
     using Base;
     using DbServerPlugin;
@@ -15,12 +15,12 @@ namespace SnapshotManager.Services
     using System.Linq;
 
     /// <summary>
-    /// See <see cref="IDatabaseServices"/>.
+    /// See <see cref="IDatabaseAccess"/>.
     /// </summary>
-    public class DatabaseServices : IDatabaseServices
+    public class DatabaseAccess : IDatabaseAccess
     {
         /// <summary>
-        /// See <see cref="IDatabaseServices.GetAllDatabasesForConnection(ConnectionInfo)"/>.
+        /// See <see cref="IDatabaseAccess.GetAllDatabasesForConnection(ConnectionInfo)"/>.
         /// </summary>
         public IEnumerable<DatabaseInfo> GetAllDatabasesForConnection(ConnectionInfo connection)
         {
@@ -49,7 +49,7 @@ namespace SnapshotManager.Services
         }
 
         /// <summary>
-        /// See <see cref="IDatabaseServices.GetAllSnapshotsForDatabase(DatabaseInfo)"/>.
+        /// See <see cref="IDatabaseAccess.GetAllSnapshotsForDatabase(DatabaseInfo)"/>.
         /// </summary>
         public IEnumerable<SnapshotInfo> GetAllSnapshotsForDatabase(DatabaseInfo database)
         {
@@ -78,7 +78,7 @@ namespace SnapshotManager.Services
         }
 
         /// <summary>
-        /// See <see cref="IDatabaseServices.CreateSnapshotForDatabase"/>.
+        /// See <see cref="IDatabaseAccess.CreateSnapshotForDatabase"/>.
         /// </summary>
         public void CreateSnapshotForDatabase(string snapshotName, DatabaseInfo database)
         {
@@ -109,7 +109,7 @@ namespace SnapshotManager.Services
         }
 
         /// <summary>
-        /// See <see cref="IDatabaseServices.RestoreSnapshot(SnapshotInfo)"/>.
+        /// See <see cref="IDatabaseAccess.RestoreSnapshot(SnapshotInfo)"/>.
         /// </summary>
         public void RestoreSnapshot(SnapshotInfo snapshot)
         {
@@ -135,7 +135,7 @@ namespace SnapshotManager.Services
         }
 
         /// <summary>
-        /// See <see cref="IDatabaseServices.DeleteSnapshot(SnapshotInfo)"/>.
+        /// See <see cref="IDatabaseAccess.DeleteSnapshot(SnapshotInfo)"/>.
         /// </summary>
         public void DeleteSnapshot(SnapshotInfo snapshot)
         {
@@ -160,7 +160,7 @@ namespace SnapshotManager.Services
         }
 
         /// <summary>
-        /// See <see cref="IDatabaseServices.DeleteSnapshot(SnapshotInfo)"/>.
+        /// See <see cref="IDatabaseAccess.DeleteSnapshot(SnapshotInfo)"/>.
         /// </summary>
         public void DeleteDatabase(DatabaseInfo database)
         {
@@ -178,7 +178,7 @@ namespace SnapshotManager.Services
             }
             catch (Exception ex)
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Messages.DeleteSnapshotFailed, database);
+                var message = string.Format(CultureInfo.CurrentCulture, Messages.DeleteDatabaseFailed, database);
                 throw new SnapshotException(message, ex);
             }
         }

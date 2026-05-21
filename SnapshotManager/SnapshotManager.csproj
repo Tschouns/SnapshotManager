@@ -62,13 +62,15 @@
     <Compile Include="Repositories\ISnapshotRepository.cs" />
     <Compile Include="Repositories\SuccessResult.cs" />
     <Compile Include="Repositories\SnapshotRepository.cs" />
-    <Compile Include="Services\IDatabaseServices.cs" />
-    <Compile Include="Services\DatabaseServices.cs" />
-    <Compile Include="Services\Messages.Designer.cs">
+    <Compile Include="Access\IDatabaseAccess.cs" />
+    <Compile Include="Access\DatabaseAccess.cs" />
+    <Compile Include="Access\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\DeleteDatabaseService.cs" />
+    <Compile Include="Services\IDeleteDatabaseService.cs" />
     <Compile Include="SnapshotException.cs" />
     <Compile Include="SnapshotInfo.cs" />
   </ItemGroup>
@@ -87,7 +89,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Services\Messages.resx">
+    <EmbeddedResource Include="Access\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>

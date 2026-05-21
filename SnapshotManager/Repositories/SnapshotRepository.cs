@@ -7,7 +7,7 @@
 namespace SnapshotManager.Repositories
 {
     using Base;
-    using Services;
+    using SnapshotManager.Access;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -16,25 +16,25 @@ namespace SnapshotManager.Repositories
     /// </summary>
     public class SnapshotRepository : ISnapshotRepository
     {
-        private readonly IDatabaseServices _databaseServices;
+        private readonly IDatabaseAccess _databaseAccess;
         private readonly IDictionary<DatabaseInfo, IEnumerable<SnapshotInfo>> _snapshotsPerDatabaseDict;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseRepository"/> class.
         /// </summary>
         public SnapshotRepository()
-            : this(new DatabaseServices())
+            : this(new DatabaseAccess())
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseRepository"/> class.
         /// </summary>
-        public SnapshotRepository(IDatabaseServices databaseServices)
+        public SnapshotRepository(IDatabaseAccess databaseAccess)
         {
-            ArgumentChecks.AssertNotNull(databaseServices, nameof(databaseServices));
+            ArgumentChecks.AssertNotNull(databaseAccess, nameof(databaseAccess));
 
-            this._databaseServices = databaseServices;
+            this._databaseAccess = databaseAccess;
             this._snapshotsPerDatabaseDict = new Dictionary<DatabaseInfo, IEnumerable<SnapshotInfo>>();
         }
 
@@ -49,7 +49,7 @@ namespace SnapshotManager.Repositories
 
             try
             {
-                var snapshots = this._databaseServices.GetAllSnapshotsForDatabase(database);
+                var snapshots = this._databaseAccess.GetAllSnapshotsForDatabase(database);
                 this._snapshotsPerDatabaseDict.Add(database, snapshots);
 
                 return SuccessResult.CreateSuccessful();
@@ -115,7 +115,7 @@ namespace SnapshotManager.Repositories
 
             try
             {
-                this._databaseServices.CreateSnapshotForDatabase(snapshotName, database);
+                this._databaseAccess.CreateSnapshotForDatabase(snapshotName, database);
 
                 return this.TryLoadSnapshots(database);
             }
@@ -134,7 +134,7 @@ namespace SnapshotManager.Repositories
 
             try
             {
-                this._databaseServices.RestoreSnapshot(snapshot);
+                this._databaseAccess.RestoreSnapshot(snapshot);
 
                 // If this snapshot and his friends from the same database were already loaded...
                 if (this._snapshotsPerDatabaseDict.ContainsKey(snapshot.Database))
@@ -160,7 +160,7 @@ namespace SnapshotManager.Repositories
 
             try
             {
-                this._databaseServices.DeleteSnapshot(snapshot);
+                this._databaseAccess.DeleteSnapshot(snapshot);
 
                 // If this snapshot and his friends from the same database were already loaded...
                 if (this._snapshotsPerDatabaseDict.ContainsKey(snapshot.Database))

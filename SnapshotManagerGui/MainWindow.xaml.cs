@@ -7,15 +7,18 @@
 namespace SnapshotManagerGui
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Input;
     using Base;
     using DbServerPlugin;
     using DbServerPluginMsSql2014;
     using DbServerPluginMsSql2014.Services;
-    using SnapshotManager.Repositories;
     using SnapshotManager;
+    using SnapshotManager.Repositories;
+    using SnapshotManager.Services;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -26,12 +29,14 @@ namespace SnapshotManagerGui
         private readonly IDatabaseRepository _databaseRepository;
         private readonly ISnapshotRepository _snapshotRepository;
 
+        private readonly DeleteDatabaseService _deleteDatabaseService;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
         public MainWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             // Quick hack...
             DbServerPluginRegistry.RegisterPlugin(
@@ -40,11 +45,15 @@ namespace SnapshotManagerGui
                 new MsSql2014DatabaseServices(),
                 new MsSql2014SnapshotServices());
 
-            this._connectionRepository = new ConnectionRepository();
-            this._databaseRepository = new DatabaseRepository();
-            this._snapshotRepository = new SnapshotRepository();
+            _connectionRepository = new ConnectionRepository();
+            _databaseRepository = new DatabaseRepository();
+            _snapshotRepository = new SnapshotRepository();
 
-            this.UpdateButtonStatus();
+            _deleteDatabaseService = new DeleteDatabaseService(
+                _databaseRepository,
+                _snapshotRepository);
+
+            UpdateButtonStatus();
         }
 
         private static void HandleResult(SuccessResult result)
@@ -285,18 +294,66 @@ namespace SnapshotManagerGui
 
         private void DeleteDatabaseButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedDatabase = this.databasesListView.SelectedItems.Cast<DatabaseInfo>().ToList();
-            foreach (var database in selectedDatabase)
+            var selectedDatabases = databasesListView.SelectedItems.Cast<DatabaseInfo>().ToList();
+            var deleteIncludingSnapshots = ShouldDeleteIncludingSnapshots(selectedDatabases);
+
+            if (deleteIncludingSnapshots == null)
             {
-                HandleResult(this._databaseRepository.DeleteDatabase(database));
+                return;
             }
+
+            selectedDatabases.ForEach(d =>
+                HandleResult(
+                    deleteIncludingSnapshots.Value
+                        ? _deleteDatabaseService.TryDeleteDatabaseIncludingSnapshots(d)
+                        : _databaseRepository.TryDeleteDatabase(d)));
 
             this.UpdateButtonStatus();
             this.UpdateDatabaseListView();
             this.UpdateSnapshotListView();
         }
-        #endregion
 
+        private bool? ShouldDeleteIncludingSnapshots(IReadOnlyCollection<DatabaseInfo> databases)
+        {
+            // User may hold Ctrl and/or Alt to also delete database snapshots without the need for user confirmation.
+            if ((Keyboard.Modifiers & (ModifierKeys.Control | ModifierKeys.Alt)) != ModifierKeys.None)
+            {
+                return true;
+            }
+
+            if (!databases.Any(HasLoadedSnapshots))
+            {
+                return false;
+            }
+
+            var messageBoxResult = MessageBox.Show(
+                "Do you also want to delete the snapshots?\n\n" +
+                "Hint:\n" + 
+                "Hold Ctrl or Alt while clicking the Delete button\n" +
+                "to have this confirmation dialog skipped.",
+                "Delete database snapshots",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Warning);
+
+            switch (messageBoxResult)
+            {
+                case MessageBoxResult.Yes:
+                    return true;
+
+                case MessageBoxResult.No:
+                    return false;
+
+                default:
+                    return null;
+            }
+        }
+
+        private bool HasLoadedSnapshots(DatabaseInfo database)
+        {
+            return _snapshotRepository.GetLoadedSnapshots(database).Any();
+        }
+
+        #endregion
 
     }
 }
