@@ -196,18 +196,64 @@ namespace SnapshotManagerGui
                 return;
             }
 
+            if (CopySelectedItemNames((ListView)sender))
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Selects the list item under the mouse pointer before opening its context menu.
+        /// </summary>
+        private void ListView_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
             var listView = (ListView)sender;
+            var source = Mouse.DirectlyOver as DependencyObject;
+            var listViewItem = source == null
+                ? null
+                : ItemsControl.ContainerFromElement(listView, source) as ListViewItem;
+
+            if (listViewItem == null)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            listViewItem.IsSelected = true;
+            listViewItem.Focus();
+        }
+
+        /// <summary>
+        /// Copies the selected item names from a list view's context menu.
+        /// </summary>
+        private void CopyNameMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var contextMenu = ItemsControl.ItemsControlFromItemContainer((MenuItem)sender) as ContextMenu;
+            var listView = contextMenu?.PlacementTarget as ListView;
+            if (listView != null)
+            {
+                CopySelectedItemNames(listView);
+            }
+        }
+
+        /// <summary>
+        /// Copies the names of selected list items to the clipboard.
+        /// </summary>
+        private static bool CopySelectedItemNames(ListView listView)
+        {
             var selectedNames = listView.SelectedItems
                 .Cast<object>()
                 .Select(GetItemName)
                 .Where(name => !string.IsNullOrEmpty(name));
             var clipboardText = string.Join(Environment.NewLine, selectedNames);
 
-            if (!string.IsNullOrEmpty(clipboardText))
+            if (string.IsNullOrEmpty(clipboardText))
             {
-                Clipboard.SetText(clipboardText);
-                e.Handled = true;
+                return false;
             }
+
+            Clipboard.SetText(clipboardText);
+            return true;
         }
 
         /// <summary>

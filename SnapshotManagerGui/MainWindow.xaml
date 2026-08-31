@@ -30,7 +30,12 @@
                 <Button x:Name="addConnectionButton" Content="Add..." HorizontalAlignment="Left" Click="AddConnectionButton_Click" TabIndex="10"/>
                 <Button x:Name="removeConnectionButton" Content="Remove" HorizontalAlignment="Left" Click="RemoveConnectionButton_OnClickConnectionButton_Click" TabIndex="11"/>
             </StackPanel>
-            <ListView x:Name="connectionsListView" Grid.Row="2" SelectionChanged="ConnectionsListView_SelectionChanged" KeyDown="ListView_KeyDown" TabIndex="12">
+            <ListView x:Name="connectionsListView" Grid.Row="2" SelectionChanged="ConnectionsListView_SelectionChanged" KeyDown="ListView_KeyDown" ContextMenuOpening="ListView_ContextMenuOpening" TabIndex="12">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy Name" InputGestureText="Ctrl+C" Click="CopyNameMenuItem_Click" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Host" DisplayMemberBinding="{Binding Host}"/>
@@ -50,7 +55,12 @@
                 <Button x:Name="refreshDatabasesButton" Content="Refresh" Click="RefreshDatabasesButton_Click" TabIndex="21"/>
                 <Button x:Name="deleteDatabaseButton" Content="Delete" Click="DeleteDatabaseButton_Click" TabIndex="22" />
             </StackPanel>
-            <ListView x:Name="databasesListView" Grid.Row="2" TabIndex="22" SelectionChanged="DatabasesListView_SelectionChanged" KeyDown="ListView_KeyDown">
+            <ListView x:Name="databasesListView" Grid.Row="2" TabIndex="22" SelectionChanged="DatabasesListView_SelectionChanged" KeyDown="ListView_KeyDown" ContextMenuOpening="ListView_ContextMenuOpening">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy Name" InputGestureText="Ctrl+C" Click="CopyNameMenuItem_Click" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
@@ -72,7 +82,12 @@
                 <Button x:Name="restoreSnapshotButton" Content="Restore" Grid.Column="2" TabIndex="33" Click="RestoreSnapshotButton_Click"/>
                 <Button x:Name="deleteSnapshotButton" Content="Delete" Grid.Column="2" TabIndex="34" Click="DeleteSnapshotButton_Click"/>
             </StackPanel>
-            <ListView x:Name="snapshotsListView" Grid.Row="2" TabIndex="36" SelectionChanged="SnapshotsListView_SelectionChanged" KeyDown="ListView_KeyDown">
+            <ListView x:Name="snapshotsListView" Grid.Row="2" TabIndex="36" SelectionChanged="SnapshotsListView_SelectionChanged" KeyDown="ListView_KeyDown" ContextMenuOpening="ListView_ContextMenuOpening">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy Name" InputGestureText="Ctrl+C" Click="CopyNameMenuItem_Click" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" />
