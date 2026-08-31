@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CreateSnapshot" xml:space="preserve">
-    <value>CREATE DATABASE {0} ON {1} AS SNAPSHOT OF {2}</value>
+    <value>CREATE DATABASE [{0}] ON {1} AS SNAPSHOT OF [{2}]</value>
     <comment>{0}: snapshot name, {1}: file clause, {2}: database name</comment>
   </data>
   <data name="DropDatabaseOrSnapshot" xml:space="preserve">
-    <value>DROP DATABASE {0}</value>
+    <value>DROP DATABASE [{0}]</value>
     <comment>{0}: snapshot name</comment>
   </data>
   <data name="FileClause" xml:space="preserve">
-    <value>(NAME={0}, FILENAME='{1}')</value>
+    <value>(NAME=[{0}], FILENAME='{1}')</value>
     <comment>{0}: logical file name, {1}: physical file name</comment>
   </data>
   <data name="NameColumn" xml:space="preserve">
@@ -136,7 +136,7 @@
     <value>physical_name</value>
   </data>
   <data name="RestoreSnapshot" xml:space="preserve">
-    <value>RESTORE DATABASE {0} FROM DATABASE_SNAPSHOT = '{1}'</value>
+    <value>RESTORE DATABASE [{0}] FROM DATABASE_SNAPSHOT = '{1}'</value>
     <comment>{0}: database name, {1}: snapshot name</comment>
   </data>
   <data name="SelectDatabaseFiles" xml:space="preserve">
