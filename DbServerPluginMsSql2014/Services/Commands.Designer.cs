@@ -19,7 +19,7 @@ namespace DbServerPluginMsSql2014.Services {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Commands {
@@ -61,7 +61,7 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CREATE DATABASE {0} ON {1} AS SNAPSHOT OF {2}.
+        ///   Looks up a localized string similar to CREATE DATABASE [{0}] ON {1} AS SNAPSHOT OF [{2}].
         /// </summary>
         internal static string CreateSnapshot {
             get {
@@ -70,7 +70,7 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DROP DATABASE {0}.
+        ///   Looks up a localized string similar to DROP DATABASE [{0}].
         /// </summary>
         internal static string DropDatabaseOrSnapshot {
             get {
@@ -79,7 +79,7 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (NAME={0}, FILENAME=&apos;{1}&apos;).
+        ///   Looks up a localized string similar to (NAME=[{0}], FILENAME=&apos;{1}&apos;).
         /// </summary>
         internal static string FileClause {
             get {
@@ -106,7 +106,7 @@ namespace DbServerPluginMsSql2014.Services {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RESTORE DATABASE {0} FROM DATABASE_SNAPSHOT = &apos;{1}&apos;.
+        ///   Looks up a localized string similar to RESTORE DATABASE [{0}] FROM DATABASE_SNAPSHOT = &apos;{1}&apos;.
         /// </summary>
         internal static string RestoreSnapshot {
             get {
