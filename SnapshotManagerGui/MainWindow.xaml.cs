@@ -11,6 +11,7 @@ namespace SnapshotManagerGui
     using System.Globalization;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
     using Base;
     using DbServerPlugin;
@@ -183,6 +184,51 @@ namespace SnapshotManagerGui
         private void SnapshotsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             this.UpdateButtonStatus();
+        }
+
+        /// <summary>
+        /// Copies the names of selected list items to the clipboard when Ctrl+C is pressed.
+        /// </summary>
+        private void ListView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.C || Keyboard.Modifiers != ModifierKeys.Control)
+            {
+                return;
+            }
+
+            var listView = (ListView)sender;
+            var selectedNames = listView.SelectedItems
+                .Cast<object>()
+                .Select(GetItemName)
+                .Where(name => !string.IsNullOrEmpty(name));
+            var clipboardText = string.Join(Environment.NewLine, selectedNames);
+
+            if (!string.IsNullOrEmpty(clipboardText))
+            {
+                Clipboard.SetText(clipboardText);
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Gets the displayed name of a connection, database, or snapshot.
+        /// </summary>
+        private static string GetItemName(object item)
+        {
+            var connection = item as ConnectionInfo;
+            if (connection != null)
+            {
+                return connection.Host;
+            }
+
+            var database = item as DatabaseInfo;
+            if (database != null)
+            {
+                return database.Name;
+            }
+
+            var snapshot = item as SnapshotInfo;
+            return snapshot?.Name;
         }
 
         private void AddConnectionButton_Click(object sender, RoutedEventArgs e)
