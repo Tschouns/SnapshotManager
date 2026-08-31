@@ -117,8 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllSelectedDatabasesDisconnected" xml:space="preserve">
+    <value>All connections to the selected databases have been successfully disconnected.</value>
+  </data>
+  <data name="ConnectionsDisconnected" xml:space="preserve">
+    <value>All connections to the database [{0}] have been successfully disconnected.</value>
+    <comment>{0}: the database name</comment>
+  </data>
+  <data name="ConnectionsDisconnectedSection" xml:space="preserve">
+    <value>Connections successfully disconnected from:
+{0}</value>
+    <comment>{0}: successful database names</comment>
+  </data>
+  <data name="ConnectionsNotDisconnected" xml:space="preserve">
+    <value>Connections to the database [{0}] could not be disconnected.</value>
+    <comment>{0}: the database name</comment>
+  </data>
+  <data name="ConnectionsNotDisconnectedSection" xml:space="preserve">
+    <value>Connections could not be disconnected from:
+{0}</value>
+    <comment>{0}: failed database names</comment>
+  </data>
+  <data name="DisconnectAllConnectionsCaption" xml:space="preserve">
+    <value>Disconnect All Connections</value>
+  </data>
+  <data name="DisconnectAllConnectionsFromMultipleDatabasesQuestion" xml:space="preserve">
+    <value>Disconnect all connections from the {0} selected databases?
+
+All incomplete transactions will be rolled back immediately.</value>
+    <comment>{0}: the number of databases</comment>
+  </data>
+  <data name="DisconnectAllConnectionsQuestion" xml:space="preserve">
+    <value>Disconnect all connections from the database [{0}]?
+
+All incomplete transactions will be rolled back immediately.</value>
+    <comment>{0}: the database name</comment>
+  </data>
   <data name="EnterSnapshotName" xml:space="preserve">
     <value>Please enter a name for the new snapshot.</value>
+  </data>
+  <data name="NoSelectedDatabasesDisconnected" xml:space="preserve">
+    <value>Connections to the selected databases could not be disconnected.</value>
   </data>
   <data name="SaveConnectionsFailedCaption" xml:space="preserve">
     <value>Sure?</value>

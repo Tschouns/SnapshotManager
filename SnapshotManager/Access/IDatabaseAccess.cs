@@ -22,6 +22,14 @@ namespace SnapshotManager.Access
         IEnumerable<DatabaseInfo> GetAllDatabasesForConnection(ConnectionInfo connection);
 
         /// <summary>
+        /// Disconnects all connections from the specified database.
+        /// </summary>
+        /// <exception cref="SnapshotException">
+        /// Thrown if the connections could not be disconnected
+        /// </exception>
+        void DisconnectAllConnections(DatabaseInfo database);
+
+        /// <summary>
         /// Gets all the snapshots for the specified database.
         /// </summary>
         /// <exception cref="SnapshotException">

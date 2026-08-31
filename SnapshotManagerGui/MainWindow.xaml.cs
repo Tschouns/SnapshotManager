@@ -219,7 +219,12 @@ namespace SnapshotManagerGui
                 return;
             }
 
-            listViewItem.IsSelected = true;
+            if (!listViewItem.IsSelected)
+            {
+                listView.SelectedItems.Clear();
+                listViewItem.IsSelected = true;
+            }
+
             listViewItem.Focus();
         }
 
@@ -234,6 +239,116 @@ namespace SnapshotManagerGui
             {
                 CopySelectedItemNames(listView);
             }
+        }
+
+        /// <summary>
+        /// Disconnects all connections from the selected databases.
+        /// </summary>
+        private void DisconnectAllConnectionsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedDatabases = this.databasesListView.SelectedItems.Cast<DatabaseInfo>().ToList();
+            if (!selectedDatabases.Any() || !ShouldDisconnectAllConnections(selectedDatabases))
+            {
+                return;
+            }
+
+            var successfulDatabases = new List<DatabaseInfo>();
+            var failedDatabases = new List<DatabaseInfo>();
+
+            foreach (var database in selectedDatabases)
+            {
+                var disconnectResult = this._databaseRepository.TryDisconnectAllConnections(database);
+                (disconnectResult.Successful ? successfulDatabases : failedDatabases).Add(database);
+            }
+
+            var message = selectedDatabases.Count == 1
+                ? FormatSingleDatabaseDisconnectResult(selectedDatabases.Single(), successfulDatabases.Any())
+                : FormatMultipleDatabaseDisconnectResult(successfulDatabases, failedDatabases);
+            var messageBoxImage = failedDatabases.Any()
+                ? MessageBoxImage.Warning
+                : MessageBoxImage.Information;
+
+            MessageBox.Show(
+                message,
+                Messages.DisconnectAllConnectionsCaption,
+                MessageBoxButton.OK,
+                messageBoxImage);
+        }
+
+        /// <summary>
+        /// Asks the user to confirm disconnecting all connections.
+        /// </summary>
+        private static bool ShouldDisconnectAllConnections(IReadOnlyCollection<DatabaseInfo> databases)
+        {
+            var question = databases.Count == 1
+                ? string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.DisconnectAllConnectionsQuestion,
+                    databases.Single().Name)
+                : string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.DisconnectAllConnectionsFromMultipleDatabasesQuestion,
+                    databases.Count);
+
+            return MessageBox.Show(
+                question,
+                Messages.DisconnectAllConnectionsCaption,
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Warning,
+                MessageBoxResult.No) == MessageBoxResult.Yes;
+        }
+
+        /// <summary>
+        /// Formats the result message for a single database.
+        /// </summary>
+        private static string FormatSingleDatabaseDisconnectResult(DatabaseInfo database, bool successful)
+        {
+            var messageTemplate = successful
+                ? Messages.ConnectionsDisconnected
+                : Messages.ConnectionsNotDisconnected;
+            return string.Format(CultureInfo.CurrentCulture, messageTemplate, database.Name);
+        }
+
+        /// <summary>
+        /// Formats the result sections for multiple databases.
+        /// </summary>
+        private static string FormatMultipleDatabaseDisconnectResult(
+            IEnumerable<DatabaseInfo> successfulDatabases,
+            IEnumerable<DatabaseInfo> failedDatabases)
+        {
+            var successfulDatabaseNames = successfulDatabases.Select(database => database.Name).ToList();
+            var failedDatabaseNames = failedDatabases.Select(database => database.Name).ToList();
+
+            if (!failedDatabaseNames.Any())
+            {
+                return Messages.AllSelectedDatabasesDisconnected;
+            }
+
+            if (!successfulDatabaseNames.Any())
+            {
+                return Messages.NoSelectedDatabasesDisconnected;
+            }
+
+            var sections = new[]
+            {
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ConnectionsDisconnectedSection,
+                    FormatDatabaseNames(successfulDatabaseNames)),
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ConnectionsNotDisconnectedSection,
+                    FormatDatabaseNames(failedDatabaseNames))
+            };
+            return string.Join(Environment.NewLine + Environment.NewLine, sections);
+        }
+
+        /// <summary>
+        /// Formats database names as a list.
+        /// </summary>
+        private static string FormatDatabaseNames(IEnumerable<string> databaseNames)
+        {
+            return string.Join(Environment.NewLine, databaseNames);
         }
 
         /// <summary>

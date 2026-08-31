@@ -86,6 +86,15 @@ namespace SnapshotManager.Access {
                 return ResourceManager.GetString("DeleteSnapshotFailed", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Not all connections could be disconnected from the database [{0}]..
+        /// </summary>
+        internal static string DisconnectAllConnectionsFailed {
+            get {
+                return ResourceManager.GetString("DisconnectAllConnectionsFailed", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to The databases for the connection [{0}] could not be retrieved..

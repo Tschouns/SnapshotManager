@@ -29,6 +29,11 @@ namespace SnapshotManager.Repositories
         void ClearDatabases(ConnectionInfo connection);
 
         /// <summary>
+        /// Tries to disconnect all connections from the specified database.
+        /// </summary>
+        SuccessResult TryDisconnectAllConnections(DatabaseInfo database);
+
+        /// <summary>
         /// Tries to delete a database on the database server.
         /// </summary>
         SuccessResult TryDeleteDatabase(DatabaseInfo database);
