@@ -81,6 +81,22 @@ namespace DbServerPluginMsSql2014.Services
         }
 
         /// <summary>
+        /// See <see cref="IDatabaseServices.DisconnectAllConnections(string, DbServerConnectionData)"/>.
+        /// </summary>
+        public void DisconnectAllConnections(string databaseName, DbServerConnectionData connection)
+        {
+            ArgumentChecks.AssertNotNullOrEmpty(databaseName, nameof(databaseName));
+            ArgumentChecks.AssertNotNull(connection, nameof(connection));
+
+            var connectionString = this._connectionStringHelper.CreateConnectionString(connection);
+            var disconnectAllConnectionsQuery = string.Format(
+                CultureInfo.InvariantCulture,
+                Commands.DisconnectAllConnections,
+                databaseName);
+            this._sqlHelper.ExecuteNonQuery(connectionString, disconnectAllConnectionsQuery);
+        }
+
+        /// <summary>
         /// See <see cref="IDatabaseServices.DeleteDatabase(string, DbServerConnectionData)"/>.
         /// </summary>
         public void DeleteDatabase(string databaseName, DbServerConnectionData connection)

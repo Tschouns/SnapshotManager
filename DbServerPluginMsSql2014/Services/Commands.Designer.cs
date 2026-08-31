@@ -68,6 +68,15 @@ namespace DbServerPluginMsSql2014.Services {
                 return ResourceManager.GetString("CreateSnapshot", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string used to disconnect all database connections.
+        /// </summary>
+        internal static string DisconnectAllConnections {
+            get {
+                return ResourceManager.GetString("DisconnectAllConnections", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to DROP DATABASE [{0}].

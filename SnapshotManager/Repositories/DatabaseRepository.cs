@@ -88,6 +88,24 @@ namespace SnapshotManager.Repositories
         }
 
         /// <summary>
+        /// See <see cref="IDatabaseRepository.TryDisconnectAllConnections(DatabaseInfo)"/>.
+        /// </summary>
+        public SuccessResult TryDisconnectAllConnections(DatabaseInfo database)
+        {
+            ArgumentChecks.AssertNotNull(database, nameof(database));
+
+            try
+            {
+                this._databaseServices.DisconnectAllConnections(database);
+                return SuccessResult.CreateSuccessful();
+            }
+            catch (SnapshotException ex)
+            {
+                return SuccessResult.CreateFailed($"{ex.Message} ({ex.InnerException.Message})");
+            }
+        }
+
+        /// <summary>
         /// See <see cref="IDatabaseRepository.TryDeleteDatabase(ConnectionInfo)"/>.
         /// </summary>
         public SuccessResult TryDeleteDatabase(DatabaseInfo database)

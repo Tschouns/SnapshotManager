@@ -121,6 +121,11 @@
     <value>CREATE DATABASE [{0}] ON {1} AS SNAPSHOT OF [{2}]</value>
     <comment>{0}: snapshot name, {1}: file clause, {2}: database name</comment>
   </data>
+  <data name="DisconnectAllConnections" xml:space="preserve">
+    <value>ALTER DATABASE [{0}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+ALTER DATABASE [{0}] SET MULTI_USER;</value>
+    <comment>{0}: database name</comment>
+  </data>
   <data name="DropDatabaseOrSnapshot" xml:space="preserve">
     <value>DROP DATABASE [{0}]</value>
     <comment>{0}: snapshot name</comment>

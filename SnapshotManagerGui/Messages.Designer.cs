@@ -59,6 +59,78 @@ namespace SnapshotManagerGui {
                 resourceCulture = value;
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to All connections to the selected databases have been successfully disconnected..
+        /// </summary>
+        internal static string AllSelectedDatabasesDisconnected {
+            get {
+                return ResourceManager.GetString("AllSelectedDatabasesDisconnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to All connections to the database [{0}] have been successfully disconnected..
+        /// </summary>
+        internal static string ConnectionsDisconnected {
+            get {
+                return ResourceManager.GetString("ConnectionsDisconnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string used to list databases disconnected successfully.
+        /// </summary>
+        internal static string ConnectionsDisconnectedSection {
+            get {
+                return ResourceManager.GetString("ConnectionsDisconnectedSection", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Connections to the database [{0}] could not be disconnected..
+        /// </summary>
+        internal static string ConnectionsNotDisconnected {
+            get {
+                return ResourceManager.GetString("ConnectionsNotDisconnected", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string used to list databases that could not be disconnected.
+        /// </summary>
+        internal static string ConnectionsNotDisconnectedSection {
+            get {
+                return ResourceManager.GetString("ConnectionsNotDisconnectedSection", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect All Connections.
+        /// </summary>
+        internal static string DisconnectAllConnectionsCaption {
+            get {
+                return ResourceManager.GetString("DisconnectAllConnectionsCaption", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized question for disconnecting multiple databases.
+        /// </summary>
+        internal static string DisconnectAllConnectionsFromMultipleDatabasesQuestion {
+            get {
+                return ResourceManager.GetString("DisconnectAllConnectionsFromMultipleDatabasesQuestion", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized question for disconnecting a database.
+        /// </summary>
+        internal static string DisconnectAllConnectionsQuestion {
+            get {
+                return ResourceManager.GetString("DisconnectAllConnectionsQuestion", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Please enter a name for the new snapshot..
@@ -68,7 +140,16 @@ namespace SnapshotManagerGui {
                 return ResourceManager.GetString("EnterSnapshotName", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Connections to the selected databases could not be disconnected..
+        /// </summary>
+        internal static string NoSelectedDatabasesDisconnected {
+            get {
+                return ResourceManager.GetString("NoSelectedDatabasesDisconnected", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Sure?.
         /// </summary>

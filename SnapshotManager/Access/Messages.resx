@@ -129,6 +129,10 @@
     <value>The snapshot [{0}] could not be deleted.</value>
     <comment>{0}: the snapshot info</comment>
   </data>
+  <data name="DisconnectAllConnectionsFailed" xml:space="preserve">
+    <value>Not all connections could be disconnected from the database [{0}].</value>
+    <comment>{0}: the database info</comment>
+  </data>
   <data name="GetAllDatabasesForConnectionFailed" xml:space="preserve">
     <value>The databases for the connection [{0}] could not be retrieved.</value>
     <comment>{0}: the connection info</comment>

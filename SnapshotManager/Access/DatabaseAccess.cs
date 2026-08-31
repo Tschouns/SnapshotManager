@@ -78,6 +78,30 @@ namespace SnapshotManager.Access
         }
 
         /// <summary>
+        /// See <see cref="IDatabaseAccess.DisconnectAllConnections(DatabaseInfo)"/>.
+        /// </summary>
+        public void DisconnectAllConnections(DatabaseInfo database)
+        {
+            ArgumentChecks.AssertNotNull(database, nameof(database));
+
+            try
+            {
+                database.Connection.DbServer.Services.Databases.DisconnectAllConnections(
+                    database.Name,
+                    new DbServerConnectionData(
+                        database.Connection.Host,
+                        database.Connection.UsesIntegratedSecurity,
+                        database.Connection.UserId,
+                        database.Connection.Password));
+            }
+            catch (Exception ex)
+            {
+                var message = string.Format(CultureInfo.CurrentCulture, Messages.DisconnectAllConnectionsFailed, database);
+                throw new SnapshotException(message, ex);
+            }
+        }
+
+        /// <summary>
         /// See <see cref="IDatabaseAccess.CreateSnapshotForDatabase"/>.
         /// </summary>
         public void CreateSnapshotForDatabase(string snapshotName, DatabaseInfo database)
